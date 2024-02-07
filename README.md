@@ -1,1 +1,1 @@
-# P2
+# P2 Project concerning determination of social activities for individuals with troubled mental health
