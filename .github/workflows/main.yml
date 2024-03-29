@@ -14,4 +14,4 @@ jobs:
         command: cd /srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp; pkill -f node; git pull origin main; nohup node server.js &
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
-        passphrase: ${{ secrets.PASSWORD }}
+        password: ${{ secrets.PASSWORD }}
