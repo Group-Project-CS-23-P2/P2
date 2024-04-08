@@ -15,9 +15,9 @@ server.on("request", (request, response) => {
     //Parse where the request wants to go.
     let pathname = url.parse(request.url).pathname;
     console.log("", pathname);
-    
+
     //Standard front page respone
-    if (pathname === "/node0/") { // A request for the front page
+    if (pathname === "/") { // A request for the front page
         response.writeHead(200, {
             "Content-Type": "text/html"
         }).end(clientHTML);
