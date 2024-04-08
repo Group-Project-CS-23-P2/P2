@@ -3,7 +3,7 @@ import http from 'http';
 import fs from "fs";
 import url from "url";
 
-const clientHTML = fs.readFileSync("/HTML-Pages/frontpage.html");
+const clientHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 
 let server = new http.Server();
 server.listen(3430, "localhost", () => {
