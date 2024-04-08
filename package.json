@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "mysql": "^2.18.1",
     "optimization-js": "^1.5.0"
   },
   "type": "module"
