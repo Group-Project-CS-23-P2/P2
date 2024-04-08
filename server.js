@@ -20,5 +20,6 @@ server.on("request", (request, response) => {
         response.writeHead(200, {
             "Content-Type": "text/html"
         }).end(clientHTML);
+        response.end();
     }
 })
