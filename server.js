@@ -1,9 +1,9 @@
-const optimizationjs = require('optimization-js');
+import optimize from "optimization-js";
 import http from 'http';
 import fs from "fs";
 import url from "url";
 
-const clientHTML = fs.readFileSync("/HTML-Pages/frontpage.html";);
+const clientHTML = fs.readFileSync("/HTML-Pages/frontpage.html");
 
 let server = new http.Server();
 server.listen(3430, "localhost", () => {
@@ -21,6 +21,4 @@ server.on("request", (request, response) => {
             "Content-Type": "text/html"
         }).end(clientHTML);
     }
-
-
 })
