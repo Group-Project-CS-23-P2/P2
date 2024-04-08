@@ -3,7 +3,10 @@ import http from 'http';
 import fs from "fs";
 import url from "url";
 
-const clientHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
+const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/Frontpage.html");
+const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
+const groupqueryHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/GroupQuery.html");
+const userratingHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserRating.html");
 
 let server = new http.Server();
 server.listen(3430, "localhost", () => {
@@ -20,7 +23,28 @@ server.on("request", (request, response) => {
     if (pathname === "/") { // A request for the front page
         response.writeHead(200, {
             "Content-Type": "text/html"
-        }).end(clientHTML);
+        }).end(frontpageHTML);
+        response.end();
+    }
+
+    else if (pathname === "/usercreation/") { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "text/html"
+        }).end(usercreationHTML);
+        response.end();
+    }
+
+    else if (pathname === "/groupquery/") { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "text/html"
+        }).end(groupqueryHTML);
+        response.end();
+    }
+
+    else if (pathname === "/rating/") { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "text/html"
+        }).end(userratingHTML);
         response.end();
     }
 })
