@@ -1,3 +1,9 @@
-console.log("server started")
+const optimizationjs = require('optimization-js');
+import http from 'http';
+import fs from "fs";
+import url from "url";
 
-console.log("huh");
+let server = new http.Server();
+server.listen(3430, "localhost", () => {
+	console.log("To connect to the chat, go to http://localhost:3430/");
+});
