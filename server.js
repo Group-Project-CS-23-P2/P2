@@ -14,8 +14,8 @@ const DBConnection = mysql.createConnection({
     database : 'cs_24_sw_2_13',
     user     : 'cs-24-sw-2-13@student.aau.dk',
     password : '4zrwf9DxnSLRLV/+'
-
 });
+
 DBConnection.connect((err) =>{
     if(err) throw err;
     console.log('MySql connected');
@@ -60,4 +60,32 @@ server.on("request", (request, response) => {
         }).end(userratingHTML);
         response.end();
     }
+
+    //API Requests
+
+    //User creation POST
+    else if (pathname === "/createuser/" && request.method === 'POST') { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "application/json"
+        }).end(userratingHTML);
+        response.end();
+    }
+
+    //Rating POST
+    else if (pathname === "/submitrating/" && request.method === 'POST') { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "application/json"
+        }).end(userratingHTML);
+        response.end();
+    }
+
+    //Group Query GET
+    else if (pathname === "/grouprequest/" && request.method === 'GET') { // A request for the front page
+        response.writeHead(200, {
+            "Content-Type": "application/json"
+        }).end(userratingHTML);
+        response.end();
+    }
 })
+
+
