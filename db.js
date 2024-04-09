@@ -11,3 +11,10 @@ DBConnection.connect((err) =>{
     if(err) throw err;
     console.log('MySql connected');
 });
+
+const insertQuery = `INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com')`;
+
+DBConnection.query(insertQuery, (err, result) => {
+    if (err) throw err;
+    console.log('Data inserted', result.insertId);
+});
