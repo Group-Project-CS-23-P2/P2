@@ -34,4 +34,5 @@ DBConnection.connect(err => {
         DBConnection.end();
       });
     });
+    console.log('Tables:', tables);
   });
