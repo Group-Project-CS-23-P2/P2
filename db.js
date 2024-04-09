@@ -7,14 +7,26 @@ const DBConnection = mysql.createConnection({
     password : '4zrwf9DxnSLRLV/+'
 
 });
-DBConnection.connect((err) =>{
-    if(err) throw err;
-    console.log('MySql connected');
-});
+// Connect to the database
+DBConnection.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySql', err);
+        return;
+    }
+    console.log('MySQL connected');
+    
+    // Insert data once connected
+    const insertQuery = 'INSERT INTO your_table_name (column1, column2) VALUES (?, ?)';
+    const values = ['value1', 'value2']; // Replace these with the values you wish to insert
+    DBConnection.query(insertQuery, values, (error, result) => {
+        if (error) {
+            console.error('Error inserting data:', error);
+            return;
+        }
+        console.log('Data inserted', result.insertId);
+    });
 
-const insertQuery = `INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com')`;
-
-DBConnection.query(insertQuery, (err, result) => {
-    if (err) throw err;
-    console.log('Data inserted', result.insertId);
+    // Don't forget to close the connection when you're done
+    // Especially important in scripts that exit after execution
+    // DBConnection.end();
 });
