@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "cs-24-sw-2-13@student.aau.dk",
+            "port": 3430,
+            "driver": "MySQL",
+            "database": "cs_24_sw_2_13",
+            "username": "cs-24-sw-2-13@student.aau.dk",
+            "password": "4zrwf9DxnSLRLV/+",
+            "name": "DBP2"
+        }
+    ]
+}
