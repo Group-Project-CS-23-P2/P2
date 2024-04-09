@@ -16,6 +16,24 @@ DBConnection.connect(err => {
   }
   console.log('MySQL connected');
 
+
+  function insertData(table, data) {
+    const placeholders = Object.keys(data).map(() => '?').join(',');
+    const insertQuery = `INSERT INTO \`${table}\` (${Object.keys(data).join(',')}) VALUES (${placeholders})`;
+
+    DBConnection.query(insertQuery, Object.values(data), (err, results) => {
+      if (err) {
+        console.error('Error inserting data', err);
+        return;
+      }
+      console.log('Data inserted', results);
+    });
+  }
+
+  // Inserting data example
+  insertData('example_table', { data: 'Sample Data' });
+
+
   // Show all tables in the database
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
