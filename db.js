@@ -1,6 +1,6 @@
 import mysql from 'mysql';
 
-// Set up the database connection
+
 const DBConnection = mysql.createConnection({
   host: 'localhost',
   database: 'cs_24_sw_2_13',
@@ -8,13 +8,13 @@ const DBConnection = mysql.createConnection({
   password: '4zrwf9DxnSLRLV/+',
 });
 
-// Connect to the database
+
 DBConnection.connect(err => {
   if (err) {
     console.error('Error connecting to MySQL', err);
     return;
   }
-  console.log('MySQL connected');
+  console.log('MySQL is connected');
 
 
   function insertData(table, data) {
@@ -26,15 +26,15 @@ DBConnection.connect(err => {
         console.error('Error inserting data', err);
         return;
       }
-      console.log('Data inserted', results);
+      console.log('Data is inserted', results);
     });
   }
 
-  // Inserting data example
+
   insertData('example_table', { data: 'Sample Data' });
 
 
-  // Show all tables in the database
+ 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
       console.error('Error fetching tables', err);
@@ -42,20 +42,18 @@ DBConnection.connect(err => {
       return;
     }
 
-    // Check if there are any tables
+    
     if (results.length === 0) {
       console.log('No tables found.');
       DBConnection.end();
       return;
     }
 
-    // Log the list of tables
+    
     console.log('Available Tables:', results);
 
-    // To print the contents of each table (optional)
     results.forEach(row => {
-      // The key for the table name depends on the result structure
-      // This might need to be changed based on what SHOW TABLES returns
+     
       let tableName = row[`Tables_in_${DBConnection.config.database}`];
 
       DBConnection.query(`SELECT * FROM \`${tableName}\``, (err, tableResults) => {
@@ -66,8 +64,5 @@ DBConnection.connect(err => {
         console.log(`Contents of the table ${tableName}:`, tableResults);
       });
     });
-
-    // End the connection if you are not planning to do any more queries
-    // DBConnection.end(); // Uncomment this line if you're done with all queries
   });
 });
