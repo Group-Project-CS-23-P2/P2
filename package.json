@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@penrose/core": "^3.2.0",
     "mysql": "^2.18.1",
-    "optimization-js": "^1.5.0"
+    "optimization-js": "^1.5.0",
+    "scipy": "^0.1.4"
   },
   "type": "module"
 }
