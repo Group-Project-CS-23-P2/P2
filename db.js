@@ -17,7 +17,7 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
 
-
+/*
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS User_table (
     column1 INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,6 +34,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   // Now you can proceed to insert data or perform other operations on the table
 });
 
+*/
 
   function insertIntoTable(column1Value, column2Value) {
     const query = 'INSERT INTO `User_table` (`column1`, `column2`) VALUES (?, ?)';
@@ -46,7 +47,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(20, 'TestValue');
+  insertIntoTable(2000, 'TestValueForUser');
   
  
   DBConnection.query('SHOW TABLES', (err, results) => {
