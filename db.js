@@ -18,7 +18,7 @@ DBConnection.connect(err => {
 
 
 
-
+/*
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS new_Activity_table (
     Activity_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,11 +41,11 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 });
 
+*/
 
-/*
   function insertIntoTable(column1Value, column2Value) {
-    const query = 'INSERT INTO `new_Activity_table` (`column1`, `column2`) VALUES (?, ?)';
-    DBConnection.query(query, [column1Value, column2Value], (err, results) => {
+    const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    DBConnection.query(query, [Activity_idValue, Activity_nameValue, Physical_rankValue, Creative_rankValue, Brainy_rankValue, Social_rankValue, Competative_rankValue, PricepointValue], (err, results) => {
       if (err) {
         console.error('Error inserting data into table', err);
         return;
@@ -54,8 +54,8 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  //insertIntoTable(3000, 'Test2ValueForUser');
-  */
+  insertIntoTable(1, 'Football', 5, 1, 2, 4, 4, 0);
+  
  
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
