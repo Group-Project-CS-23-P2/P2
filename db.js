@@ -17,9 +17,9 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
 
-/*
+
   const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS User_table (
+  CREATE TABLE IF NOT EXISTS Activity_table (
     column1 INT AUTO_INCREMENT PRIMARY KEY,
     column2 VARCHAR(255) NOT NULL
   )
@@ -27,14 +27,14 @@ DBConnection.connect(err => {
 
 DBConnection.query(createTableQuery, (err, results) => {
   if (err) {
-    console.error('Error creating User_table', err);
+    console.error('Error creating Activity_table', err);
     return;
   }
-  console.log('User_table created successfully or already exists');
+  console.log('Activity_table created successfully or already exists');
   // Now you can proceed to insert data or perform other operations on the table
 });
 
-*/
+
 
   function insertIntoTable(column1Value, column2Value) {
     const query = 'INSERT INTO `User_table` (`column1`, `column2`) VALUES (?, ?)';
@@ -47,7 +47,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(3000, 'Test2ValueForUser');
+  //insertIntoTable(3000, 'Test2ValueForUser');
   
  
   DBConnection.query('SHOW TABLES', (err, results) => {
