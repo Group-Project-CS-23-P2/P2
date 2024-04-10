@@ -17,23 +17,6 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
 
-  function insertData(table, data) {
-    const placeholders = Object.keys(data).map(() => '?').join(',');
-    const insertQuery = `INSERT INTO \`${table}\` (${Object.keys(data).join(',')}) VALUES (${placeholders})`;
-
-    DBConnection.query(insertQuery, Object.values(data), (err, results) => {
-      if (err) {
-        console.error('Error inserting data', err);
-        return;
-      }
-      console.log('Data is inserted', results);
-    });
-  }
-
-
-  insertData('your_actual_table_name', { data: 'Sample Data' });
-
-
  
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
