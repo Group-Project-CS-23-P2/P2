@@ -31,7 +31,7 @@ DBConnection.connect(err => {
   }
 
 
-  insertData('example_table', { data: 'Sample Data' });
+  insertData('your_actual_table_name', { data: 'Sample Data' });
 
 
  
