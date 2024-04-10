@@ -16,7 +16,19 @@ DBConnection.connect(err => {
   }
   console.log('MySQL is connected');
 
+  function insertIntoTable(column1Value, column2Value) {
+    const query = 'INSERT INTO `your_actual_table_name` (`column1`, `column2`) VALUES (?, ?)';
+    DBConnection.query(query, [column1Value, column2Value], (err, results) => {
+      if (err) {
+        console.error('Error inserting data into table', err);
+        return;
+      }
+      console.log('Data inserted successfully:', results);
+    });
+  }
 
+  insertIntoTable(3, 'newValue');
+  
  
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
