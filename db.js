@@ -47,7 +47,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(2000, 'TestValueForUser');
+  insertIntoTable(3000, 'Test2ValueForUser');
   
  
   DBConnection.query('SHOW TABLES', (err, results) => {
