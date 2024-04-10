@@ -43,9 +43,9 @@ DBConnection.query(createTableQuery, (err, results) => {
 
 */
 
-  function insertIntoTable(column1Value, column2Value) {
+  function insertIntoTable(activityId, activityName, physicalRank, creativeRank, brainyRank, socialRank, competitiveRank, pricePoint) {
     const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    DBConnection.query(query, [column1Value, column2Value, column3Value, column4Value, column5Value, column6Value, column7Value, column8Value], (err, results) => {
+    DBConnection.query(query, [ activityId, activityName, physicalRank, creativeRank, brainyRank, socialRank, competitiveRank, pricePoint], (err, results) => {
       if (err) {
         console.error('Error inserting data into table', err);
         return;
