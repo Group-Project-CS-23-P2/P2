@@ -16,28 +16,35 @@ DBConnection.connect(err => {
   }
   console.log('MySQL is connected');
 
-/*
+
+
 
   const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS Activity_table (
-    column1 INT AUTO_INCREMENT PRIMARY KEY,
-    column2 VARCHAR(255) NOT NULL
+  CREATE TABLE IF NOT EXISTS new_Activity_table (
+    Activity_id INT AUTO_INCREMENT PRIMARY KEY,
+    Activity_name VARCHAR(255) NOT NULL,
+    Physical_rank INT,
+    Creative_rank INT,
+    Brainy_rank INT,
+    Social_rank INT,
+    Competative_rank INT,
+    Pricepoint INT
   )
 `;
 
 DBConnection.query(createTableQuery, (err, results) => {
   if (err) {
-    console.error('Error creating Activity_table', err);
+    console.error('Error creating new_Activity_table', err);
     return;
   }
-  console.log('Activity_table created successfully or already exists');
+  console.log('new_Activity_table created successfully or already exists');
   
 });
-*/
 
 
+/*
   function insertIntoTable(column1Value, column2Value) {
-    const query = 'INSERT INTO `User_table` (`column1`, `column2`) VALUES (?, ?)';
+    const query = 'INSERT INTO `new_Activity_table` (`column1`, `column2`) VALUES (?, ?)';
     DBConnection.query(query, [column1Value, column2Value], (err, results) => {
       if (err) {
         console.error('Error inserting data into table', err);
@@ -48,7 +55,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   }
 
   //insertIntoTable(3000, 'Test2ValueForUser');
-  
+  */
  
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
