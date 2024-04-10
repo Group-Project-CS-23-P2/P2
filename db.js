@@ -81,4 +81,3 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   });
 });
-console.log("TEST")
