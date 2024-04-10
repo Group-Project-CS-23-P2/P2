@@ -17,7 +17,7 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
   function insertIntoTable(column1Value, column2Value) {
-    const query = 'INSERT INTO `your_actual_table_name` (`column1`, `column2`) VALUES (?, ?)';
+    const query = 'INSERT INTO `User_table` (`column1`, `column2`) VALUES (?, ?)';
     DBConnection.query(query, [column1Value, column2Value], (err, results) => {
       if (err) {
         console.error('Error inserting data into table', err);
