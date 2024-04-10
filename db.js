@@ -27,7 +27,7 @@ DBConnection.connect(err => {
     });
   }
 
-  insertIntoTable(3, 'newValue');
+  //insertIntoTable(3, 'newValue');
   
  
   DBConnection.query('SHOW TABLES', (err, results) => {
