@@ -16,7 +16,7 @@ DBConnection.connect(err => {
   }
   console.log('MySQL is connected');
 
-
+/*
 
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS Activity_table (
@@ -31,9 +31,9 @@ DBConnection.query(createTableQuery, (err, results) => {
     return;
   }
   console.log('Activity_table created successfully or already exists');
-  // Now you can proceed to insert data or perform other operations on the table
+  
 });
-
+*/
 
 
   function insertIntoTable(column1Value, column2Value) {
