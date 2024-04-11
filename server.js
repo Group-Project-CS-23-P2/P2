@@ -40,21 +40,21 @@ server.on("request", (request, response) => {
         response.end();
     }
 
-    else if (pathname === "/usercreation/") { // A request for the front page
+    else if (pathname === "/usercreation/") { // A request for the user creation page
         response.writeHead(200, {
             "Content-Type": "text/html"
         }).end(usercreationHTML);
         response.end();
     }
 
-    else if (pathname === "/groupquery/") { // A request for the front page
+    else if (pathname === "/groupquery/") { // A request for the group query page
         response.writeHead(200, {
             "Content-Type": "text/html"
         }).end(groupqueryHTML);
         response.end();
     }
 
-    else if (pathname === "/rating/") { // A request for the front page
+    else if (pathname === "/rating/") { // A request for the rating page
         response.writeHead(200, {
             "Content-Type": "text/html"
         }).end(userratingHTML);
@@ -64,32 +64,59 @@ server.on("request", (request, response) => {
     //API Requests
 
     //User creation POST
-    else if (pathname === "/createuser/" && request.method === 'POST') { // A request for the front page
+    else if (pathname === "/createuser/" && request.method === 'POST') {
+        requestinfo = JSON.parse(request.body);
+        try {CreateUser(requestinfo);}
+        catch (e) {}
         response.writeHead(200, {
             "Content-Type": "application/json"
-        }).end(userratingHTML);
+        }).end();
         response.end();
     }
 
     //Rating POST
-    else if (pathname === "/submitrating/" && request.method === 'POST') { // A request for the front page
+    else if (pathname === "/submitrating/" && request.method === 'POST') {
+        requestinfo = JSON.parse(request.body);
+        try {AddRating(requestinfo)}
+        catch (e) {}
+        
         response.writeHead(200, {
             "Content-Type": "application/json"
-        }).end(userratingHTML);
+        }).end();
         response.end();
     }
 
     //Group Query GET
-    else if (pathname === "/grouprequest/" && request.method === 'GET') { // A request for the front page
+    else if (pathname === "/grouprequest/" && request.method === 'GET') {
+        requestinfo = JSON.parse(request.body);
+        try {GroupQuery(requestinfo);}
+        //If function fails
+        catch (e) {        
+            response.writeHead(200, {
+            "Content-Type": "application/json"
+            }).end();
+            response.end();
+        }
+
+        //If function succeeds
         response.writeHead(200, {
             "Content-Type": "application/json"
-        }).end(userratingHTML);
+        }).end();
         response.end();
     }
 })
 
-async function CreateUser(){}
+function CreateUser()
+{
+    //Sanitize Relevant JSON variables
+}
 
-async function AddRating(){}
+function AddRating()
+{
+    //Sanitize Relevant JSON variables
+}
 
-async function GroupQuery(){}
+function GroupQuery()
+{
+    //Sanitize Relevant JSON variables
+}
