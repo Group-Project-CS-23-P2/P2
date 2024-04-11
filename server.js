@@ -4,7 +4,7 @@ import fs from "fs";
 import url from "url";
 import mysql from "mysql";
 
-const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/Frontpage.html");
+const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
 const groupqueryHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/GroupQuery.html");
 const userratingHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserRating.html");
@@ -106,9 +106,48 @@ server.on("request", (request, response) => {
     }
 })
 
-function CreateUser()
+const userInfotest = {
+    Username: "mebj",
+    Password: "Kjelderenhurtigkat10!",
+    Age: 23,
+    Physical: 5,
+    Creative: 2,
+    Social: 4,
+    Competative: 5,
+    Pricepoint: 0
+}
+
+function CreateUser(userInfo)
 {
-    //Sanitize Relevant JSON variables
+    const query = `
+    INSERT INTO new_User_table
+    (Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+
+
+  const values = [
+    userInfo.Username,
+    userInfo.Password, 
+    userInfo.Age,
+    userInfo.Physical,
+    userInfo.Creative,
+    userInfo.Brainy,
+    userInfo.Social,
+    userInfo.Competative,
+    userInfo.Pricepoint
+  ];
+
+
+  DBConnection.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error inserting data into new_User_table', err);
+      return;
+    }
+    console.log('New user created successfully:', results);
+    
+  });
 }
 
 function AddRating()
@@ -120,8 +159,6 @@ function GroupQuery()
 {
     //Sanitize Relevant JSON variables
 }
-
-
 class Activity {
     constructor(name, id, listofFeatures)
     {
@@ -139,3 +176,5 @@ class User {
         this.listofFeatures = listofFeatures;
     }
 }
+
+CreateUser(userInfotest);
