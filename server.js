@@ -112,6 +112,7 @@ const userInfotest = {
     Age: 23,
     Physical: 5,
     Creative: 2,
+    Brainy: 3,
     Social: 4,
     Competative: 5,
     Pricepoint: 0
