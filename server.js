@@ -177,4 +177,34 @@ class User {
     }
 }
 
-CreateUser(userInfotest);
+function userInfo(username){
+    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+
+    DBConnection.query(query, [username], (err, results) => {
+        if (err) {
+          console.error('Error fetching user from new_User_table', err);
+          return null; 
+        }
+        if (results.length === 0) {
+          console.log('User not found');
+          return null; 
+        }
+    
+        const userRow = results[0];
+        const listofFeatures = [
+          userRow.Physical,
+          userRow.Creative,
+          userRow.Brainy,
+          userRow.Social,
+          userRow.Competative,
+          userRow.Pricepoint
+        ];
+    
+        const user = new User(userRow.Username, userRow.User_id, listofFeatures);
+    
+        console.log(user);
+        return user;
+      });
+}
+
+userInfo("mebj");
