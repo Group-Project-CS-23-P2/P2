@@ -17,7 +17,7 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
 
-
+/*
 
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS new_User_table (
@@ -57,8 +57,12 @@ DBConnection.query(createTableQuery, (err, results) => {
   }
 
   insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
-  
+  */
  
+DBConnection.query('DROP TABLE Your_actual_table_name');
+DBConnection.query('DROP TABLE User_table');
+DBConnection.query('DROP TABLE Activity_table');
+
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
       console.error('Error fetching tables', err);
