@@ -4,7 +4,7 @@ import fs from "fs";
 import url from "url";
 import mysql from "mysql";
 
-const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/Frontpage.html");
+const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
 const groupqueryHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/GroupQuery.html");
 const userratingHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserRating.html");
@@ -139,14 +139,14 @@ function CreateUser(userInfo)
     userInfo.Pricepoint
   ];
 
-  // Execute the query
+
   DBConnection.query(query, values, (err, results) => {
     if (err) {
       console.error('Error inserting data into new_User_table', err);
       return;
     }
     console.log('New user created successfully:', results);
-    // Additional logic to handle post-insert operations can go here
+    
   });
 }
 
