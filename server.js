@@ -88,4 +88,8 @@ server.on("request", (request, response) => {
     }
 })
 
+async function CreateUser(){}
 
+async function AddRating(){}
+
+async function GroupQuery(){}
