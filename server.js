@@ -150,7 +150,7 @@ function CreateUser(userInfo)
     
   });
 }
-CreateUser(userInfotest1)
+
 
 function AddRating()
 {
