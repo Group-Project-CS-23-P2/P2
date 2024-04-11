@@ -159,6 +159,22 @@ function GroupQuery()
 {
     //Sanitize Relevant JSON variables
 }
+class Activity {
+    constructor(name, id, listofFeatures)
+    {
+        this.name = name;
+        this.id = id;
+        this.listofFeatures = listofFeatures;
+    }
+}
 
+class User {
+    constructor(name, id, listofFeatures)
+    {
+        this.name = name;
+        this.id= id;
+        this.listofFeatures = listofFeatures;
+    }
+}
 
 CreateUser(userInfotest);
