@@ -41,7 +41,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 });
 
-
+*/
 
   function insertIntoTable(activityId, activityName, physicalRank, creativeRank, brainyRank, socialRank, competitiveRank, pricePoint) {
     const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -54,8 +54,8 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(1, 'Football', 5, 1, 2, 4, 4, 0);
-  */
+  insertIntoTable(2, 'Cheramic', 1, 5, 3, 3, 0, 300);
+  
  
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
