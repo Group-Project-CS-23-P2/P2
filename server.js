@@ -106,16 +106,16 @@ server.on("request", (request, response) => {
     }
 })
 
-const userInfotest = {
-    Username: "mebj",
-    Password: "Kjelderenhurtigkat10!",
-    Age: 23,
+const userInfotest1 = {
+    Username: "amve",
+    Password: "tintinitibet123",
+    Age: 21,
     Physical: 5,
     Creative: 2,
-    Brainy: 3,
-    Social: 4,
+    Brainy: 4,
+    Social: 3,
     Competative: 5,
-    Pricepoint: 0
+    Pricepoint: 300
 }
 
 function CreateUser(userInfo)
@@ -150,6 +150,7 @@ function CreateUser(userInfo)
     
   });
 }
+CreateUser(userInfotest1)
 
 function AddRating()
 {
@@ -208,4 +209,4 @@ function userInfo(username){
       });
 }
 
-userInfo("mebj");
+userInfo("amve");
