@@ -18,34 +18,36 @@ DBConnection.connect(err => {
 
 
 
-/*
+
   const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS new_Activity_table (
-    Activity_id INT AUTO_INCREMENT PRIMARY KEY,
-    Activity_name VARCHAR(255) NOT NULL,
-    Physical_rank INT,
-    Creative_rank INT,
-    Brainy_rank INT,
-    Social_rank INT,
-    Competative_rank INT,
+  CREATE TABLE IF NOT EXISTS new_User_table (
+    User_id INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Age INT,
+    Physical INT,
+    Creative INT,
+    Brainy INT,
+    Social INT,
+    Competative INT,
     Pricepoint INT
   )
 `;
 
 DBConnection.query(createTableQuery, (err, results) => {
   if (err) {
-    console.error('Error creating new_Activity_table', err);
+    console.error('Error creating new_User_table', err);
     return;
   }
-  console.log('new_Activity_table created successfully or already exists');
+  console.log('new_User_table created successfully or already exists');
   
 });
 
-*/
 
-  function insertIntoTable(activityId, activityName, physicalRank, creativeRank, brainyRank, socialRank, competitiveRank, pricePoint) {
-    const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    DBConnection.query(query, [ activityId, activityName, physicalRank, creativeRank, brainyRank, socialRank, competitiveRank, pricePoint], (err, results) => {
+
+  function insertIntoTable(User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint) {
+    const query = 'INSERT INTO `new_User_table` (`User_id`, `Username`, `Password`,`Age`,`Physical`,`Creative`,`Brainy`, `Social`, `Competative`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    DBConnection.query(query, [User_Id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint], (err, results) => {
       if (err) {
         console.error('Error inserting data into table', err);
         return;
@@ -54,7 +56,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(2, 'Cheramic', 1, 5, 3, 3, 0, 300);
+  insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   
  
   DBConnection.query('SHOW TABLES', (err, results) => {
