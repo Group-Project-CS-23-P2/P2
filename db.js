@@ -59,18 +59,31 @@ DBConnection.query(createTableQuery, (err, results) => {
   insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   */
  
-  const tableName = 'User_table';
-  const dropTableQuery = `DROP TABLE ${tableName}`;
-  
-  connection.query(dropTableQuery, (error, results, fields) => {
-    if (error) {
-      console.error('Error dropping table:', error);
+  DBConnection.query('DROP TABLE Your_actual_table_name', (err) => {
+    if (err) {
+      console.error('Error dropping Your_actual_table_name', err);
       return;
     }
-    console.log('Table dropped successfully');
+    console.log('Your_actual_table_name dropped successfully');
+  
+    DBConnection.query('DROP TABLE User_table', (err) => {
+      if (err) {
+        console.error('Error dropping User_table', err);
+        return;
+      }
+      console.log('User_table dropped successfully');
+  
+      DBConnection.query('DROP TABLE Activity_table', (err) => {
+        if (err) {
+          console.error('Error dropping Activity_table', err);
+          return;
+        }
+        console.log('Activity_table dropped successfully');
+      
+      });
+    });
   });
-
-
+  
 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
