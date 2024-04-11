@@ -59,12 +59,12 @@ DBConnection.query(createTableQuery, (err, results) => {
   insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   */
  
-  DBConnection.query('DROP TABLE Your_actual_table_name', (err) => {
+  DBConnection.query('DROP TABLE your_actual_table_name', (err) => {
     if (err) {
       console.error('Error dropping Your_actual_table_name', err);
       return;
     }
-    console.log('Your_actual_table_name dropped successfully');
+    console.log('your_actual_table_name dropped successfully');
   
     DBConnection.query('DROP TABLE User_table', (err) => {
       if (err) {
