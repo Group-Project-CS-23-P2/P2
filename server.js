@@ -106,9 +106,48 @@ server.on("request", (request, response) => {
     }
 })
 
-function CreateUser()
+const userInfotest = {
+    Username: "mebj",
+    Password: "Kjelderenhurtigkat10!",
+    Age: 23,
+    Physical: 5,
+    Creative: 2,
+    Social: 4,
+    Competative: 5,
+    Pricepoint: 0
+}
+
+function CreateUser(userInfo)
 {
-    //Sanitize Relevant JSON variables
+    const query = `
+    INSERT INTO new_User_table
+    (Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+
+
+  const values = [
+    userInfo.Username,
+    userInfo.Password, 
+    userInfo.Age,
+    userInfo.Physical,
+    userInfo.Creative,
+    userInfo.Brainy,
+    userInfo.Social,
+    userInfo.Competative,
+    userInfo.Pricepoint
+  ];
+
+  // Execute the query
+  DBConnection.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error inserting data into new_User_table', err);
+      return;
+    }
+    console.log('New user created successfully:', results);
+    // Additional logic to handle post-insert operations can go here
+  });
 }
 
 function AddRating()
@@ -120,3 +159,6 @@ function GroupQuery()
 {
     //Sanitize Relevant JSON variables
 }
+
+
+CreateUser(userInfotest);
