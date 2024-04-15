@@ -4,7 +4,7 @@ import fs from "fs";
 import url from "url";
 import mysql from "mysql";
 
-const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/Frontpage.html");
+const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
 const groupqueryHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/GroupQuery.html");
 const userratingHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserRating.html");
@@ -106,10 +106,51 @@ server.on("request", (request, response) => {
     }
 })
 
-function CreateUser()
-{
-    //Sanitize Relevant JSON variables
+const userInfotest1 = {
+    Username: "amve",
+    Password: "tintinitibet123",
+    Age: 21,
+    Physical: 5,
+    Creative: 2,
+    Brainy: 4,
+    Social: 3,
+    Competative: 5,
+    Pricepoint: 300
 }
+
+function CreateUser(userInfo)
+{
+    const query = `
+    INSERT INTO new_User_table
+    (Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+
+
+  const values = [
+    userInfo.Username,
+    userInfo.Password, 
+    userInfo.Age,
+    userInfo.Physical,
+    userInfo.Creative,
+    userInfo.Brainy,
+    userInfo.Social,
+    userInfo.Competative,
+    userInfo.Pricepoint
+  ];
+
+
+  DBConnection.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error inserting data into new_User_table', err);
+      return;
+    }
+    console.log('New user created successfully:', results);
+    
+  });
+}
+
 
 function AddRating()
 {
@@ -120,8 +161,6 @@ function GroupQuery()
 {
     //Sanitize Relevant JSON variables
 }
-
-
 class Activity {
     constructor(name, id, listofFeatures)
     {
@@ -139,6 +178,38 @@ class User {
         this.listofFeatures = listofFeatures;
     }
 }
+=======
+function userInfo(username){
+    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+
+    DBConnection.query(query, [username], (err, results) => {
+        if (err) {
+          console.error('Error fetching user from new_User_table', err);
+          return null; 
+        }
+        if (results.length === 0) {
+          console.log('User not found');
+          return null; 
+        }
+    
+        const userRow = results[0];
+        const listofFeatures = [
+          userRow.Physical,
+          userRow.Creative,
+          userRow.Brainy,
+          userRow.Social,
+          userRow.Competative,
+          userRow.Pricepoint
+        ];
+    
+        const user = new User(userRow.Username, userRow.User_id, listofFeatures);
+    
+        console.log(user);
+        return user;
+      });
+}
+
+userInfo("amve");
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
