@@ -63,7 +63,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   */
  
 
-  /*
+  
 //Activity insert 
   function insertIntoTable(Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint) {
     const query = 'INSERT INTO `new_User_table` (Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -76,9 +76,10 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
+  insertIntoTable(3, 'Padeltennis', 4, 2, 1, 3, 4, 150);
+  insertIntoTable(4, 'Running', 5, 1, 1, 2, 2, 0);
+  insertIntoTable(5, 'Walking', 2, 1, 2, 3, 1, 0);
   
-  */
  
 
   /*
