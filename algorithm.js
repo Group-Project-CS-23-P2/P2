@@ -1,10 +1,20 @@
 import { spawn } from 'child_process';
 
+class RatedActivity {
+  constructor(name, id, listofFeatures, rating)
+  {
+      this.name = name;
+      this.id = id;
+      this.listofFeatures = listofFeatures;
+      this.rating = rating;
+  }
+}
+
 // Path to your Python script
 const pythonScriptPath = '/Users/peter/Documents/GitHub/P2/P2/script1.py';
 
 // Arguments to pass to the Python script
-const args = ['arg1', 'arg2', 'arg3'];
+const args = ['peter', '5','5','5','5','5', JSON.stringify(new RatedActivity('Soccer', 51, [5,5,5,5,5], 5))];
 
 // Spawn a new Python process
 const pythonProcess = spawn('py', [pythonScriptPath, ...args]);
@@ -23,4 +33,3 @@ pythonProcess.stderr.on('data', (data) => {
 pythonProcess.on('close', (code) => {
   console.log(`Python script exited with code ${code}`);
 });
-

@@ -178,7 +178,7 @@ class User {
         this.listofFeatures = listofFeatures;
     }
 }
-
+=======
 function userInfo(username){
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
@@ -210,3 +210,13 @@ function userInfo(username){
 }
 
 userInfo("amve");
+
+class RatedActivity {
+    constructor(name, id, listofFeatures, rating)
+    {
+        this.name = name;
+        this.id = id;
+        this.listofFeatures = listofFeatures;
+        this.rating = rating;
+    }
+  }
