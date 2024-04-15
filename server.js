@@ -178,7 +178,7 @@ class User {
         this.listofFeatures = listofFeatures;
     }
 }
-=======
+
 function userInfo(username){
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
