@@ -209,6 +209,39 @@ function userInfo(username){
       });
 }
 
+function activityInfo(Activity_name){
+    const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
+
+    DBConnection.query(query, [Activity_name], (err, results) => {
+        if (err) {
+          console.error('Error fetching user from new_Activity_table', err);
+          return null; 
+        }
+        if (results.length === 0) {
+          console.log('Activity not found');
+          return null; 
+        }
+    
+        const ActivityRow = results[0];
+        const listofFeatures = [
+          ActivityRow.Physical_rank,
+          ActivityRow.Creative_rank,
+          ActivityRow.Brainy_rank,
+          ActivityRow.Social_rank,
+          ActivityRow.Competative_rank,
+          ActivityRow.Pricepoint
+        ];
+    
+        const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
+    
+        console.log(activity);
+        return activity;
+      });
+}
+
+
+activityInfo("Football");
+
 userInfo("amve");
 
 class RatedActivity {
