@@ -139,3 +139,13 @@ class User {
         this.listofFeatures = listofFeatures;
     }
 }
+
+class RatedActivity {
+    constructor(name, id, listofFeatures, rating)
+    {
+        this.name = name;
+        this.id = id;
+        this.listofFeatures = listofFeatures;
+        this.rating = rating;
+    }
+  }
