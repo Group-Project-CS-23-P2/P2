@@ -18,8 +18,6 @@ function PythonFeatureCalculation(args) {
   // Path to your Python script
   const pythonScriptPath = '/Users/peter/Documents/GitHub/P2/P2/script1.py';
 
-  // Arguments to pass to the Python script
- 
 
   // Spawn a new Python process
   const pythonProcess = spawn('py', [pythonScriptPath, ...args]);
