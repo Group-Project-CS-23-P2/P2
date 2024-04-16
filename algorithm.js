@@ -39,3 +39,27 @@ function PythonFeatureCalculation(args) {
   });  
 }
 
+function PythonCosineComparer(args)
+{
+  const pythonCosinePath = '/Users/peter/Documents/GitHub/P2/P2/cosineComparer.py';
+  const pythonProcess = spawn('py', [pythonCosinePath, ...args]);
+
+    // Listen for data from the Python script
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
+  
+    // Listen for errors from the Python script
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+    });
+  
+    // Listen for when the Python script exits
+    pythonProcess.on('close', (code) => {
+      console.log(`Python script exited with code ${code}`);
+    });  
+
+}
+
+let testingVars = [3,3,3,3,3, JSON.stringify(new RatedActivity('Soccer', 51, [5,5,5,5,5], 5)), JSON.stringify(new RatedActivity('Basket', 51, [5,5,5,5,5], 5))];
+let result = PythonCosineComparer((testingVars));
