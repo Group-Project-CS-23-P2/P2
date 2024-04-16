@@ -9,6 +9,8 @@ class RatedActivity {
       this.rating = rating;
   }
 }
+const args = ['peter', '5',"5",5,'5','5', JSON.stringify(new RatedActivity('Soccer', 51, [5,5,5,5,5], 5))];
+PythonFeatureCalculation(args);
 
 //Args should be in the form [Name, Quizval1, Quizval2, Quizval3, Quizval4, Quizval5, JSON string of rated activity]...
 //Amount of activities is unlimited
@@ -25,7 +27,11 @@ function PythonFeatureCalculation(args) {
   pythonProcess.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
     let result = JSON.parse(data);
-    return result;
+    console.log(result);
+    for(let i = 0; i < result.length;) 
+    {
+      console.log(result[i]);
+    }
   });
 
   // Listen for errors from the Python script

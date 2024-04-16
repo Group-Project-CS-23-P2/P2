@@ -3,6 +3,7 @@ import http from 'http';
 import fs from "fs";
 import url from "url";
 import mysql from "mysql";
+import { PythonFeatureCalculation } from 'algorithm';
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
@@ -157,10 +158,23 @@ function AddRating()
     //Sanitize Relevant JSON variables
 }
 
-function GroupQuery()
+function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
+    //Get a list of lists, containing user features
+    for(let i = 0; i < requestinfo.length; i++)
+    {
+        //Get activities for user I
+        //Send it all to algorithm function.
+        //Add returned list to list of user features
+    }
+
+    //Calculate the group vector
+    //Send group vector to python to calculate group similarity
+
+    //Returns list of best fitting activities
 }
+
 class Activity {
     constructor(name, id, listofFeatures)
     {

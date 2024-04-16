@@ -27,13 +27,6 @@ def costFunction(userfeatures):
 
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
-cons = (LinearConstraint([1,0,0,0,0], [0], [5]),
-        LinearConstraint([0,1,0,0,0], [0], [5]),
-        LinearConstraint([0,0,1,0,0], [0], [5]),
-        LinearConstraint([0,0,0,1,0], [0], [5]),
-        LinearConstraint([0,0,0,0,1], [0], [5]))
-
-# Your Python script logic here
 
 result = minimize(costFunction, [2.5,2.5,2.5,2.5,2.5], bounds= ((0,5),(0,5),(0,5),(0,5),(0,5)));
 returnobject = list(result.x);
