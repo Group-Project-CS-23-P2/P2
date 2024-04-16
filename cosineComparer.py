@@ -27,11 +27,12 @@ for i in range(len(listOfActivityObject)):
     cosineSimilarity = np.dot(featureVector, currentObjectNParray) / (np.linalg.norm(featureVector) * np.linalg.norm(currentObjectNParray));
     print(cosineSimilarity);
     #Create tuple from object
-    addedTuple = tuple(currentObject["id"], cosineSimilarity);
+    addedTuple = tuple((currentObject["id"], cosineSimilarity));
     calculatedActivityList.append(addedTuple);
 
 #sort list of tuples
-calculatedActivityList.sort(key = lambda x: x[1])
+calculatedActivityList.sort(key = lambda x: x[1]);
+print(calculatedActivityList);
 #Create list of activity ID's 
 
 
