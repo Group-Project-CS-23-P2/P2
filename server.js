@@ -233,7 +233,7 @@ function activityInfo(Activity_name){
         ];
     
         let activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
-    
+        console.log("returning object");
         console.log(activity);
         return activity;
       });
