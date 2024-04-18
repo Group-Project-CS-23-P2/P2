@@ -240,10 +240,6 @@ function activityInfo(Activity_name){
 }
 
 
-activityInfo("Football");
-
-userInfo("amve");
-
 
 function getRatedActivities(Username){
 
