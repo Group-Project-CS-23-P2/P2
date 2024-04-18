@@ -18,21 +18,26 @@ featureVector = np.array([feature1, feature2, feature3, feature4, feature5]);
 
 listOfActivityObject = args_from_nodejs[5:];
 
-print(args_from_nodejs, featureVector, listOfActivityObject)
-
 for i in range(len(listOfActivityObject)):
     currentObject = json.loads(listOfActivityObject[i]);
     currentObjectNParray = np.array(currentObject["listofFeatures"])
     #This needs to be converted to NP arrays
     cosineSimilarity = np.dot(featureVector, currentObjectNParray) / (np.linalg.norm(featureVector) * np.linalg.norm(currentObjectNParray));
-    print(cosineSimilarity);
     #Create tuple from object
     addedTuple = tuple((currentObject["id"], cosineSimilarity));
     calculatedActivityList.append(addedTuple);
 
 #sort list of tuples
 calculatedActivityList.sort(key = lambda x: x[1]);
-print(calculatedActivityList);
+
+ReturnObject = {"ListOfObjectIDs": calculatedActivityList}
+listOfIds = [(calculatedActivityList[i])[0] for i in range(5)];
+ReturnObject["ListOfObjectIDs"] = listOfIds;
+
+
+print(json.dumps(ReturnObject));
+
+#print(json.dumps(ReturnObject, indent = 4));
 #Create list of activity ID's 
 
 

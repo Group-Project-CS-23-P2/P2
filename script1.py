@@ -30,4 +30,5 @@ def costFunction(userfeatures):
 
 result = minimize(costFunction, [2.5,2.5,2.5,2.5,2.5], bounds= ((0,5),(0,5),(0,5),(0,5),(0,5)));
 returnobject = list(result.x);
+
 print(json.dumps(returnobject))

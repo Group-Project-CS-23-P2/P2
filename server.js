@@ -3,8 +3,9 @@ import http from 'http';
 import fs from "fs";
 import url from "url";
 import mysql from "mysql";
-import { PythonFeatureCalculation } from 'algorithm';
-import { PythonCosineComparer } from 'algorithm';
+import { PythonFeatureCalculation } from './algorithm.mjs';
+import { PythonCosineComparer } from './algorithm.mjs';
+
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
@@ -29,7 +30,7 @@ server.listen(3430, "localhost", () => {
 });
 
 
-server.on("request", (request, response) => {
+server.on("request", async (request, response) => {
     //Parse where the request wants to go.
     let pathname = url.parse(request.url).pathname;
     console.log("", pathname);
@@ -92,7 +93,7 @@ server.on("request", (request, response) => {
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
         requestinfo = JSON.parse(request.body);
         let returnList;
-        try {returnList = GroupQuery(requestinfo);}
+        try {returnList =  await GroupQuery(requestinfo);}
         //If function fails
         catch (e) {}  
         
@@ -158,7 +159,7 @@ function AddRating()
     //Sanitize Relevant JSON variables
 }
 
-function GroupQuery(requestinfo)
+async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
     let returnList = [];
