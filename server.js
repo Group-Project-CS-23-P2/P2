@@ -330,12 +330,12 @@ function getRatedActivities(Username){
                 listOfRatedActivities.push(ratedActivityPadeltennis);
             };
             if(results_rating[0].Running > 0 ){
-                let ratedActivityRunning = new RatedActivity(activityInfo("Running").name,activityInfo("Running").id, activityInfo("Running").listofFeatures, results_rating[0].Running);
+                let ratedActivityRunning = new RatedActivity(activityInfo("Running").name ,activityInfo("Running").id, activityInfo("Running").listofFeatures, results_rating[0].Running);
 
                 listOfRatedActivities.push(ratedActivityRunning);
             };
             if(results_rating[0].Walking > 0 ){
-                let ratedActivityWalking = new RatedActivity(activityInfo("Walking").name,results_rating[0].Walking);
+                let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
 
                 listOfRatedActivities.push(ratedActivityWalking);
             };
