@@ -264,7 +264,7 @@ function getRatedActivities(Username){
       
         let userid = results[0].User_id;
 
-        const query1 = `SELECT * FROM ratedActivitiesTable WHERE User_id = ? LIMIT 1`;
+        const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
 
         DBConnection.query1(query1, [userid], (err, results_rating) => {
             if (err) {
@@ -317,6 +317,9 @@ function getRatedActivities(Username){
     //
 
         }
+
+
+        console.log(getRatedActivities("mebj"));
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)

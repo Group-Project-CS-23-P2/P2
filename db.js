@@ -107,7 +107,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
   });
 }
 
-insertIntoTable(2, 5, -1, 4, 5, -1);
+//insertIntoTable(2, 5, -1, 4, 5, -1);
 
 
 
