@@ -96,7 +96,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
 //User insert 
 function insertIntoTable(User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating) {
-  const query = 'INSERT INTO `ratedactivities_table` (`User_id`, `Activity_1_rating`, Activity_2_rating`,`Activity_3_rating`,`Activity_4_rating`,`Activity_5_rating`) VALUES (?, ?, ?, ?, ?, ?)';
+  const query = 'INSERT INTO `ratedactivities_table` (`User_id`, `Activity_1_rating`, `Activity_2_rating`, `Activity_3_rating`,`Activity_4_rating`,`Activity_5_rating`) VALUES (?, ?, ?, ?, ?, ?)';
   DBConnection.query(query, [User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
