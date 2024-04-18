@@ -284,11 +284,11 @@ function getRatedActivities(Username){
     DBConnection.query(query, [Username], (err, results) => {
         if (err) {
           console.error('Error fetching user from new_User_table', err);
-          return null; 
+          return; 
         }
         if (results.length === 0) {
           console.log('User not found');
-          return null; 
+          return; 
         }
         let userid = results[0].User_id;
         
@@ -301,53 +301,41 @@ function getRatedActivities(Username){
         DBConnection.query(query1, [userid], (err, results_rating) => {
             if (err) {
               console.error('Error fetching user from new_User_table', err);
-              return null; 
+              return; 
             }
             if (results_rating.length === 0) {
               console.log('User not found');
-              return null; 
+              return ; 
             }
 
             let listOfRatedActivities = [];
-            if (results_rating[0].Football > 0) {
-                activityInfo("Football", (err, activity) => {
-                    if (!err && activity) {
-                        let ratedActivityFootball = new RatedActivity(activity.name, activity.id,activity.listofFeatures, results_rating[0].Football);
-                        listOfRatedActivities.push(ratedActivityFootball);
+            let activitiesProcessed = 0; // Counter to track completion of asynchronous tasks
+
+            // List of activities to check ratings
+            const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];
+
+            activities.forEach(activity => {
+                if (results_rating[0][activity] && results_rating[0][activity] > 0) {
+                    activityInfo(activity, (err, activityDetails) => {
+                        if (!err && activityDetails) {
+                            let ratedActivity = new RatedActivity(activityDetails.name, activityDetails.id, activityDetails.listofFeatures, results_rating[0][activity]);
+                            listOfRatedActivities.push(ratedActivity);
+                        }
+                        activitiesProcessed++;
+                        if (activitiesProcessed === activities.length) { // Check if all activities have been processed
+                            console.log(listOfRatedActivities); // Finally, log all rated activities
+                        }
+                    });
+                } else {
+                    activitiesProcessed++;
+                    if (activitiesProcessed === activities.length) {
+                        console.log(listOfRatedActivities); // Handle case where some activities have no rating
                     }
-                });
-            }
-            if (results_rating[0].Cheramic > 0) {
-                activityInfo("Cheramic", (err, activity) => {
-                    if (!err && activity) {
-                        let ratedActivityCheramic = new RatedActivity(activity, results_rating[0].Cheramic);
-                        listOfRatedActivities.push(ratedActivityCheramic);
-                    }
-                });
-            }
-            if (results_rating[0].Padeltennis > 0) {
-                activityInfo("Padeltennis", (err, activity) => {
-                    if (!err && activity) {
-                        let ratedActivityPadeltennis = new RatedActivity(activity, results_rating[0].Padeltennis);
-                        listOfRatedActivities.push(ratedActivityPadeltennis);
-                    }
-                });
-            }
-            if (results_rating[0].Running > 0) {
-                activityInfo("Running", (err, activity) => {
-                    if (!err && activity) {
-                        let ratedActivityRunning = new RatedActivity(activity, results_rating[0].Running);
-                        listOfRatedActivities.push(ratedActivityRunning);
-                    }
-                });
-            }
-            if (results_rating[0].Walking > 0) {
-                activityInfo("Walking", (err, activity) => {
-                    if (!err && activity) {
-                        let ratedActivityWalking = new RatedActivity(activity, results_rating[0].Walking);
-                        listOfRatedActivities.push(ratedActivityWalking);
-                    }
-            })}})})};
+                }
+            });
+        });
+    });
+}
             
 
 
