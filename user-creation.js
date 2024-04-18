@@ -17,7 +17,7 @@ document.getElementById('nameForm').addEventListener('submit', function(event) {
     console.log('Valid name:', usernameInput);
 });
 
-// INPUT VALIDATION FOR PASSWORD MANGLER REGEX!!!
+// INPUT VALIDATION FOR PASSWORD
 function isValidPassword(password){
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
     return passwordRegex.test(password);
@@ -57,7 +57,7 @@ fs.readFile('data.json', 'utf8', (err,data) => {
 
     const jsonData = JSON.parse(data);
 
-    //Det her skal pege mod stedet hvor POST request skal være "serveren"
+    //Det her skal pege mod stedet hvor POST request skal være "serveren" AXIOS SKAL INSTALLERES
     axios.post('/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/System', jsonData).then(response => {
         console.log('Response', response.data);
     })
