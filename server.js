@@ -315,27 +315,27 @@ function getRatedActivities(Username){
             let listOfRatedActivities = [];
             if(results_rating[0].Football > 0 ){
                
-                let ratedActivityFootball = new RatedActivity(activityInfo(Football),results_rating[0].Football);
+                let ratedActivityFootball = new RatedActivity(activityInfo("Football"),results_rating[0].Football);
 
                 listOfRatedActivities.push(ratedActivityFootball);
             };
             if(results_rating[0].Cheramic > 0 ){
-                let ratedActivityCheramic = new RatedActivity(activityInfo(Cheramic),results_rating[0].Cheramic);
+                let ratedActivityCheramic = new RatedActivity(activityInfo("Cheramic"),results_rating[0].Cheramic);
 
                 listOfRatedActivities.push(ratedActivityCheramic);
             };
             if(results_rating[0].Padeltennis > 0 ){
-                let ratedActivityPadeltennis = new RatedActivity(activityInfo(Padeltennis),results_rating[0].Padeltennis);
+                let ratedActivityPadeltennis = new RatedActivity(activityInfo("Padeltennis"),results_rating[0].Padeltennis);
 
                 listOfRatedActivities.push(ratedActivityPadeltennis);
             };
             if(results_rating[0].Running > 0 ){
-                let ratedActivityRunning = new RatedActivity(activityInfo(Running),results_rating[0].Running);
+                let ratedActivityRunning = new RatedActivity(activityInfo("Running"),results_rating[0].Running);
 
                 listOfRatedActivities.push(ratedActivityRunning);
             };
             if(results_rating[0].Walking > 0 ){
-                let ratedActivityWalking = new RatedActivity(activityInfo(Walking),results_rating[0].Walking);
+                let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
 
                 listOfRatedActivities.push(ratedActivityWalking);
             };
