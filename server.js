@@ -275,9 +275,9 @@ function getRatedActivities(Username){
             }
 
             let listOfRatedActivities = [];
-            let activitiesProcessed = 0; // Counter to track completion of asynchronous tasks
+            let activitiesProcessed = 0; 
 
-            // List of activities to check ratings
+            
             const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];
 
             activities.forEach(activity => {
@@ -288,14 +288,14 @@ function getRatedActivities(Username){
                             listOfRatedActivities.push(ratedActivity);
                         }
                         activitiesProcessed++;
-                        if (activitiesProcessed === activities.length) { // Check if all activities have been processed
-                            console.log(listOfRatedActivities); // Finally, log all rated activities
+                        if (activitiesProcessed === activities.length) { 
+                            console.log(listOfRatedActivities); 
                         }
                     });
                 } else {
                     activitiesProcessed++;
                     if (activitiesProcessed === activities.length) {
-                        console.log(listOfRatedActivities); // Handle case where some activities have no rating
+                        console.log(listOfRatedActivities); 
                     }
                 }
             });
@@ -305,7 +305,7 @@ function getRatedActivities(Username){
             
 
 
-        console.log(getRatedActivities("mebj"));
+getRatedActivities("mebj");
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
