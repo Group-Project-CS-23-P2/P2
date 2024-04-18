@@ -19,7 +19,7 @@ DBConnection.connect(err => {
 
 
 //Table creation function
-
+/*
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS ratedActivitiestTable (
     User_id INT REFERENCES new_User_table(User_id),
@@ -31,7 +31,8 @@ DBConnection.connect(err => {
     PRIMARY KEY(User_id)
   )
 `;
-
+*/
+/*
 DBConnection.query(createTableQuery, (err, results) => {
   if (err) {
     console.error('Error creating ratedActivitiesTable', err);
@@ -41,7 +42,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 });
 
-
+*/
 /*
 //User insert 
   function insertIntoTable(User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint) {
@@ -82,7 +83,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
   //Denne funktion bruges til at fjerne tables!!!
-
+/*
   DBConnection.query('DROP TABLE ratedactivities_table', (err) => {
     if (err) {
       console.error('Error dropping ratedactivities_table', err);
@@ -91,13 +92,13 @@ DBConnection.query(createTableQuery, (err, results) => {
     console.log('ratedactivities_table dropped successfully');
   });
   
-
+*/
 
 
 //User insert 
-function insertIntoTable(User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating) {
-  const query = 'INSERT INTO `ratedactivities_table` (`User_id`, `Activity_1_rating`, `Activity_2_rating`, `Activity_3_rating`,`Activity_4_rating`,`Activity_5_rating`) VALUES (?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating], (err, results) => {
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
+  const query = 'INSERT INTO `ratedactivities_table` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -106,6 +107,7 @@ function insertIntoTable(User_id, Activity_1_rating, Activity_2_rating, Activity
   });
 }
 
+insertIntoTable(2, 5, -1, 4, 5, -1);
 
 
 

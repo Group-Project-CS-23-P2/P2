@@ -244,10 +244,10 @@ activityInfo("Football");
 
 userInfo("amve");
 
-/*
+
 function getRatedActivities(Username){
 
-    let listofRatedActivities = [];
+    
 
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
@@ -264,7 +264,7 @@ function getRatedActivities(Username){
       
         let userid = results[0].User_id;
 
-        const query1 = `SELECT * FROM ratedactivities_table WHERE User_id = ? LIMIT 1`;
+        const query1 = `SELECT * FROM ratedActivitiesTable WHERE User_id = ? LIMIT 1`;
 
         DBConnection.query1(query1, [userid], (err, results_rating) => {
             if (err) {
@@ -276,28 +276,39 @@ function getRatedActivities(Username){
               return null; 
             }})
 
-            let listOfRatedActivitiesSQL= [];
-            if(results_rating[0].Activity_1_rating > 0 ){
-                listOfRatedActivitiesSQL.push(results_rating[0].Activity_1_rating)
+            let listOfRatedActivities = [];
+            if(results_rating[0].Football > 0 ){
+               
+                let ratedActivityFootball = new RatedActivity(activityInfo(Football),results_rating[0].Football);
+
+                listOfRatedActivities.push(ratedActivityFootball);
             };
-            if(results_rating[0].Activity_2_rating > 0 ){
-                listOfRatedActivitiesSQL.push(results_rating[0].Activity_2_rating)
+            if(results_rating[0].Cheramic > 0 ){
+                let ratedActivityCheramic = new RatedActivity(activityInfo(Cheramic),results_rating[0].Cheramic);
+
+                listOfRatedActivities.push(ratedActivityCheramic);
             };
-            if(results_rating[0].Activity_3_rating > 0 ){
-                listOfRatedActivitiesSQL.push(results_rating[0].Activity_3_rating)
+            if(results_rating[0].Padeltennis > 0 ){
+                let ratedActivityPadeltennis = new RatedActivity(activityInfo(Padeltennis),results_rating[0].Padeltennis);
+
+                listOfRatedActivities.push(ratedActivityPadeltennis);
             };
-            if(results_rating[0].Activity_4_rating > 0 ){
-                listOfRatedActivitiesSQL.push(results_rating[0].Activity_4_rating)
+            if(results_rating[0].Running > 0 ){
+                let ratedActivityRunning = new RatedActivity(activityInfo(Running),results_rating[0].Running);
+
+                listOfRatedActivities.push(ratedActivityRunning);
             };
-            if(results_rating[0].Activity_5_rating > 0 ){
-                listOfRatedActivitiesSQL.push(results_rating[0].Activity_5_rating)
+            if(results_rating[0].Walking > 0 ){
+                let ratedActivityWalking = new RatedActivity(activityInfo(Walking),results_rating[0].Walking);
+
+                listOfRatedActivities.push(ratedActivityWalking);
             };
 
-             
+            return listOfRatedActivities;
+            
+          
 
-            for(let i = 0; i < listOfRatedActivitiesSQL.length; i++){
-                let ratedactivity = new RatedActivity(listOfRatedActivitiesSQL[i].)
-            }
+          
 
     //finde brugens rating tabel
     //if user not rated -1
@@ -305,8 +316,8 @@ function getRatedActivities(Username){
     //ved hver aktivitet der er rated, skal den gemme rating og features for aktiviten i objekt
     //
 
-}
-*/
+        }
+
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
     {
