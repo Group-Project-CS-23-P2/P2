@@ -310,7 +310,7 @@ function getRatedActivities(Username){
             if (results_rating.length === 0) {
               console.log('User not found');
               return null; 
-            }})
+            }
 
             let listOfRatedActivities = [];
             if(results_rating[0].Football > 0 ){
@@ -344,7 +344,7 @@ function getRatedActivities(Username){
             
           
 
-    })}
+    })})}
 
 
         console.log(getRatedActivities("mebj"));
