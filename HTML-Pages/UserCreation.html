@@ -4,11 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
-  </head>
-  <body>
-    <main>
-        <h1>Welcome to My Website</h1>  
-    </main>
-  </body>
-</html>
+    <title>User Creation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #c6e7fd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="submit"] {
+            background-color: #5a91df;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Welcome! Create user</h2>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age" required>
+            </div>
+            <div class="form-group">
+                <label for="physical">Physical Level:</label>
+                <select id="physical" name="physical">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3 (Moderate)</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="creativity">Creativity Level:</label>
+                <select id="creativity" name="creativity">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3 (Moderate)</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="brainy">Brainy Level:</label>
+                <select id="brainy" name="brainy">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3 (Moderate)</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="social">Social Level:</label>
+                <select id="social" name="social">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3 (Moderate)</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="competitive">Competitive Level:</label>
+                <select id="competitive" name="competitive">
+                    <option value="1">1 (Low)</option>
+                    <option value="2">2</option>
+                    <option value="3">3 (Moderate)</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (High)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget:</label>
+                <select id="budget" name="budget">
+                    <option value="free">Free</option>
+                    <option value="1-500">1 - 500</option>
+                    <option value="500-1000">500 - 1000</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    </body>
+    </html>
