@@ -28,7 +28,7 @@ export async function PythonFeatureCalculation(args) {
 
   let finalResult;
   // Spawn a new Python process
-  const pythonProcess = spawn('py', [pythonScriptPath, ...args]);
+  const pythonProcess = spawn('python', [pythonScriptPath, ...args]);
 
   // Listen for data from the Python script
   pythonProcess.stdout.on('data', (data) => {
@@ -58,7 +58,7 @@ export async function PythonCosineComparer(args)
   let finalResult;
 
   const pythonCosinePath = '/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/cosineComparer.py';
-  const pythonProcess = spawn('py', [pythonCosinePath, ...args]);
+  const pythonProcess = spawn('python', [pythonCosinePath, ...args]);
 
     // Listen for data from the Python script
     pythonProcess.stdout.on('data', (data) => {
