@@ -330,7 +330,10 @@ function getRatedActivities(Username){
                 listOfRatedActivities.push(ratedActivityPadeltennis);
             };
             if(results_rating[0].Running > 0 ){
-                let ratedActivityRunning = new RatedActivity(activityInfo("Running").name ,activityInfo("Running").id, activityInfo("Running").listofFeatures, results_rating[0].Running);
+                let running_name = activityInfo("Running").name;
+                let running_id = activityInfo("Running").id;
+                let running_features = activityInfo("Running").listofFeatures;
+                let ratedActivityRunning = new RatedActivity(running_name ,running_id, running_features, results_rating[0].Running);
 
                 listOfRatedActivities.push(ratedActivityRunning);
             };
