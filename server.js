@@ -4,6 +4,7 @@ import fs from "fs";
 import url from "url";
 import mysql from "mysql";
 import { PythonFeatureCalculation } from 'algorithm';
+import { PythonCosineComparer } from 'algorithm';
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
@@ -90,22 +91,21 @@ server.on("request", (request, response) => {
     //Group Query GET
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
         requestinfo = JSON.parse(request.body);
-        try {GroupQuery(requestinfo);}
+        let returnList;
+        try {returnList = GroupQuery(requestinfo);}
         //If function fails
-        catch (e) {        
-            response.writeHead(200, {
-            "Content-Type": "application/json"
-            }).end();
-            response.end();
-        }
-
+        catch (e) {}  
+        
         //If function succeeds
         response.writeHead(200, {
-            "Content-Type": "application/json"
+        "Content-Type": "application/json"
         }).end();
         response.end();
+        }
+
+        
     }
-})
+)
 
 const userInfotest1 = {
     Username: "amve",
@@ -161,9 +161,27 @@ function AddRating()
 function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
-    //Get a list of lists, containing user features
+    let returnList = [];
+
     for(let i = 0; i < requestinfo.length; i++)
     {
+        let currentUser = userInfo();
+        let currentActivities = userRatedActivities();
+        let currentArgs = [currentUser.Username];
+
+        //Add the currentUser features to arguments.
+        for(let j = 0; j < 5; j++)
+        {
+            currentArgs.push(currentUser.listofFeatures[j]);
+        }
+
+        //Add the current 
+        for(let j = 0; j < currentActivities.length; j++)
+        {
+            currentArgs.push(JSON.stringify(currentActivities[j]));
+        }
+
+        
         //Get activities for user I
         //Send it all to algorithm function.
         //Add returned list to list of user features
@@ -172,6 +190,7 @@ function GroupQuery(requestinfo)
     //Calculate the group vector
     //Send group vector to python to calculate group similarity
 
+    
     //Returns list of best fitting activities
 }
 
