@@ -266,13 +266,17 @@ function activityInfo(Activity_name){
           ActivityRow.Pricepoint
         ];
     
-        let activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
-        console.log("returning object");
+        const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
+    
         console.log(activity);
         return activity;
       });
 }
 
+
+activityInfo("Football");
+
+userInfo("amve");
 
 
 function getRatedActivities(Username){
@@ -284,11 +288,11 @@ function getRatedActivities(Username){
     DBConnection.query(query, [Username], (err, results) => {
         if (err) {
           console.error('Error fetching user from new_User_table', err);
-          return; 
+          return null; 
         }
         if (results.length === 0) {
           console.log('User not found');
-          return; 
+          return null; 
         }
         let userid = results[0].User_id;
         
@@ -301,54 +305,49 @@ function getRatedActivities(Username){
         DBConnection.query(query1, [userid], (err, results_rating) => {
             if (err) {
               console.error('Error fetching user from new_User_table', err);
-              return; 
+              return null; 
             }
             if (results_rating.length === 0) {
               console.log('User not found');
-              return ; 
+              return null; 
             }
 
             let listOfRatedActivities = [];
-            let activitiesProcessed = 0; // Counter to track completion of asynchronous tasks
-            const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];
+            if(results_rating[0].Football > 0 ){
+               
+                let ratedActivityFootball = new RatedActivity(activityInfo("Football"),results_rating[0].Football);
 
-            activities.forEach(activity => {
-                if (results_rating[0][activity] && results_rating[0][activity] > 0) {
-                    activityInfo(activity, (err, activityDetails) => {
-                        if (!err && activityDetails) {
-                            let ratedActivity = new RatedActivity(activityDetails.name, activityDetails.id, activityDetails.listofFeatures, results_rating[0][activity]);
-                            listOfRatedActivities.push(ratedActivity);
-                        } else {
-                            console.log("Failed to fetch details for", activity);
-                        }
-                        activitiesProcessed++;
-                        if (activitiesProcessed === activities.length) {
-                            console.log("All activities processed. Final list:");
-                            listOfRatedActivities.forEach(activity => {
-                                console.log(`${activity.name}: ${activity.rating}`);
-                            });
-                        }
-                    });
-                } else {
-                    activitiesProcessed++;
-                    if (activitiesProcessed === activities.length) {
-                        console.log("All activities processed. Final list:");
-                        listOfRatedActivities.forEach(activity => {
-                            console.log(`${activity.name}: ${activity.rating}`);
-                        });
-                    }
-                }
-            });
-        });
-    });
-}
+                listOfRatedActivities.push(ratedActivityFootball);
+            };
+            if(results_rating[0].Cheramic > 0 ){
+                let ratedActivityCheramic = new RatedActivity(activityInfo("Cheramic"),results_rating[0].Cheramic);
 
-// Usage
-getRatedActivities("mebj");
+                listOfRatedActivities.push(ratedActivityCheramic);
+            };
+            if(results_rating[0].Padeltennis > 0 ){
+                let ratedActivityPadeltennis = new RatedActivity(activityInfo("Padeltennis"),results_rating[0].Padeltennis);
+
+                listOfRatedActivities.push(ratedActivityPadeltennis);
+            };
+            if(results_rating[0].Running > 0 ){
+                let ratedActivityRunning = new RatedActivity(activityInfo("Running"),results_rating[0].Running);
+                listOfRatedActivities.push(ratedActivityRunning);
+            };
+            if(results_rating[0].Walking > 0 ){
+                
+                let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
+
+                listOfRatedActivities.push(ratedActivityWalking);
+            };
+
+            return listOfRatedActivities;
             
+          
+
+    })})}
 
 
-getRatedActivities("mebj");
+        console.log(getRatedActivities("mebj"));
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
