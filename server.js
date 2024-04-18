@@ -302,7 +302,7 @@ function getRatedActivities(Username){
 
         const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
 
-        DBConnection.query1(query1, [userid], (err, results_rating) => {
+        DBConnection.query(query1, [userid], (err, results_rating) => {
             if (err) {
               console.error('Error fetching user from new_User_table', err);
               return null; 
@@ -343,14 +343,6 @@ function getRatedActivities(Username){
             return listOfRatedActivities;
             
           
-
-          
-
-    //finde brugens rating tabel
-    //if user not rated -1
-    //then iterer gennem alle rated aktiviter 
-    //ved hver aktivitet der er rated, skal den gemme rating og features for aktiviten i objekt
-    //
 
     })}
 
