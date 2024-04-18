@@ -309,9 +309,7 @@ function getRatedActivities(Username){
             }
 
             let listOfRatedActivities = [];
-            let activitiesProcessed = 0; 
-
-            
+            let activitiesProcessed = 0; // Counter to track completion of asynchronous tasks
             const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];
 
             activities.forEach(activity => {
@@ -320,22 +318,33 @@ function getRatedActivities(Username){
                         if (!err && activityDetails) {
                             let ratedActivity = new RatedActivity(activityDetails.name, activityDetails.id, activityDetails.listofFeatures, results_rating[0][activity]);
                             listOfRatedActivities.push(ratedActivity);
+                        } else {
+                            console.log("Failed to fetch details for", activity);
                         }
                         activitiesProcessed++;
-                        if (activitiesProcessed === activities.length) { 
-                            console.log(listOfRatedActivities); 
+                        if (activitiesProcessed === activities.length) {
+                            console.log("All activities processed. Final list:");
+                            listOfRatedActivities.forEach(activity => {
+                                console.log(`${activity.name}: ${activity.rating}`);
+                            });
                         }
                     });
                 } else {
                     activitiesProcessed++;
                     if (activitiesProcessed === activities.length) {
-                        console.log(listOfRatedActivities); 
+                        console.log("All activities processed. Final list:");
+                        listOfRatedActivities.forEach(activity => {
+                            console.log(`${activity.name}: ${activity.rating}`);
+                        });
                     }
                 }
             });
         });
     });
 }
+
+// Usage
+getRatedActivities("mebj");
             
 
 
