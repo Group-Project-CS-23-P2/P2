@@ -276,8 +276,8 @@ function getRatedActivities(Username){
 
             let listOfRatedActivities = [];
             if(results_rating[0].Football > 0 ){
-               let activityobjectfootball = activityInfo("Football");
-                console.log(activityobjectfootball);
+               
+                console.log(activityInfo("Football"));
 
                 //let ratedActivityFootball = new RatedActivity(activityobjectfootball.name, activityobjectfootball.id, activityobjectfootball.listofFeatures, results_rating[0].Football);
 
