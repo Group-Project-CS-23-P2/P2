@@ -19,7 +19,7 @@ DBConnection.connect(err => {
 
 
 //Table creation function
-
+/*
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS ratedactivities_table (
     User_id INT REFERENCES new_User_table(User_id),
@@ -40,7 +40,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   console.log('new_User_table created successfully or already exists');
   
 });
-
+*/
 
 /*
 //User insert 
@@ -57,7 +57,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   
-  */
+  
  
 
   
@@ -72,6 +72,7 @@ DBConnection.query(createTableQuery, (err, results) => {
       console.log('Data inserted successfully:', results);
     });
   }
+  */
 /*
   insertIntoTable(3, 'Padeltennis', 4, 2, 1, 3, 4, 150);
   insertIntoTable(4, 'Running', 5, 1, 1, 2, 2, 0);
@@ -91,6 +92,22 @@ DBConnection.query(createTableQuery, (err, results) => {
   });
   
 */
+
+
+//User insert 
+function insertIntoTable(User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating) {
+  const query = 'INSERT INTO `ratedactivities_table` (`User_id`, `Activity_1_rating`, Activity_2_rating`,`Activity_3_rating`,`Activity_4_rating`,`Activity_5_rating`) VALUES (?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Activity_1_rating, Activity_2_rating, Activity_3_rating, Activity_4_rating, Activity_5_rating], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into table', err);
+      return;
+    }
+    console.log('Data inserted successfully:', results);
+  });
+}
+
+insertIntoTable(2, 5, -1, 4, 5, -1);
+
 
 
   DBConnection.query('SHOW TABLES', (err, results) => {
