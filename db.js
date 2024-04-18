@@ -97,7 +97,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
 //User insert 
 function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
-  const query = 'INSERT INTO `ratedActivitiesTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
   DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
