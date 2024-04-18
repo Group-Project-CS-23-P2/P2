@@ -3,6 +3,9 @@ import http from 'http';
 import fs from "fs";
 import url from "url";
 import mysql from "mysql";
+import { PythonFeatureCalculation } from './algorithm.mjs';
+import { PythonCosineComparer } from './algorithm.mjs';
+
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/frontpage.html");
 const usercreationHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/RecommenderApp/HTML-Pages/UserCreation.html");
@@ -27,7 +30,7 @@ server.listen(3430, "localhost", () => {
 });
 
 
-server.on("request", (request, response) => {
+server.on("request", async (request, response) => {
     //Parse where the request wants to go.
     let pathname = url.parse(request.url).pathname;
     console.log("", pathname);
@@ -89,22 +92,21 @@ server.on("request", (request, response) => {
     //Group Query GET
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
         requestinfo = JSON.parse(request.body);
-        try {GroupQuery(requestinfo);}
+        let returnList;
+        try {returnList =  await GroupQuery(requestinfo);}
         //If function fails
-        catch (e) {        
-            response.writeHead(200, {
-            "Content-Type": "application/json"
-            }).end();
-            response.end();
-        }
-
+        catch (e) {}  
+        
         //If function succeeds
         response.writeHead(200, {
-            "Content-Type": "application/json"
+        "Content-Type": "application/json"
         }).end();
         response.end();
+        }
+
+        
     }
-})
+)
 
 const userInfotest1 = {
     Username: "amve",
@@ -129,15 +131,15 @@ function CreateUser(userInfo)
 
 
   const values = [
-    userInfo.Username,
+    userInfo.username,
     userInfo.Password, 
-    userInfo.Age,
-    userInfo.Physical,
-    userInfo.Creative,
-    userInfo.Brainy,
-    userInfo.Social,
-    userInfo.Competative,
-    userInfo.Pricepoint
+    userInfo.age,
+    userInfo.physical,
+    userInfo.creative,
+    userInfo.brainy,
+    userInfo.social,
+    userInfo.competetive,
+    userInfo.pricepoint
   ];
 
 
@@ -157,10 +159,42 @@ function AddRating()
     //Sanitize Relevant JSON variables
 }
 
-function GroupQuery()
+async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
+    let returnList = [];
+
+    for(let i = 0; i < requestinfo.length; i++)
+    {
+        let currentUser = userInfo();
+        let currentActivities = userRatedActivities();
+        let currentArgs = [currentUser.Username];
+
+        //Add the currentUser features to arguments.
+        for(let j = 0; j < 5; j++)
+        {
+            currentArgs.push(currentUser.listofFeatures[j]);
+        }
+
+        //Add the current 
+        for(let j = 0; j < currentActivities.length; j++)
+        {
+            currentArgs.push(JSON.stringify(currentActivities[j]));
+        }
+
+        
+        //Get activities for user I
+        //Send it all to algorithm function.
+        //Add returned list to list of user features
+    }
+
+    //Calculate the group vector
+    //Send group vector to python to calculate group similarity
+
+    
+    //Returns list of best fitting activities
 }
+
 class Activity {
     constructor(name, id, listofFeatures)
     {
