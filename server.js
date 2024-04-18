@@ -309,40 +309,46 @@ function getRatedActivities(Username){
             }
 
             let listOfRatedActivities = [];
-            if(results_rating[0].Football > 0 ){
-               
-                console.log(activityInfo("Football"));
-
-                //let ratedActivityFootball = new RatedActivity(activityobjectfootball.name, activityobjectfootball.id, activityobjectfootball.listofFeatures, results_rating[0].Football);
-
-                listOfRatedActivities.push(ratedActivityFootball);
-            };
-            if(results_rating[0].Cheramic > 0 ){
-                let ratedActivityCheramic = new RatedActivity(activityInfo("Cheramic"),results_rating[0].Cheramic);
-
-                listOfRatedActivities.push(ratedActivityCheramic);
-            };
-            if(results_rating[0].Padeltennis > 0 ){
-                let ratedActivityPadeltennis = new RatedActivity(activityInfo("Padeltennis"),results_rating[0].Padeltennis);
-
-                listOfRatedActivities.push(ratedActivityPadeltennis);
-            };
-            if(results_rating[0].Running > 0 ){
-                let ratedActivityRunning = new RatedActivity(activityInfo("Running"),results_rating[0].Running);
-                listOfRatedActivities.push(ratedActivityRunning);
-            };
-            if(results_rating[0].Walking > 0 ){
-
-                let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
-
-                listOfRatedActivities.push(ratedActivityWalking);
-            };
-
-            return listOfRatedActivities;
+            if (results_rating[0].Football > 0) {
+                activityInfo("Football", (err, activity) => {
+                    if (!err && activity) {
+                        let ratedActivityFootball = new RatedActivity(activity, results_rating[0].Football);
+                        listOfRatedActivities.push(ratedActivityFootball);
+                    }
+                });
+            }
+            if (results_rating[0].Cheramic > 0) {
+                activityInfo("Cheramic", (err, activity) => {
+                    if (!err && activity) {
+                        let ratedActivityCheramic = new RatedActivity(activity, results_rating[0].Cheramic);
+                        listOfRatedActivities.push(ratedActivityCheramic);
+                    }
+                });
+            }
+            if (results_rating[0].Padeltennis > 0) {
+                activityInfo("Padeltennis", (err, activity) => {
+                    if (!err && activity) {
+                        let ratedActivityPadeltennis = new RatedActivity(activity, results_rating[0].Padeltennis);
+                        listOfRatedActivities.push(ratedActivityPadeltennis);
+                    }
+                });
+            }
+            if (results_rating[0].Running > 0) {
+                activityInfo("Running", (err, activity) => {
+                    if (!err && activity) {
+                        let ratedActivityRunning = new RatedActivity(activity, results_rating[0].Running);
+                        listOfRatedActivities.push(ratedActivityRunning);
+                    }
+                });
+            }
+            if (results_rating[0].Walking > 0) {
+                activityInfo("Walking", (err, activity) => {
+                    if (!err && activity) {
+                        let ratedActivityWalking = new RatedActivity(activity, results_rating[0].Walking);
+                        listOfRatedActivities.push(ratedActivityWalking);
+                    }
+            })}})})};
             
-          
-
-    })})}
 
 
         console.log(getRatedActivities("mebj"));
