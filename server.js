@@ -130,15 +130,15 @@ function CreateUser(userInfo)
 
 
   const values = [
-    userInfo.Username,
+    userInfo.username,
     userInfo.Password, 
-    userInfo.Age,
-    userInfo.Physical,
-    userInfo.Creative,
-    userInfo.Brainy,
-    userInfo.Social,
-    userInfo.Competative,
-    userInfo.Pricepoint
+    userInfo.age,
+    userInfo.physical,
+    userInfo.creative,
+    userInfo.brainy,
+    userInfo.social,
+    userInfo.competetive,
+    userInfo.pricepoint
   ];
 
 
