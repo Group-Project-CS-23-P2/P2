@@ -244,6 +244,69 @@ activityInfo("Football");
 
 userInfo("amve");
 
+/*
+function getRatedActivities(Username){
+
+    let listofRatedActivities = [];
+
+    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+
+    DBConnection.query(query, [Username], (err, results) => {
+        if (err) {
+          console.error('Error fetching user from new_User_table', err);
+          return null; 
+        }
+        if (results.length === 0) {
+          console.log('User not found');
+          return null; 
+        }})
+
+      
+        let userid = results[0].User_id;
+
+        const query1 = `SELECT * FROM ratedactivities_table WHERE User_id = ? LIMIT 1`;
+
+        DBConnection.query1(query1, [userid], (err, results_rating) => {
+            if (err) {
+              console.error('Error fetching user from new_User_table', err);
+              return null; 
+            }
+            if (results_rating.length === 0) {
+              console.log('User not found');
+              return null; 
+            }})
+
+            let listOfRatedActivitiesSQL= [];
+            if(results_rating[0].Activity_1_rating > 0 ){
+                listOfRatedActivitiesSQL.push(results_rating[0].Activity_1_rating)
+            };
+            if(results_rating[0].Activity_2_rating > 0 ){
+                listOfRatedActivitiesSQL.push(results_rating[0].Activity_2_rating)
+            };
+            if(results_rating[0].Activity_3_rating > 0 ){
+                listOfRatedActivitiesSQL.push(results_rating[0].Activity_3_rating)
+            };
+            if(results_rating[0].Activity_4_rating > 0 ){
+                listOfRatedActivitiesSQL.push(results_rating[0].Activity_4_rating)
+            };
+            if(results_rating[0].Activity_5_rating > 0 ){
+                listOfRatedActivitiesSQL.push(results_rating[0].Activity_5_rating)
+            };
+
+             
+
+            for(let i = 0; i < listOfRatedActivitiesSQL.length; i++){
+                let ratedactivity = new RatedActivity(listOfRatedActivitiesSQL[i].)
+            }
+
+    //finde brugens rating tabel
+    //if user not rated -1
+    //then iterer gennem alle rated aktiviter 
+    //ved hver aktivitet der er rated, skal den gemme rating og features for aktiviten i objekt
+    //
+
+}
+*/
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
     {
