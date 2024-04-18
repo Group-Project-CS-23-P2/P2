@@ -293,10 +293,12 @@ function getRatedActivities(Username){
         if (results.length === 0) {
           console.log('User not found');
           return null; 
-        }})
+        }
+        let userid = results[0].User_id;
+        
 
       
-        let userid = results[0].User_id;
+        
 
         const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
 
@@ -350,7 +352,7 @@ function getRatedActivities(Username){
     //ved hver aktivitet der er rated, skal den gemme rating og features for aktiviten i objekt
     //
 
-        }
+    })}
 
 
         console.log(getRatedActivities("mebj"));
