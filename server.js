@@ -232,7 +232,7 @@ function activityInfo(Activity_name){
           ActivityRow.Pricepoint
         ];
     
-        const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
+        let activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
     
         console.log(activity);
         return activity;
