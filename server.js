@@ -278,7 +278,7 @@ function getRatedActivities(Username){
             if (results_rating[0].Football > 0) {
                 activityInfo("Football", (err, activity) => {
                     if (!err && activity) {
-                        let ratedActivityFootball = new RatedActivity(activity, results_rating[0].Football);
+                        let ratedActivityFootball = new RatedActivity(activity.name, activity.id,activity.listofFeatures, results_rating[0].Football);
                         listOfRatedActivities.push(ratedActivityFootball);
                     }
                 });
