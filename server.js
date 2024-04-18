@@ -243,38 +243,35 @@ function userInfo(username){
       });
 }
 
-function activityInfo(Activity_name, callback) {
+function activityInfo(Activity_name){
     const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
+
     DBConnection.query(query, [Activity_name], (err, results) => {
-      if (err) {
-        console.error('Error fetching user from new_Activity_table', err);
-        return callback(err, null);
-      }
-      if (results.length === 0) {
-        console.log('Activity not found');
-        return callback(new Error('Activity not found'), null);
-      }
-  
-      const ActivityRow = results[0];
-      const listofFeatures = [
-        ActivityRow.Physical_rank,
-        ActivityRow.Creative_rank,
-        ActivityRow.Brainy_rank,
-        ActivityRow.Social_rank,
-        ActivityRow.Competative_rank,
-        ActivityRow.Pricepoint
-      ];
-  
-      const activity = {
-        name: ActivityRow.Activity_name,
-        id: ActivityRow.Activity_id,
-        listofFeatures: listofFeatures
-      };
-  
-      console.log(activity);
-      callback(null, activity);
-    });
-  }
+        if (err) {
+          console.error('Error fetching user from new_Activity_table', err);
+          return null; 
+        }
+        if (results.length === 0) {
+          console.log('Activity not found');
+          return null; 
+        }
+    
+        const ActivityRow = results[0];
+        const listofFeatures = [
+          ActivityRow.Physical_rank,
+          ActivityRow.Creative_rank,
+          ActivityRow.Brainy_rank,
+          ActivityRow.Social_rank,
+          ActivityRow.Competative_rank,
+          ActivityRow.Pricepoint
+        ];
+    
+        const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
+    
+        console.log(activity);
+        return activity;
+      });
+}
 
 
 activityInfo("Football");
@@ -333,16 +330,9 @@ function getRatedActivities(Username){
                 listOfRatedActivities.push(ratedActivityPadeltennis);
             };
             if(results_rating[0].Running > 0 ){
-                activityInfo("Running", function(err, activity){
-                    if(err || !activity){
-                        console.log("error fetching data",err);
-                        return;
-                    }
-                let ratedActivityRunning = new RatedActivity(activity.name, activity.id, activity.listofFeatures, results_rating[0].Running);
-                
-                
+                let ratedActivityRunning = new RatedActivity(activityInfo("Running"),results_rating[0].Running);
+
                 listOfRatedActivities.push(ratedActivityRunning);
-            })
             };
             if(results_rating[0].Walking > 0 ){
                 let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
