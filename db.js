@@ -106,7 +106,7 @@ function insertIntoTable(User_id, Activity_1_rating, Activity_2_rating, Activity
   });
 }
 
-insertIntoTable(2, 5, -1, 4, 5, -1);
+
 
 
 
