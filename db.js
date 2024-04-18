@@ -17,21 +17,18 @@ DBConnection.connect(err => {
   console.log('MySQL is connected');
 
 
-/*
+
 //Table creation function
 
   const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS new_User_table (
-    User_id INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(255) NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    Age INT,
-    Physical INT,
-    Creative INT,
-    Brainy INT,
-    Social INT,
-    Competative INT,
-    Pricepoint INT
+  CREATE TABLE IF NOT EXISTS ratedactivities_table (
+    User_id INT REFERENCES new_User_table(User_id),
+    Activity_1_rating INT,
+    Activity_2_rating INT,
+    Activity_3_rating INT,
+    Activity_4_rating INT,
+    Activity_5_rating INT,
+    PRIMARY KEY(User_id)
   )
 `;
 
@@ -43,7 +40,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   console.log('new_User_table created successfully or already exists');
   
 });
-*/
+
 
 /*
 //User insert 
