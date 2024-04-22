@@ -23,9 +23,9 @@ const userInfotest1 = {
     Pricepoint: 300
 }
 
-const userInfotest4 = {
-  Username: "test",
-  Password: "test1",
+const userInfotest5 = {
+  Username: "test10",
+  Password: "test2",
   Age: 21,
   Physical: 5,
   Creative: 5,
@@ -69,7 +69,7 @@ function CreateUser(userInfo)
     userInfo.Pricepoint
   ];
   
-  insertIntoTable(userInfo.User_id, -1, -1, 1, -1, -1);
+  
   
   DBConnection.query(query, values, (err, results) => {
     if (err) {
@@ -78,10 +78,13 @@ function CreateUser(userInfo)
     }
     console.log('New user created successfully:', results);
     
+    insertIntoTable(userInfo.User_id, -1, -1, 1, -1, -1);
   });
+
+ 
 }
 
-CreateUser(userInfotest4);
+CreateUser(userInfotest5);
 
 function AddRating()
 {
@@ -92,6 +95,7 @@ function GroupQuery()
 {
     //Sanitize Relevant JSON variables
 }
+
 class Activity {
     constructor(name, id, listofFeatures)
     {
@@ -220,7 +224,7 @@ getRatedActivities("mebj").then(activities => {
   console.error("Error fetching activities:", error);
 });
 
-getRatedActivities("test").then(activities => {
+getRatedActivities("test10").then(activities => {
   console.log(activities); 
 }).catch(error => {
   console.error("Error fetching activities:", error);
