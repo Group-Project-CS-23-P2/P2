@@ -23,6 +23,30 @@ const userInfotest1 = {
     Pricepoint: 300
 }
 
+const userInfotest2 = {
+  Username: "Emil",
+  Password: "Emil123",
+  Age: 21,
+  Physical: 1,
+  Creative: 2,
+  Brainy: 1,
+  Social: 1,
+  Competative: 5,
+  Pricepoint: 0
+}
+
+
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into table', err);
+      return;
+    }
+    console.log('Data inserted successfully:', results);
+  });
+}
+
 function CreateUser(userInfo)
 {
     const query = `
@@ -45,7 +69,8 @@ function CreateUser(userInfo)
     userInfo.Pricepoint
   ];
 
-
+  insertIntoTable(userInfo.id, -1, -1, 1, -1, -1);
+  
   DBConnection.query(query, values, (err, results) => {
     if (err) {
       console.error('Error inserting data into new_User_table', err);
@@ -56,6 +81,7 @@ function CreateUser(userInfo)
   });
 }
 
+CreateUser(userInfotest2);
 
 function AddRating()
 {
@@ -170,7 +196,7 @@ async function getRatedActivities(Username) {
       });
 
       let listOfRatedActivities = [];
-      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];  // Example activity names
+      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];  
       for (let activity of activities) {
           if (ratingsResults[0][activity] > 0) {
               let activityDetails = await activityInfo(activity);
@@ -183,18 +209,22 @@ async function getRatedActivities(Username) {
       return listOfRatedActivities;
   } catch (error) {
       console.error("Error in getRatedActivities:", error);
-      return []; // Return an empty array or handle the error as appropriate
+      return []; 
   }
 }
 
-// Usage:
+
 getRatedActivities("mebj").then(activities => {
-  console.log(activities); // This will log the list of activities once the promise resolves
+  console.log(activities); 
 }).catch(error => {
   console.error("Error fetching activities:", error);
 });
 
-
+getRatedActivities("emil").then(activities => {
+  console.log(activities); 
+}).catch(error => {
+  console.error("Error fetching activities:", error);
+});
 
 
 class RatedActivity {
