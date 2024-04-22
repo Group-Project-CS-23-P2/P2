@@ -168,8 +168,8 @@ function getRatedActivities(Username){
         let userid = results[0].User_id;
         
 
-      
         
+
 
         const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
 
@@ -211,6 +211,7 @@ function getRatedActivities(Username){
                 listOfRatedActivities.push(ratedActivityWalking);
             };
 
+            console.log(results_rating[0].Football, results_rating[0].Running, results_rating[0].Padeltennis);
             return listOfRatedActivities;
             
           
