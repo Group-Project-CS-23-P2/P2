@@ -184,12 +184,16 @@ function getRatedActivities(Username){
             }
 
             let listOfRatedActivities = [];
-            if(results_rating[0].Football > 0 ){
-               
-                let ratedActivityFootball = new RatedActivity("Football", 1 , [5,1,2,4,4,0],results_rating[0].Football);
+            if(results_rating[0].Football > 0 && results_rating[0].Football !== undefined){
+               let footrating = results_rating[0].Football;
 
+                let ratedActivityFootball = new RatedActivity("Football", 1, [5,1,2,4,4,0], footrating);
                 listOfRatedActivities.push(ratedActivityFootball);
-            };
+            }
+            else{
+              console.log("error");
+            }
+            
             if(results_rating[0].Cheramic > 0 ){
                 let ratedActivityCheramic = new RatedActivity(activityInfo("Cheramic"),results_rating[0].Cheramic);
 
