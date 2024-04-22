@@ -23,14 +23,14 @@ const userInfotest1 = {
     Pricepoint: 300
 }
 
-const userInfotest2 = {
-  Username: "Emil",
-  Password: "Emil123",
+const userInfotest3 = {
+  Username: "Antonmohr",
+  Password: "Anton69",
   Age: 21,
-  Physical: 1,
-  Creative: 2,
-  Brainy: 1,
-  Social: 1,
+  Physical: 5,
+  Creative: 5,
+  Brainy: 5,
+  Social: 5,
   Competative: 5,
   Pricepoint: 0
 }
@@ -68,8 +68,8 @@ function CreateUser(userInfo)
     userInfo.Competative,
     userInfo.Pricepoint
   ];
-
-  insertIntoTable(userInfo.id, -1, -1, 1, -1, -1);
+  
+  insertIntoTable(userInfo.User_id, -1, -1, 1, -1, -1);
   
   DBConnection.query(query, values, (err, results) => {
     if (err) {
@@ -81,7 +81,7 @@ function CreateUser(userInfo)
   });
 }
 
-CreateUser(userInfotest2);
+CreateUser(userInfotest3);
 
 function AddRating()
 {
