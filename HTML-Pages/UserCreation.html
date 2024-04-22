@@ -47,7 +47,7 @@
     <body>
     <div class="container">
         <h2>Welcome! Create user</h2>
-        <form id="userForm">
+        <form id="userForm" action="http://www.cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/createuser/" method="POST">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -121,6 +121,27 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+    <script>
+        const formEl = document.querySelector('#userForm');
+
+            formEl.addEventListener('submit', event => {
+                event.preventDefault();
+
+                const formData = new FormData(formEl);
+                const data = Object.fromEntries(formData);
+                console.log(data)
+
+                fetch('http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/createuser/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json())
+                  .then(data => console.log(data))
+                  .catch(error => console.log(error))
+            });
+    </script>
     </body>
     </html>
 
