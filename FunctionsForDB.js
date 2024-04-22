@@ -188,7 +188,7 @@ async function getRatedActivities(Username) {
 }
 
 // Usage:
-getRatedActivities("mebj").then(activities => console.log(activities)).catch(error => console.error(error));
+getRatedActivities("mebj");
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
