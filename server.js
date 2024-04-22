@@ -68,7 +68,7 @@ server.on("request", async (request, response) => {
 
     //User creation POST
     else if (pathname === "/createuser/" && request.method === 'POST') {
-        requestinfo = JSON.parse(request.body);
+        //requestinfo = JSON.parse(request.body);
         //try {CreateUser(requestinfo);}
         //catch (e) {}
         console.log("CreateUser received as:");
@@ -81,7 +81,7 @@ server.on("request", async (request, response) => {
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
-        requestinfo = JSON.parse(request.body);
+        //requestinfo = JSON.parse(request.body);
         //try {AddRating(requestinfo)}
         //catch (e) {}
         console.log("SubmitRating received as:");
@@ -95,7 +95,7 @@ server.on("request", async (request, response) => {
 
     //Group Query GET
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
-        requestinfo = JSON.parse(request.body);
+        //requestinfo = JSON.parse(request.body);
         //let returnList;
         //try {returnList =  await GroupQuery(requestinfo);}
         //If function fails
