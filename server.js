@@ -69,8 +69,10 @@ server.on("request", async (request, response) => {
     //User creation POST
     else if (pathname === "/createuser/" && request.method === 'POST') {
         requestinfo = JSON.parse(request.body);
-        try {CreateUser(requestinfo);}
-        catch (e) {}
+        //try {CreateUser(requestinfo);}
+        //catch (e) {}
+        console.log("CreateUser received as:");
+        console.log(requestinfo);
         response.writeHead(200, {
             "Content-Type": "application/json"
         }).end();
@@ -80,9 +82,11 @@ server.on("request", async (request, response) => {
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
         requestinfo = JSON.parse(request.body);
-        try {AddRating(requestinfo)}
-        catch (e) {}
-        
+        //try {AddRating(requestinfo)}
+        //catch (e) {}
+        console.log("SubmitRating received as:");
+        console.log(requestinfo);
+
         response.writeHead(200, {
             "Content-Type": "application/json"
         }).end();
@@ -92,11 +96,13 @@ server.on("request", async (request, response) => {
     //Group Query GET
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
         requestinfo = JSON.parse(request.body);
-        let returnList;
-        try {returnList =  await GroupQuery(requestinfo);}
+        //let returnList;
+        //try {returnList =  await GroupQuery(requestinfo);}
         //If function fails
-        catch (e) {}  
-        
+        //catch (e) {}  
+        console.log("GroupRequest received as:");
+        console.log(requestinfo);
+
         //If function succeeds
         response.writeHead(200, {
         "Content-Type": "application/json"
