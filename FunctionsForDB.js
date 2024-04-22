@@ -179,7 +179,7 @@ async function getRatedActivities(Username) {
           }
       }
 
-      console.log(listOfRatedActivities);
+      
       return listOfRatedActivities;
   } catch (error) {
       console.error("Error in getRatedActivities:", error);
@@ -188,7 +188,7 @@ async function getRatedActivities(Username) {
 }
 
 // Usage:
-getRatedActivities("mebj");
+console.log(getRatedActivities("mebj"));
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
