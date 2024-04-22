@@ -114,34 +114,31 @@ function userInfo(username){
       });
 }
 
-function activityInfo(Activity_name){
-    const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
-
-    DBConnection.query(query, [Activity_name], (err, results) => {
-        if (err) {
-          console.error('Error fetching user from new_Activity_table', err);
-          return null; 
-        }
-        if (results.length === 0) {
-          console.log('Activity not found');
-          return null; 
-        }
-    
-        const ActivityRow = results[0];
-        const listofFeatures = [
-          ActivityRow.Physical_rank,
-          ActivityRow.Creative_rank,
-          ActivityRow.Brainy_rank,
-          ActivityRow.Social_rank,
-          ActivityRow.Competative_rank,
-          ActivityRow.Pricepoint
-        ];
-    
-        const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
-    
-        console.log(activity);
-        return activity;
+function activityInfo(Activity_name) {
+  return new Promise((resolve, reject) => {
+      const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
+      DBConnection.query(query, [Activity_name], (err, results) => {
+          if (err) {
+              console.error('Error fetching activity from new_Activity_table', err);
+              reject(err);
+          } else if (results.length === 0) {
+              console.log('Activity not found');
+              reject(new Error('Activity not found'));
+          } else {
+              const ActivityRow = results[0];
+              const listofFeatures = [
+                  ActivityRow.Physical_rank,
+                  ActivityRow.Creative_rank,
+                  ActivityRow.Brainy_rank,
+                  ActivityRow.Social_rank,
+                  ActivityRow.Competative_rank,
+                  ActivityRow.Pricepoint
+              ];
+              const activity = new Activity(ActivityRow.Activity_name, ActivityRow.Activity_id, listofFeatures);
+              resolve(activity);
+          }
       });
+  });
 }
 
 
@@ -150,80 +147,48 @@ function activityInfo(Activity_name){
 //userInfo("amve");
 
 
-function getRatedActivities(Username){
+async function getRatedActivities(Username) {
+  try {
+      const userResults = await new Promise((resolve, reject) => {
+          const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+          DBConnection.query(query, [Username], (err, results) => {
+              if (err) reject(err);
+              else if (results.length === 0) reject(new Error('User not found'));
+              else resolve(results);
+          });
+      });
 
-    
+      let userid = userResults[0].User_id;
 
-    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+      const ratingsResults = await new Promise((resolve, reject) => {
+          const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
+          DBConnection.query(query1, [userid], (err, results) => {
+              if (err) reject(err);
+              else if (results.length === 0) reject(new Error('Ratings not found'));
+              else resolve(results);
+          });
+      });
 
-    DBConnection.query(query, [Username], (err, results) => {
-        if (err) {
-          console.error('Error fetching user from new_User_table', err);
-          return null; 
-        }
-        if (results.length === 0) {
-          console.log('User not found');
-          return null; 
-        }
-        let userid = results[0].User_id;
-        
+      let listOfRatedActivities = [];
+      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];  // Example activity names
+      for (let activity of activities) {
+          if (ratingsResults[0][activity] > 0) {
+              let activityDetails = await activityInfo(activity);
+              let ratedActivity = new RatedActivity(activity, activityDetails.id, activityDetails.listofFeatures, ratingsResults[0][activity]);
+              listOfRatedActivities.push(ratedActivity);
+          }
+      }
 
-        
+      console.log(listOfRatedActivities);
+      return listOfRatedActivities;
+  } catch (error) {
+      console.error("Error in getRatedActivities:", error);
+      return []; // Return an empty array or handle the error as appropriate
+  }
+}
 
-
-        const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
-
-        DBConnection.query(query1, [userid], (err, results_rating) => {
-            if (err) {
-              console.error('Error fetching user from new_User_table', err);
-              return null; 
-            }
-            if (results_rating.length === 0) {
-              console.log('User not found');
-              return null; 
-            }
-
-            let listOfRatedActivities = [];
-            if(results_rating[0].Football > 0 && results_rating[0].Football !== undefined){
-               let footrating = results_rating[0].Football;
-
-                let ratedActivityFootball = new RatedActivity("Football", 1, [5,1,2,4,4,0], footrating);
-                listOfRatedActivities.push(ratedActivityFootball);
-            }
-            else{
-              console.log("error");
-            }
-            
-            if(results_rating[0].Cheramic > 0 ){
-                let ratedActivityCheramic = new RatedActivity(activityInfo("Cheramic"),results_rating[0].Cheramic);
-
-                listOfRatedActivities.push(ratedActivityCheramic);
-            };
-            if(results_rating[0].Padeltennis > 0 ){
-                let ratedActivityPadeltennis = new RatedActivity(activityInfo("Padeltennis"),results_rating[0].Padeltennis);
-
-                listOfRatedActivities.push(ratedActivityPadeltennis);
-            };
-            if(results_rating[0].Running > 0 ){
-                let ratedActivityRunning = new RatedActivity(activityInfo("Running"),results_rating[0].Running);
-                listOfRatedActivities.push(ratedActivityRunning);
-            };
-            if(results_rating[0].Walking > 0 ){
-                
-                let ratedActivityWalking = new RatedActivity(activityInfo("Walking"),results_rating[0].Walking);
-
-                listOfRatedActivities.push(ratedActivityWalking);
-            };
-
-            console.log(results_rating[0].Football, results_rating[0].Running, results_rating[0].Padeltennis);
-            return listOfRatedActivities;
-            
-          
-
-    })})}
-
-
-        console.log(getRatedActivities("mebj"));
+// Usage:
+getRatedActivities("mebj").then(activities => console.log(activities)).catch(error => console.error(error));
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
