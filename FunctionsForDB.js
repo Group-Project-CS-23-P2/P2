@@ -23,9 +23,9 @@ const userInfotest1 = {
     Pricepoint: 300
 }
 
-const userInfotest3 = {
-  Username: "Antonmohr",
-  Password: "Anton69",
+const userInfotest4 = {
+  Username: "test",
+  Password: "test1",
   Age: 21,
   Physical: 5,
   Creative: 5,
@@ -81,7 +81,7 @@ function CreateUser(userInfo)
   });
 }
 
-CreateUser(userInfotest3);
+CreateUser(userInfotest4);
 
 function AddRating()
 {
@@ -220,7 +220,7 @@ getRatedActivities("mebj").then(activities => {
   console.error("Error fetching activities:", error);
 });
 
-getRatedActivities("emil").then(activities => {
+getRatedActivities("test").then(activities => {
   console.log(activities); 
 }).catch(error => {
   console.error("Error fetching activities:", error);
