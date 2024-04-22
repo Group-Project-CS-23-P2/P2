@@ -189,7 +189,7 @@ async function getRatedActivities(Username) {
 
 // Usage:
 let userrating = getRatedActivities("mebj").then(activities => {
-  console.log(activities); // This will log the list of activities once the promise resolves
+  return activities; // This will log the list of activities once the promise resolves
 }).catch(error => {
   console.error("Error fetching activities:", error);
 });
