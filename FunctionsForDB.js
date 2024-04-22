@@ -145,9 +145,9 @@ function activityInfo(Activity_name){
 }
 
 
-activityInfo("Football");
+//activityInfo("Football");
 
-userInfo("amve");
+//userInfo("amve");
 
 
 function getRatedActivities(Username){
