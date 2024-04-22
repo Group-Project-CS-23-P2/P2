@@ -72,7 +72,7 @@ server.on("request", async (request, response) => {
         //try {CreateUser(requestinfo);}
         //catch (e) {}
         console.log("CreateUser received as:");
-        console.log(requestinfo);
+        console.log(request.body);
         response.writeHead(200, {
             "Content-Type": "application/json"
         }).end();
@@ -85,7 +85,7 @@ server.on("request", async (request, response) => {
         //try {AddRating(requestinfo)}
         //catch (e) {}
         console.log("SubmitRating received as:");
-        console.log(requestinfo);
+        console.log(request.body);
 
         response.writeHead(200, {
             "Content-Type": "application/json"
@@ -101,7 +101,7 @@ server.on("request", async (request, response) => {
         //If function fails
         //catch (e) {}  
         console.log("GroupRequest received as:");
-        console.log(requestinfo);
+        console.log(request.body);
 
         //If function succeeds
         response.writeHead(200, {
