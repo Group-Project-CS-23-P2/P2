@@ -168,8 +168,8 @@ function getRatedActivities(Username){
         let userid = results[0].User_id;
         
 
-      
         
+
 
         const query1 = `SELECT * FROM ratedActivitiestTable WHERE User_id = ? LIMIT 1`;
 
@@ -186,7 +186,7 @@ function getRatedActivities(Username){
             let listOfRatedActivities = [];
             if(results_rating[0].Football > 0 ){
                
-                let ratedActivityFootball = new RatedActivity(activityInfo("Football"),results_rating[0].Football);
+                let ratedActivityFootball = new RatedActivity("Football", 1 , [5,1,2,4,4,0],results_rating[0].Football);
 
                 listOfRatedActivities.push(ratedActivityFootball);
             };
@@ -211,6 +211,7 @@ function getRatedActivities(Username){
                 listOfRatedActivities.push(ratedActivityWalking);
             };
 
+            console.log(results_rating[0].Football, results_rating[0].Running, results_rating[0].Padeltennis);
             return listOfRatedActivities;
             
           
