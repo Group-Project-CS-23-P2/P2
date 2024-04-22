@@ -125,7 +125,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
       DBConnection.end();
       return;
     }
-
+    
     
     console.log('Available Tables:', results);
 
