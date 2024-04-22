@@ -23,16 +23,16 @@ const userInfotest1 = {
     Pricepoint: 300
 }
 
-const userInfotest6 = {
-  Username: "test6",
-  Password: "test2",
-  Age: 21,
-  Physical: 5,
-  Creative: 5,
-  Brainy: 5,
+const userInfotest7 = {
+  Username: "finaltest",
+  Password: "test",
+  Age: 26,
+  Physical: 3,
+  Creative: 4,
+  Brainy: 1,
   Social: 5,
   Competative: 5,
-  Pricepoint: 0
+  Pricepoint: 150
 }
 
 
@@ -77,13 +77,13 @@ function CreateUser(userInfo)
       return;
     }
     console.log('New user created successfully:', results);
-    insertIntoTable(results.insertId, -1, -1, 1, -1, -1);
+    insertIntoTable(results.insertId, -1, -1, -1, -1, -1);
   });
 
  
 }
 
-CreateUser(userInfotest6);
+CreateUser(userInfotest7);
 
 function AddRating()
 {
@@ -223,7 +223,7 @@ getRatedActivities("mebj").then(activities => {
   console.error("Error fetching activities:", error);
 });
 
-getRatedActivities("test6").then(activities => {
+getRatedActivities("finaltest").then(activities => {
   console.log(activities); 
 }).catch(error => {
   console.error("Error fetching activities:", error);
