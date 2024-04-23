@@ -73,6 +73,7 @@ server.on("request", async (request, response) => {
         //catch (e) {}
         console.log("CreateUser received as:");
         console.log(request);
+        console.log(JSON.parse(request.body));
         response.writeHead(200, {
             "Content-Type": "application/json"
         }).end(JSON.stringify("Post received"));
