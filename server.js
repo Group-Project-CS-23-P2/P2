@@ -72,10 +72,10 @@ server.on("request", async (request, response) => {
         //try {CreateUser(requestinfo);}
         //catch (e) {}
         console.log("CreateUser received as:");
-        console.log(request.body);
+        console.log(request);
         response.writeHead(200, {
             "Content-Type": "application/json"
-        }).end();
+        }).end(JSON.stringify("Post received"));
         response.end();
     }
 
