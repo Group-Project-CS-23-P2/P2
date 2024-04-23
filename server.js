@@ -70,8 +70,6 @@ server.on("request", async (request, response) => {
     //User creation POST
     else if (pathname === "/createuser/" && request.method === 'POST') {
         console.log("CreateUser received as:");
-        console.log(request.headers.data);
-
         request.setEncoding("utf8");
         let body = "";
         for await (let chunk of request) {
@@ -82,7 +80,7 @@ server.on("request", async (request, response) => {
 
         //Data is received in the header, as the body remains as undefined, no matter how the request is posted
         //This is highly suboptimal, but for now, it's a working communication.
-        let requestInfo = JSON.parse(request.headers.data);
+        let requestInfo = JSON.parse(body);
         try {CreateUser(requestInfo)} catch (error) {
             
         }

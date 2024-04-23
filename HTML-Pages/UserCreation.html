@@ -142,8 +142,7 @@
                 fetch('http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/createuser/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/html',
-                        'Data' : JSON.stringify(data)
+                        'Content-Type': 'text/html'
                     },
                     body : JSON.stringify(data)
                 }).then(res => res.json())
