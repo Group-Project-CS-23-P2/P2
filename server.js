@@ -72,6 +72,14 @@ server.on("request", async (request, response) => {
         console.log("CreateUser received as:");
         console.log(request.headers.data);
 
+        request.setEncoding("utf8");
+        let body = "";
+        for await (let chunk of request) {
+            body += chunk;
+        }
+
+        console.log(body);
+
         //Data is received in the header, as the body remains as undefined, no matter how the request is posted
         //This is highly suboptimal, but for now, it's a working communication.
         let requestInfo = JSON.parse(request.headers.data);
