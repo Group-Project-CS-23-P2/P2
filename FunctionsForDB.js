@@ -16,7 +16,7 @@ const userInfotest1 = {
     Password: "tintinitibet123",
     Age: 21,
     Physical: 5,
-    Creative: 2,
+    Creative: 4,
     Brainy: 4,
     Social: 3,
     Competative: 5,
@@ -83,7 +83,7 @@ function CreateUser(userInfo)
  
 }
 
-CreateUser(userInfotest7);
+//CreateUser(userInfotest8);
 
 function AddRating()
 {
