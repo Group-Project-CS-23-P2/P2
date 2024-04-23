@@ -68,16 +68,15 @@ server.on("request", async (request, response) => {
 
     //User creation POST
     else if (pathname === "/createuser/" && request.method === 'POST') {
-        //requestinfo = JSON.parse(request.body);
-        //try {CreateUser(requestinfo);}
-        //catch (e) {}
         console.log("CreateUser received as:");
-        console.log(request.body);
         console.log(request.headers.data);
 
-        console.log(JSON.parse(request.body));
+        let requestInfo = JSON.parse(request.headers.data);
+        try {} catch (error) {
+            
+        }
         response.writeHead(200, {
-            "Content-Type": "application/json"
+            "Content-Type": "text/html"
         }).end(JSON.stringify("Post received"));
         response.end();
     }
