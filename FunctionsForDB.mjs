@@ -47,7 +47,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
   });
 }
 
-function CreateUser(userInfo)
+export function CreateUser(userInfo)
 {
     const query = `
     INSERT INTO new_User_table

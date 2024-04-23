@@ -5,6 +5,7 @@ import url from "url";
 import mysql from "mysql";
 import { PythonFeatureCalculation } from './algorithm.mjs';
 import { PythonCosineComparer } from './algorithm.mjs';
+import {CreateUser} from './FunctionsForDB.mjs';
 
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/HTML-Pages/frontpage.html");
@@ -74,7 +75,7 @@ server.on("request", async (request, response) => {
         //Data is received in the header, as the body remains as undefined, no matter how the request is posted
         //This is highly suboptimal, but for now, it's a working communication.
         let requestInfo = JSON.parse(request.headers.data);
-        try {} catch (error) {
+        try {CreateUser(requestInfo)} catch (error) {
             
         }
         response.writeHead(200, {
