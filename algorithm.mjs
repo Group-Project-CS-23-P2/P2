@@ -18,7 +18,7 @@ export async function PythonFeatureCalculation(args) {
   const pythonScriptPath = '/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/script1.py';
   const pythonProcess = spawn('python', [pythonScriptPath, ...args]);
 
-
+  //Read data from stdout
   let data = "";
   for await (const chunk of pythonProcess.stdout)
   {
@@ -30,11 +30,12 @@ export async function PythonFeatureCalculation(args) {
     console.error(`stderr: ${data}`);
   });
 
-
+  //Resolve promise if exit code is close
   const exitcode = await new Promise((resolve, reject) => {
     pythonProcess.on('close', resolve);
   })
-
+  
+  //If not, throw an error
   if(exitcode) {
     throw new Error( `subprocess error exit ${exitCode}, ${error}`);
   }
@@ -50,6 +51,7 @@ export async function PythonCosineComparer(args)
   //const pythonCosinePath = '/Users/peter/Documents/GitHub/P2/P2/cosineComparer.py';
   const pythonProcess = spawn('python', [pythonCosinePath, ...args]);
 
+  //read data from stdout
   let data = "";
   for await (const chunk of pythonProcess.stdout)
   {
@@ -61,11 +63,12 @@ export async function PythonCosineComparer(args)
     console.error(`stderr: ${data}`);
   });
 
-
+  //Resolve promise if exit code is close
   const exitcode = await new Promise((resolve, reject) => {
     pythonProcess.on('close', resolve);
   })
 
+  //If not, throw an error
   if(exitcode) {
     throw new Error( `subprocess error exit ${exitCode}, ${error}`);
   }
