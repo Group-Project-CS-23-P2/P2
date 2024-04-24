@@ -1,5 +1,4 @@
 import { spawn } from 'child_process';
-import { stringify } from 'querystring';
 
 class RatedActivity {
   constructor(name, id, listofFeatures, rating)
