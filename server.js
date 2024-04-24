@@ -1,10 +1,9 @@
-import optimize from "optimization-js";
 import http from 'http';
 import fs from "fs";
 import url from "url";
 import mysql from "mysql";
-import { PythonFeatureCalculation } from './algorithm.mjs';
-import { PythonCosineComparer } from './algorithm.mjs';
+import { PythonFeatureCalculation } from './Modules/algorithm.mjs';
+import { PythonCosineComparer } from './Modules/algorithm.mjs';
 import {CreateUser} from './FunctionsForDB.mjs';
 
 
