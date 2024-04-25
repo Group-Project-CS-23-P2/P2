@@ -109,7 +109,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
 
 //insertIntoTable(2, 5, -1, 4, 5, -1);
 
-function deletefromTable(User_id) {
+function deletefromuserTable(User_id) {
   const query = 'DELETE FROM new_User_table WHERE User_id = ?';
   DBConnection.query(query, [User_id], (err, results) => {
     if (err) {
@@ -120,11 +120,21 @@ function deletefromTable(User_id) {
   });
 }
 
-for(let i = 1; i<15; i++){
-  deletefromTable(i);
-  console.log(`user ${i} is deleted\n`);
+
+function deletefromratedTable(User_id) {
+  const query = 'DELETE FROM ratedActivitiestTable WHERE User_id = ?';
+  DBConnection.query(query, [User_id], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into table', err);
+      return;
+    }
+    console.log('Data inserted successfully:', results);
+  });
 }
 
+for(let i = 0; i<15; i++){
+  deletefromratedTable(i);
+}
 
 
 
