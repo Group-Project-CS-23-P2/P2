@@ -216,7 +216,7 @@ async function getRatedActivities(Username) {
   }
 }
 
-
+/*
 getRatedActivities("mebj").then(activities => {
   console.log(activities); 
 }).catch(error => {
@@ -228,7 +228,7 @@ getRatedActivities("finaltest").then(activities => {
 }).catch(error => {
   console.error("Error fetching activities:", error);
 });
-
+*/
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)
