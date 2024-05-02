@@ -79,7 +79,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
 //Activity insert 
-/*
+
   function insertIntoTable(Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint) {
     const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     DBConnection.query(query, [Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint], (err, results) => {
@@ -90,24 +90,28 @@ DBConnection.query(createTableQuery, (err, results) => {
       console.log('Data inserted successfully:', results);
     });
   }
-  */
-/*
+  
+  insertIntoTable(1, 'Football', 5, 2, 1, 4, 5, 0);
+  insertIntoTable(2, 'Cheramic', 1, 5, 3, 4, 1, 300);
+  insertIntoTable(3, 'Padeltennis', 4, 2, 2, 4, 5, 150);
+  insertIntoTable(4, 'Running', 4, 1, 1, 3, 2, 0);
+  insertIntoTable(5, 'Walking', 2, 2, 2, 4, 1, 0);
   insertIntoTable(6, 'Bowling', 2, 2, 1, 3, 4, 150);
-  insertIntoTable(7, 'Cooking class', 1, 3, 3, 2, 1, 150);
+  insertIntoTable(7, 'Cooking_class', 1, 3, 3, 2, 1, 150);
   insertIntoTable(8, 'Crossfit', 5, 1, 1, 2, 2, 150);
   insertIntoTable(9, 'Yoga', 4, 1, 2, 3, 1, 150);
   insertIntoTable(10, 'Wellness', 1, 1, 1, 2, 1, 150);
   insertIntoTable(11, 'Swim', 5, 1, 1, 2, 3, 150);
   insertIntoTable(12, 'Museum', 1, 4, 4, 2, 1, 150);
-  insertIntoTable(13, 'Board game', 1, 3, 5, 4, 4, 0);
-  insertIntoTable(14, 'Read a book', 1, 3, 3, 1, 1, 0);
-  insertIntoTable(15, 'Listen to music', 1, 2, 2, 1, 1, 0);
-  insertIntoTable(16, 'Go to a concert', 1, 2, 2, 4, 1, 300);
-  insertIntoTable(17, 'Make a song', 1, 4, 4, 2, 2, 0);
+  insertIntoTable(13, 'Board_game', 1, 3, 5, 4, 4, 0);
+  insertIntoTable(14, 'Book_club', 1, 3, 3, 1, 1, 0);
+  insertIntoTable(15, 'Listen_music', 1, 2, 2, 1, 1, 0);
+  insertIntoTable(16, 'Concert', 1, 2, 2, 4, 1, 300);
+  insertIntoTable(17, 'Create_song', 1, 4, 4, 2, 2, 0);
   insertIntoTable(18, 'Beachvolley', 4, 2, 1, 5, 5, 0);
   insertIntoTable(19, 'Paint', 1, 5, 3, 1, 1, 150);
-  insertIntoTable(20, 'Play computer', 1, 4, 3, 2, 4, 0);
- */
+  insertIntoTable(20, 'Gaming', 1, 4, 3, 2, 4, 0);
+ 
 
   
   //Denne funktion bruges til at fjerne tables!!!
@@ -180,7 +184,7 @@ function deleteallactivities(){
     deletefromactivityTable(i);
   }
 }
-deleteallactivities();
+//deleteallactivities();
 
 function deleteAllUsers(){
   let length = 0;
@@ -197,7 +201,7 @@ function deleteSinglePerson(user_id){
 
 
 
-
+/*
 function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
   const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
   DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
@@ -208,7 +212,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
     console.log('Data inserted successfully:', results);
   });
 }
-
+*/
 function CreateUser(userInfo)
 {
     const query = `
