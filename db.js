@@ -187,7 +187,7 @@ function deleteallactivities(){
 //deleteallactivities();
 
 function deleteAllUsers(){
-  let length = 0;
+  let length = 20;
   for(let i = 0; i < length; i++){
     deletefromuserTable(i);
     deletefromratedTable(i);
@@ -199,6 +199,7 @@ function deleteSinglePerson(user_id){
   deletefromratedTable(user_id);
 }
 
+deleteAllUsers();
 
 
 
