@@ -45,7 +45,8 @@ DBConnection.query(createTableQuery, (err, results) => {
 */
 
 //User insert 
-  function insertIntoTable(User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint) {
+/*
+  function insertUserIntoTable(User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint) {
     const query = 'INSERT INTO `new_User_table` (`User_id`, `Username`, `Password`,`Age`,`Physical`,`Creative`,`Brainy`, `Social`, `Competative`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     DBConnection.query(query, [User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint], (err, results) => {
       if (err) {
@@ -58,7 +59,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   //insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   
-  
+  */
  
 
   
@@ -105,9 +106,9 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 */
 
-
+/*
 //User insert 
-function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
+function insertRatedIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
   const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
   DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
     if (err) {
@@ -120,7 +121,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
 
 //insertIntoTable(2, 5, -1, 4, 5, -1);
 
-
+*/
 //Helper function
 function deletefromuserTable(User_id) {
   const query = 'DELETE FROM new_User_table WHERE User_id = ?';
