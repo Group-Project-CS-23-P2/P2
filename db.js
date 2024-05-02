@@ -43,7 +43,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 });
 
 */
-/*
+
 //User insert 
   function insertIntoTable(User_id, Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint) {
     const query = 'INSERT INTO `new_User_table` (`User_id`, `Username`, `Password`,`Age`,`Physical`,`Creative`,`Brainy`, `Social`, `Competative`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
@@ -56,7 +56,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
 
-  insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
+  //insertIntoTable(1, 'Admin', `Password`, 22, 5, 3, 5, 4, 5, 300);
   
   
  
@@ -73,12 +73,23 @@ DBConnection.query(createTableQuery, (err, results) => {
       console.log('Data inserted successfully:', results);
     });
   }
-  */
-/*
-  insertIntoTable(3, 'Padeltennis', 4, 2, 1, 3, 4, 150);
-  insertIntoTable(4, 'Running', 5, 1, 1, 2, 2, 0);
-  insertIntoTable(5, 'Walking', 2, 1, 2, 3, 1, 0);
-*/
+  
+
+  insertIntoTable(6, 'Bowling', 2, 2, 1, 3, 4, 150);
+  insertIntoTable(7, 'Cooking class', 1, 3, 3, 2, 1, 150);
+  insertIntoTable(8, 'Crossfit', 5, 1, 1, 2, 2, 150);
+  insertIntoTable(9, 'Yoga', 4, 1, 2, 3, 1, 150);
+  insertIntoTable(10, 'Wellness', 1, 1, 1, 2, 1, 150);
+  insertIntoTable(11, 'Swim', 5, 1, 1, 2, 3, 150);
+  insertIntoTable(12, 'Museum', 1, 4, 4, 2, 1, 150);
+  insertIntoTable(13, 'Board game', 1, 3, 5, 4, 4, 0);
+  insertIntoTable(14, 'Read a book', 1, 3, 3, 1, 1, 0);
+  insertIntoTable(15, 'Listen to music', 1, 2, 2, 1, 1, 0);
+  insertIntoTable(16, 'Go to a concert', 1, 2, 2, 4, 1, 300);
+  insertIntoTable(17, 'Make a song', 1, 4, 4, 2, 2, 0);
+  insertIntoTable(18, 'Beachvolley', 4, 2, 1, 5, 5, 0);
+  insertIntoTable(19, 'Paint', 1, 5, 3, 1, 1, 150);
+  insertIntoTable(20, 'Play computer', 1, 4, 3, 2, 4, 0);
  
 
   
