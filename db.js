@@ -165,7 +165,7 @@ function deletefromratedTable(User_id) {
 
 function deletefromactivityTable(Activity_id) {
   const query = 'DELETE FROM new_Activity_table WHERE Activity_id = ?';
-  DBConnection.query(query, [Activity_id_id], (err, results) => {
+  DBConnection.query(query, [Activity_id], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
