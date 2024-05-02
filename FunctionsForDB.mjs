@@ -13,9 +13,9 @@ DBConnection.connect((err) =>{
 
 
 
-function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
-  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking,  Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -173,7 +173,7 @@ async function getRatedActivities(Username) {
       });
 
       let listOfRatedActivities = [];
-      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`];  
+      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`];  
       for (let activity of activities) {
           if (ratingsResults[0][activity] > 0) {
               let activityDetails = await activityInfo(activity);

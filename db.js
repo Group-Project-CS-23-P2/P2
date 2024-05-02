@@ -243,7 +243,7 @@ function CreateUser(userInfo)
       return;
     }
     console.log('New user created successfully:', results);
-    insertIntoTable(results.insertId, 3, 2, 3, 3, 2, 1, 4, 5, 6, 4, 3, 2, 1, 3, 4, -1, -1, 4, 5, 1);
+    insertIntoTable(results.insertId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
   });
 
  
@@ -261,7 +261,7 @@ const userInfotest10 = {
   Pricepoint: 150
 }
 
-CreateUser(userInfotest10);
+//CreateUser(userInfotest10);
 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
