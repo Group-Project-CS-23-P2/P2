@@ -31,8 +31,8 @@ DBConnection.connect(err => {
     PRIMARY KEY(User_id)
   )
 `;
-*/
-/*
+
+
 DBConnection.query(createTableQuery, (err, results) => {
   if (err) {
     console.error('Error creating ratedActivitiesTable', err);
@@ -96,8 +96,8 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
   //Denne funktion bruges til at fjerne tables!!!
-/*
-  DBConnection.query('DROP TABLE ratedactivities_table', (err) => {
+
+  DBConnection.query('DROP TABLE ratedActivitiestTable', (err) => {
     if (err) {
       console.error('Error dropping ratedactivities_table', err);
       return;
@@ -105,7 +105,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     console.log('ratedactivities_table dropped successfully');
   });
   
-*/
+
 
 /*
 //User insert 
@@ -165,7 +165,7 @@ function deleteSinglePerson(user_id){
 
 function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
   const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking,  Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -222,7 +222,7 @@ const userInfotest10 = {
   Pricepoint: 150
 }
 
-CreateUser(userInfotest10);
+
 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
