@@ -19,7 +19,7 @@ DBConnection.connect(err => {
 
 
 //Table creation function
-/*
+
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS ratedActivitiestTable (
     User_id INT REFERENCES new_User_table(User_id),
@@ -28,6 +28,21 @@ DBConnection.connect(err => {
     Padeltennis INT,
     Running INT,
     Walking INT,
+    Bowling INT,
+    Cooking class INT,
+    Crossfit INT,
+    Yoga INT,
+    Wellness INT,
+    Swim INT,
+    Museum INT,
+    Board game INT,
+    Read a book INT, 
+    Listen to music INT, 
+    Go to a concert INT,
+    Make a song INT,
+    Beachvolley INT,
+    Paint INT,
+    Play computer INT,
     PRIMARY KEY(User_id)
   )
 `;
@@ -42,7 +57,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 });
 
-*/
+
 
 //User insert 
 /*
@@ -96,7 +111,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
   //Denne funktion bruges til at fjerne tables!!!
-
+/*
   DBConnection.query('DROP TABLE ratedActivitiestTable', (err) => {
     if (err) {
       console.error('Error dropping ratedactivities_table', err);
@@ -105,7 +120,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     console.log('ratedactivities_table dropped successfully');
   });
   
-
+*/
 
 /*
 //User insert 
