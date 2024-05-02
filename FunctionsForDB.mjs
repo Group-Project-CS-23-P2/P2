@@ -11,34 +11,11 @@ DBConnection.connect((err) =>{
     console.log('MySql connected');
 });
 
-const userInfotest1 = {
-    Username: "amve",
-    Password: "tintinitibet123",
-    Age: 21,
-    Physical: 5,
-    Creative: 4,
-    Brainy: 4,
-    Social: 3,
-    Competative: 5,
-    Pricepoint: 300
-}
-
-const userInfotest7 = {
-  Username: "finaltest",
-  Password: "test",
-  Age: 26,
-  Physical: 3,
-  Creative: 4,
-  Brainy: 1,
-  Social: 5,
-  Competative: 5,
-  Pricepoint: 150
-}
 
 
-function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
-  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking,  Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -77,7 +54,7 @@ export function CreateUser(userInfo)
       return;
     }
     console.log('New user created successfully:', results);
-    insertIntoTable(results.insertId, -1, -1, -1, -1, -1);
+    insertIntoTable(results.insertId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
   });
 
  
@@ -171,10 +148,7 @@ function activityInfo(Activity_name) {
 }
 
 
-//activityInfo("Football");
-
-//userInfo("amve");
-
+console.log(activityInfo('Read a book'));
 
 async function getRatedActivities(Username) {
   try {
@@ -199,7 +173,7 @@ async function getRatedActivities(Username) {
       });
 
       let listOfRatedActivities = [];
-      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];  
+      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`];  
       for (let activity of activities) {
           if (ratingsResults[0][activity] > 0) {
               let activityDetails = await activityInfo(activity);

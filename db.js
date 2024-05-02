@@ -75,7 +75,7 @@ DBConnection.query(createTableQuery, (err, results) => {
     });
   }
   
-
+/*
   insertIntoTable(6, 'Bowling', 2, 2, 1, 3, 4, 150);
   insertIntoTable(7, 'Cooking class', 1, 3, 3, 2, 1, 150);
   insertIntoTable(8, 'Crossfit', 5, 1, 1, 2, 2, 150);
@@ -91,7 +91,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   insertIntoTable(18, 'Beachvolley', 4, 2, 1, 5, 5, 0);
   insertIntoTable(19, 'Paint', 1, 5, 3, 1, 1, 150);
   insertIntoTable(20, 'Play computer', 1, 4, 3, 2, 4, 0);
- 
+ */
 
   
   //Denne funktion bruges til at fjerne tables!!!
