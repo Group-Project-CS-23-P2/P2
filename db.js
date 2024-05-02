@@ -64,6 +64,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
 //Activity insert 
+/*
   function insertIntoTable(Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint) {
     const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     DBConnection.query(query, [Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint], (err, results) => {
@@ -74,7 +75,7 @@ DBConnection.query(createTableQuery, (err, results) => {
       console.log('Data inserted successfully:', results);
     });
   }
-  
+  */
 /*
   insertIntoTable(6, 'Bowling', 2, 2, 1, 3, 4, 150);
   insertIntoTable(7, 'Cooking class', 1, 3, 3, 2, 1, 150);
@@ -161,6 +162,67 @@ function deleteSinglePerson(user_id){
 
 
 
+
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking,  Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into table', err);
+      return;
+    }
+    console.log('Data inserted successfully:', results);
+  });
+}
+
+function CreateUser(userInfo)
+{
+    const query = `
+    INSERT INTO new_User_table
+    (Username, Password, Age, Physical, Creative, Brainy, Social, Competative, Pricepoint)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+
+
+  const values = [
+    userInfo.Username,
+    userInfo.Password, 
+    userInfo.Age,
+    userInfo.Physical,
+    userInfo.Creative,
+    userInfo.Brainy,
+    userInfo.Social,
+    userInfo.Competative,
+    userInfo.Pricepoint
+  ];
+  
+  
+  
+  DBConnection.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error inserting data into new_User_table', err);
+      return;
+    }
+    console.log('New user created successfully:', results);
+    insertIntoTable(results.insertId, 3, 2, 3, 3, 2, 1, 4, 5, 6, 4, 3, 2, 1, 3, 4, -1, -1, 4, 5, 1);
+  });
+
+ 
+}
+
+const userInfotest10 = {
+  Username: "Anton",
+  Password: "lalal",
+  Age: 26,
+  Physical: 3,
+  Creative: 4,
+  Brainy: 1,
+  Social: 5,
+  Competative: 5,
+  Pricepoint: 150
+}
+
+CreateUser(userInfotest10);
 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
