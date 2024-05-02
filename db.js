@@ -19,7 +19,7 @@ DBConnection.connect(err => {
 
 
 //Table creation function
-
+/*
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS ratedActivitiestTable (
     User_id INT REFERENCES new_User_table(User_id),
@@ -57,7 +57,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   
 });
 
-
+*/
 
 //User insert 
 /*
@@ -161,6 +161,26 @@ function deletefromratedTable(User_id) {
     console.log('User deleted');
   });
 }
+
+
+function deletefromactivityTable(Activity_id) {
+  const query = 'DELETE FROM new_Activity_table WHERE Activity_id = ?';
+  DBConnection.query(query, [Activity_id_id], (err, results) => {
+    if (err) {
+      console.error('Error inserting data into table', err);
+      return;
+    }
+    console.log('');
+  });
+}
+
+function deleteallactivities(){
+  let length = 21; 
+  for(let i = 0; i<length; i++){
+    deletefromactivityTable(i);
+  }
+}
+deleteallactivities();
 
 function deleteAllUsers(){
   let length = 0;
