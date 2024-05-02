@@ -79,7 +79,7 @@ DBConnection.query(createTableQuery, (err, results) => {
 
   
 //Activity insert 
-
+/*
   function insertIntoTable(Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint) {
     const query = 'INSERT INTO `new_Activity_table` (`Activity_id`, `Activity_name`, `Physical_rank`,`Creative_rank`,`Brainy_rank`,`Social_rank`,`Competative_rank`, `Pricepoint`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     DBConnection.query(query, [Activity_id, Activity_name, Physical_rank, Creative_rank, Brainy_rank, Social_rank, Competative_rank, Pricepoint], (err, results) => {
@@ -112,7 +112,7 @@ DBConnection.query(createTableQuery, (err, results) => {
   insertIntoTable(19, 'Paint', 1, 5, 3, 1, 1, 150);
   insertIntoTable(20, 'Gaming', 1, 4, 3, 2, 4, 0);
  
-
+*/
   
   //Denne funktion bruges til at fjerne tables!!!
 /*
@@ -201,10 +201,10 @@ function deleteSinglePerson(user_id){
 
 
 
-/*
-function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer) {
-  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board game`, `Read a book`, `Listen to music`, `Go to a concert`, `Make a song`, `Beachvolley`, `Paint`, `Play computer`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Read, Listen_music, concert, Make_song, Beachvolley, Paint, Play_computer], (err, results) => {
+
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -212,7 +212,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
     console.log('Data inserted successfully:', results);
   });
 }
-*/
+
 function CreateUser(userInfo)
 {
     const query = `
@@ -261,7 +261,7 @@ const userInfotest10 = {
   Pricepoint: 150
 }
 
-
+CreateUser(userInfotest10);
 
   DBConnection.query('SHOW TABLES', (err, results) => {
     if (err) {
