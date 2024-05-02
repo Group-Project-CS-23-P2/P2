@@ -24,7 +24,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
   });
 }
 
-export function CreateUser(userInfo)
+export function createUser(userInfo)
 {
     const query = `
     INSERT INTO new_User_table
@@ -90,7 +90,14 @@ class User {
     }
 }
 
-function userInfo(username){
+/**
+ *
+ *
+ * @export
+ * @param {string} username
+ * @returns {User} User object from database
+ */
+export function userInfo(username){
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
     DBConnection.query(query, [username], (err, results) => {
@@ -120,7 +127,7 @@ function userInfo(username){
       });
 }
 
-function activityInfo(Activity_name) {
+export async function activityInfo(Activity_name) {
   return new Promise((resolve, reject) => {
       const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
       DBConnection.query(query, [Activity_name], (err, results) => {
@@ -150,7 +157,7 @@ function activityInfo(Activity_name) {
 
 console.log(activityInfo('Read a book'));
 
-async function getRatedActivities(Username) {
+export async function getRatedActivities(Username) {
   try {
       const userResults = await new Promise((resolve, reject) => {
           const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;

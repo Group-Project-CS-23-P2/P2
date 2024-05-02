@@ -4,7 +4,11 @@ import url from "url";
 import mysql from "mysql";
 import { PythonFeatureCalculation } from './Modules/algorithm.mjs';
 import { PythonCosineComparer } from './Modules/algorithm.mjs';
-import {CreateUser} from './FunctionsForDB.mjs';
+import {createUser} from './Modules/FunctionsForDB.mjs';
+import {getRatedActivities} from './Modules/FunctionsForDB.mjs';
+import {userInfo} from './Modules/FunctionsForDB.mjs';
+import { error } from 'console';
+
 
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/HTML-Pages/frontpage.html");
@@ -77,28 +81,42 @@ server.on("request", async (request, response) => {
 
         console.log(body);
 
-        //Data is received in the header, as the body remains as undefined, no matter how the request is posted
-        //This is highly suboptimal, but for now, it's a working communication.
+
         let requestInfo = JSON.parse(body);
-        try {CreateUser(requestInfo)} catch (error) {
-            
+        if (requestInfo.Username.length != sanitize(requestInfo.Username)) {
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("The given username was not valid, it cannot contain special characters.");
+                response.end();
+                return;
         }
+        
+
+        try {createUser(requestInfo)} catch (error) {            
+                response.writeHead(400, {
+                    "Content-Type": "text/html"
+                }).end("An error occured while adding the user to the database");
+                response.end();
+                return;
+            }
+
         response.writeHead(200, {
             "Content-Type": "text/html"
-        }).end(JSON.stringify("Post received"));
+        }).end("Post received and added succcesfully");
         response.end();
     }
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
+        console.log("SubmitRating received as:");
+        console.log(request.body);
         //requestinfo = JSON.parse(request.body);
         //try {AddRating(requestinfo)}
         //catch (e) {}
-        console.log("SubmitRating received as:");
-        console.log(request.body);
 
         response.writeHead(200, {
-            "Content-Type": "application/json"
+            "Content-Type": "text/html"
         }).end();
         response.end();
     }
@@ -107,19 +125,28 @@ server.on("request", async (request, response) => {
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
         //requestinfo = JSON.parse(request.body);
         //let returnList;
-        //try {returnList =  await GroupQuery(requestinfo);}
-        //If function fails
-        //catch (e) {}  
         console.log("GroupRequest received as:");
         console.log(request.body);
 
+        let listOfUsers = JSON.parse(request.body);
+        for (let i = 0; i < listOfUsers.length; i++)
+        {
+            if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
+            {
+                response.writeHead(400, {
+                    "Content-Type": "text/html"
+                }).end("One or more usernames are incorrectly typed. Please check that none contain special characters");
+                response.end();
+                return
+            }
+        }
         //If function succeeds
         response.writeHead(200, {
         "Content-Type": "application/json"
         }).end();
         response.end();
         }
-
+    
         
     }
 )
@@ -134,12 +161,13 @@ function AddRating()
 async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
+    let listOfUserFeatures = [];
     let returnList = [];
 
     for(let i = 0; i < requestinfo.length; i++)
     {
         let currentUser = userInfo();
-        let currentActivities = userRatedActivities();
+        let currentActivities = await getRatedActivities(currentUser.Username);
         let currentArgs = [currentUser.Username];
 
         //Add the currentUser features to arguments.
@@ -154,18 +182,55 @@ async function GroupQuery(requestinfo)
             currentArgs.push(JSON.stringify(currentActivities[j]));
         }
 
-        
-        //Get activities for user I
-        //Send it all to algorithm function.
-        //Add returned list to list of user features
+        currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
+        listOfUserFeatures.push(currentUserFeatures);
     }
 
     //Calculate the group vector
+    let finalGroupVector = [0,0,0,0,0];
+    for(let i = 0; i < listOfUserFeatures.length; i++)
+    {
+        for (let j = 0; i < 5; j++)
+        {
+            finalGroupVector[j] += listOfUserFeatures[i][j];
+        }
+    }
+
+    for(let i = 0; i <= finalGroupVector.length; i++)
+    {finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;}
+
+    let listOfAllActivities = GetAllActivities();
+
+    currentArgs = [];
+    for(let i = 0; i < 5; i++)
+    {
+        currentArgs.push(finalGroupVector[i]);
+    }
+
+    for (let i = 0; i < listOfAllActivities.length; i++)
+    {
+        currentArgs.push(JSON.stringify(listOfAllActivities[i]));
+    }
+
     //Send group vector to python to calculate group similarity
 
+    let recommendedActivities = await PythonCosineComparer(currentArgs);
     
     //Returns list of best fitting activities
 }
+
+function sanitize(str){
+    str=str
+  .replace(/&/g, "")
+  .replace(/</g, "")
+  .replace(/>/g, "")
+  .replace(/"/g, "")
+  .replace(/'/g, "")
+  .replace(/`/g, "")
+  .replace(/\//g, "");
+  return str.trim();
+  }
+
 
 class Activity {
     constructor(name, id, listofFeatures)
