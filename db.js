@@ -199,7 +199,7 @@ function deleteSinglePerson(user_id){
   deletefromratedTable(user_id);
 }
 
-deleteAllUsers();
+
 
 
 
