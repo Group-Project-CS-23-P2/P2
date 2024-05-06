@@ -236,9 +236,9 @@ async function GroupQuery(requestinfo)
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
     {
-        for(let j = 0; j < recommendedActivities.length; j++)
+        for(let j = 0; j < recommendedActivities.ListOfObjectIDs.length; j++)
         {
-            if(listOfAllActivities[i].id == recommendedActivities[j])
+            if(listOfAllActivities[i].id == recommendedActivities.ListOfObjectIDs[j])
             {
                 returnActivities.push(listOfAllActivities[i]);
                 recommendedActivities.splice(j,j);
