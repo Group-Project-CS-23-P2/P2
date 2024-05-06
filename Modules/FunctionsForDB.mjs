@@ -122,7 +122,7 @@ export function userInfo(username){
           userRow.Pricepoint
         ];
     
-        const user = new User(userRow.Username, userRow.User_id, listofFeatures);
+        let user = new User(userRow.Username, userRow.User_id, listofFeatures);
     
         console.log(user);
         return user;
