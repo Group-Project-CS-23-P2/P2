@@ -16,7 +16,7 @@ class RatedActivity {
 export async function PythonFeatureCalculation(args) {
   // Path to your Python script
   const pythonScriptPath = '/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/PythonScripts/featureCalculator.py';
-  const pythonProcess = spawn('python', [pythonScriptPath, ...args]);
+  const pythonProcess = spawn('python3', [pythonScriptPath, ...args]);
 
   //Read data from stdout
   let data = "";
@@ -49,7 +49,7 @@ export async function PythonCosineComparer(args)
 {
   const pythonCosinePath = '/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/PythonScripts/cosineComparer.py';
   //const pythonCosinePath = '/Users/peter/Documents/GitHub/P2/P2/cosineComparer.py';
-  const pythonProcess = spawn('python', [pythonCosinePath, ...args]);
+  const pythonProcess = spawn('python3', [pythonCosinePath, ...args]);
 
   //read data from stdout
   let data = "";
