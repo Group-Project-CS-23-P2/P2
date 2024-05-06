@@ -84,14 +84,14 @@ server.on("request", async (request, response) => {
 
 
         let requestInfo = JSON.parse(body);
-        if (requestInfo.Username.length != sanitize(requestInfo.Username)) {
+        /*if (requestInfo.Username.length != sanitize(requestInfo.Username)) {
             response.writeHead(400, 
                 {
                     "Content-Type": "text/html"
                 }).end("The given username was not valid, it cannot contain special characters.");
                 response.end();
                 return;
-        }
+        }*/
         
 
         try {createUser(requestInfo)} catch (error) {            
