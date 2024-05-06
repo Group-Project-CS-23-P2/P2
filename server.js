@@ -201,11 +201,16 @@ async function GroupQuery(requestinfo)
         }
     }
 
+    console.log("Exited double for loop");
+
     for(let i = 0; i <= finalGroupVector.length; i++)
     {finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;}
 
-    let listOfAllActivities = await GetAllActivities();
+    console.log("Exited division for loop");
 
+    let listOfAllActivities = await GetAllActivities();
+    console.log("Got all activities");
+    
     currentArgs = [];
     for(let i = 0; i < 5; i++)
     {
@@ -217,6 +222,7 @@ async function GroupQuery(requestinfo)
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
+    console.log("Exited two argument for loops");
     //Send group vector to python to calculate group similarity
 
     let recommendedActivities = await PythonCosineComparer(currentArgs);
