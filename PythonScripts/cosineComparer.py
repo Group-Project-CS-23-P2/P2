@@ -20,7 +20,7 @@ listOfActivityObject = args_from_nodejs[5:];
 
 for i in range(len(listOfActivityObject)):
     currentObject = json.loads(listOfActivityObject[i]);
-    currentObjectNParray = np.array(currentObject["listofFeatures"][0:4]);
+    currentObjectNParray = np.array(currentObject["listofFeatures"][0:5]);
     #This needs to be converted to NP arrays
     cosineSimilarity = np.dot(featureVector, currentObjectNParray) / (np.linalg.norm(featureVector) * np.linalg.norm(currentObjectNParray));
     #Create tuple from object
