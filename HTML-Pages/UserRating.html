@@ -116,12 +116,24 @@
               fetch('http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/submitrating/', {
                   method: 'POST',
                   headers: {
-                      'Content-Type': 'text/html'
+                      'Content-Type': 'application/json'
                   },
                   body : JSON.stringify(data)
-              }).then(res => res.json())
-                .then(data => console.log(data))
-                .catch(error => console.log(error))
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Failed to submit data.');
+                  }
+                  return response.json(); 
+              })
+              .then(result => {
+                  console.log('Data submitted successfully:', result);
+                  // display a success message
+              })
+              .catch(error => {
+                  console.error('Error submitting data:', error);
+                  // display an error message to the user
+              });
           });
   </script>
 
