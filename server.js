@@ -215,7 +215,7 @@ async function GroupQuery(requestinfo)
     let listOfAllActivities = await GetAllActivities();
     console.log("Got all activities");
     
-    currentArgs = [];
+    let currentArgs = [];
     for(let i = 0; i < 5; i++)
     {
         currentArgs.push(finalGroupVector[i]);
