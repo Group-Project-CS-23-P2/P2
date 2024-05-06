@@ -167,9 +167,7 @@ async function GroupQuery(requestinfo)
 
     for(let i = 0; i < requestinfo.length; i++)
     {
-        console.log(requestinfo[i]);
         let currentUser = await userInfo(requestinfo[i]);
-        console.log(currentUser);
         let currentActivities = await getRatedActivities(currentUser.name);
         let currentArgs = [currentUser.name];
 
@@ -188,6 +186,9 @@ async function GroupQuery(requestinfo)
         let currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
         listOfUserFeatures.push(currentUserFeatures);
     }
+
+    console.log("Exited first for loop successfully");
+    console.log(listOfUserFeatures);
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
