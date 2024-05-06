@@ -163,7 +163,6 @@ async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
     let listOfUserFeatures = [];
-    let returnList = [];
 
     for(let i = 0; i < requestinfo.length; i++)
     {
@@ -232,8 +231,21 @@ async function GroupQuery(requestinfo)
     console.log(currentArgs);
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     
+    let returnActivities = [];
+    for(let i = 0; i < listOfAllActivities.length; i++)
+    {
+        for(let j = 0; j < recommendedActivities.length; j++)
+        {
+            if(listOfAllActivities[i].id == recommendedActivities[j])
+            {
+                returnActivities.push(listOfAllActivities[i]);
+                recommendedActivities.splice(j,j);
+            }
+            
+        }
+    }
     //Returns list of best fitting activities
-    return recommendedActivities;
+    return returnActivities;
 }
 
 function sanitize(str){
