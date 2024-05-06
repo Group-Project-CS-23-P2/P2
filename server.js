@@ -195,7 +195,7 @@ async function GroupQuery(requestinfo)
     {
         for (let j = 0; i < 5; j++)
         {
-            finalGroupVector[j] += listOfUserFeatures[i][j];
+            finalGroupVector[j] += (listOfUserFeatures[i])[j];
         }
     }
 
