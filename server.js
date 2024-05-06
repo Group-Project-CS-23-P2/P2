@@ -168,6 +168,7 @@ async function GroupQuery(requestinfo)
     for(let i = 0; i < requestinfo.length; i++)
     {
         let currentUser = userInfo(requestinfo[i]);
+        console.log(currentUser);
         let currentActivities = await getRatedActivities(currentUser.name);
         let currentArgs = [currentUser.name];
 
