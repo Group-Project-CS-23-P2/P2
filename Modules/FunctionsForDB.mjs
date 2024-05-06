@@ -101,6 +101,8 @@ export function userInfo(username){
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
     DBConnection.query(query, [username], (err, results) => {
+        console.log(results);
+
         if (err) {
           console.log('Error fetching user from new_User_table', err);
           return null; 
