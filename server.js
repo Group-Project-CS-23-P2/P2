@@ -185,7 +185,7 @@ async function GroupQuery(requestinfo)
             currentArgs.push(JSON.stringify(currentActivities[j]));
         }
 
-        currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
+        let currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
         listOfUserFeatures.push(currentUserFeatures);
     }
 
