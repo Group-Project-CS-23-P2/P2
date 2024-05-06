@@ -6,6 +6,7 @@ import { PythonFeatureCalculation } from './Modules/algorithm.mjs';
 import { PythonCosineComparer } from './Modules/algorithm.mjs';
 import {createUser} from './Modules/FunctionsForDB.mjs';
 import {getRatedActivities} from './Modules/FunctionsForDB.mjs';
+import {GetAllActivities} from './Modules/FunctionsForDB.mjs';
 import {userInfo} from './Modules/FunctionsForDB.mjs';
 import { error } from 'console';
 
