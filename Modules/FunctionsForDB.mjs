@@ -102,7 +102,7 @@ export function userInfo(username){
 
     DBConnection.query(query, [username], (err, results) => {
         if (err) {
-          console.error('Error fetching user from new_User_table', err);
+          console.log('Error fetching user from new_User_table', err);
           return null; 
         }
         if (results.length === 0) {
