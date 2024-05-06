@@ -229,7 +229,7 @@ async function GroupQuery(requestinfo)
     //Send group vector to python to calculate group similarity
 
     console.log(currentArgs);
-    let recommendedActivities = await PythonCosineComparer(currentArgs);
+    let recommendedActivities = JSON.parse(await PythonCosineComparer(currentArgs));
     
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
