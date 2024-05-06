@@ -155,6 +155,16 @@ export async function activityInfo(Activity_name) {
 }
 
 
+
+export async function GetAllActivities(){
+  let activitives = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`];
+  let i = 0; 
+  let activityclasses = [];
+  for (i; i < activitives.length-1; i++){
+    activityclasses.push(await activityInfo(activitives[i]));
+  }
+  return activityclasses;
+}
 console.log(activityInfo('Read a book'));
 
 export async function getRatedActivities(Username) {
