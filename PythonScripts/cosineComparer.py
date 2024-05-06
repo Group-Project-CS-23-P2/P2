@@ -8,11 +8,11 @@ from scipy.optimize import minimize, LinearConstraint
 # Get the arguments passed from Node.js
 args_from_nodejs = sys.argv[1:]
 calculatedActivityList = [];
-feature1 = int(args_from_nodejs[0]);
-feature2 = int(args_from_nodejs[1]);
-feature3 = int(args_from_nodejs[2]);
-feature4 = int(args_from_nodejs[3]);
-feature5 = int(args_from_nodejs[4]);
+feature1 = float(args_from_nodejs[0]);
+feature2 = float(args_from_nodejs[1]);
+feature3 = float(args_from_nodejs[2]);
+feature4 = float(args_from_nodejs[3]);
+feature5 = float(args_from_nodejs[4]);
 
 featureVector = np.array([feature1, feature2, feature3, feature4, feature5]);
 
