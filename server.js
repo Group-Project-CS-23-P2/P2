@@ -193,7 +193,6 @@ async function GroupQuery(requestinfo)
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
-    console.log(listOfUserFeatures.length);
     for(let i = 0; i < listOfUserFeatures.length; i++)
     {
         for (let j = 0; j < 5; j++)
@@ -205,8 +204,11 @@ async function GroupQuery(requestinfo)
 
     console.log("Exited double for loop");
 
-    for(let i = 0; i <= finalGroupVector.length; i++)
-    {finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;}
+    console.log(finalGroupVector.length);
+    for(let i = 0; i < finalGroupVector.length; i++)
+    {
+        finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
+    }
 
     console.log("Exited division for loop");
 
