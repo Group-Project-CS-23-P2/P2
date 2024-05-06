@@ -97,7 +97,7 @@ class User {
  * @param {string} username
  * @returns {User} User object from database
  */
-export function userInfo(username){
+export async function userInfo(username){
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
 
     DBConnection.query(query, [username], (err, results) => {
@@ -124,7 +124,7 @@ export function userInfo(username){
     
         let user = new User(userRow.Username, userRow.User_id, listofFeatures);
     
-        console.log(user);
+       
         return user;
       });
 }
