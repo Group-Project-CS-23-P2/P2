@@ -152,8 +152,7 @@ server.on("request", async (request, response) => {
     }
 )
 
-
-console.log(await GetAllActivities());
+//console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
 
 function AddRating()
 {
@@ -201,7 +200,7 @@ async function GroupQuery(requestinfo)
     for(let i = 0; i <= finalGroupVector.length; i++)
     {finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;}
 
-    let listOfAllActivities = GetAllActivities();
+    let listOfAllActivities = await GetAllActivities();
 
     currentArgs = [];
     for(let i = 0; i < 5; i++)
@@ -219,6 +218,7 @@ async function GroupQuery(requestinfo)
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     
     //Returns list of best fitting activities
+    return recommendedActivities;
 }
 
 function sanitize(str){
