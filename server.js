@@ -193,11 +193,13 @@ async function GroupQuery(requestinfo)
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
+    console.log(listOfUserFeatures.length);
     for(let i = 0; i < listOfUserFeatures.length; i++)
     {
         for (let j = 0; i < 5; j++)
         {
-            finalGroupVector[j] += (listOfUserFeatures[i])[j];
+            console.log(listOfUserFeatures[i][j]);
+            finalGroupVector[j] += listOfUserFeatures[i][j];
         }
     }
 
