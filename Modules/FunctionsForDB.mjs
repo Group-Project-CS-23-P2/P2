@@ -165,7 +165,6 @@ export async function GetAllActivities(){
   }
   return activityclasses;
 }
-console.log(activityInfo('Read a book'));
 
 export async function getRatedActivities(Username) {
   try {
