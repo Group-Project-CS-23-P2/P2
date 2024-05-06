@@ -168,8 +168,8 @@ async function GroupQuery(requestinfo)
     for(let i = 0; i < requestinfo.length; i++)
     {
         let currentUser = userInfo();
-        let currentActivities = await getRatedActivities(currentUser.Username);
-        let currentArgs = [currentUser.Username];
+        let currentActivities = await getRatedActivities(currentUser.name);
+        let currentArgs = [currentUser.name];
 
         //Add the currentUser features to arguments.
         for(let j = 0; j < 5; j++)
