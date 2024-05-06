@@ -153,6 +153,7 @@ server.on("request", async (request, response) => {
 )
 
 
+console.log(await GetAllActivities());
 
 function AddRating()
 {
