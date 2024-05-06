@@ -241,7 +241,7 @@ async function GroupQuery(requestinfo)
             if(listOfAllActivities[i].id == recommendedActivities.ListOfObjectIDs[j])
             {
                 returnActivities.push(listOfAllActivities[i]);
-                recommendedActivities.splice(j,j);
+                recommendedActivities.ListOfObjectIDs.splice(j,j);
             }
             
         }
