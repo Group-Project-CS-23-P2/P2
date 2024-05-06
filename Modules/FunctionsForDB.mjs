@@ -98,18 +98,17 @@ class User {
  * @returns {User} User object from database
  */
 export async function userInfo(username){
+  return new Promise((resolve, reject) =>{
     const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
-
     DBConnection.query(query, [username], (err, results) => {
-        if (err) {
-          console.error('Error fetching user from new_User_table', err);
-          return null; 
-        }
-        if (results.length === 0) {
-          console.log('User not found');
-          return null; 
-        }
-    
+      if (err) {
+        console.error('Error fetching user from new_User_table', err);
+        reject(err);
+      }
+      else if (results.length === 0) {
+        console.log('User not found');
+        reject(new Error('User not found'));
+      }else{
         const userRow = results[0];
         const listofFeatures = [
           userRow.Physical,
@@ -121,11 +120,12 @@ export async function userInfo(username){
         ];
     
         const user = new User(userRow.Username, userRow.User_id, listofFeatures);
-    
-       
-        return user;
-      });
-}
+        resolve(user);
+      }
+  
+  })
+  })};
+
 
 export async function activityInfo(Activity_name) {
   return new Promise((resolve, reject) => {
