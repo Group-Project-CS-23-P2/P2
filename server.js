@@ -152,7 +152,7 @@ server.on("request", async (request, response) => {
     }
 )
 
-//console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
+console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
 
 function AddRating()
 {
