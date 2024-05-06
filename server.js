@@ -229,6 +229,7 @@ async function GroupQuery(requestinfo)
     console.log("Exited two argument for loops");
     //Send group vector to python to calculate group similarity
 
+    console.log(currentArgs);
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     
     //Returns list of best fitting activities
