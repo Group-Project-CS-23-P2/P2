@@ -62,7 +62,7 @@
 <body>
   <div class="container">
     <h1>Activity rating</h1>
-    <form action="#" method="post">
+    <form id="ratingForm" action="http://www.cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/submitrating/" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required><br><br>
     
@@ -90,7 +90,7 @@
           <option value="20">Gaming</option>
         </select><br><br>
     
-        <label for="rating">Rate the activity (1-5):</label>
+        <label for="rate">Rate the activity (1-5):</label>
         <select id="rate" name="rate">
             <option value="1">1 (low)</option>
             <option value="2">2</option>
@@ -103,7 +103,7 @@
       </form>
     </div>
     <script>
-      const formEl = document.querySelector('form');
+      const formEl = document.querySelector('#ratingForm');
 
           formEl.addEventListener('submit', event => {
               event.preventDefault();
@@ -116,24 +116,13 @@
               fetch('http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/submitrating/', {
                   method: 'POST',
                   headers: {
-                      'Content-Type': 'application/json'
+                      'Content-Type': 'text/html'
                   },
                   body : JSON.stringify(data)
               })
-              .then(response => {
-                  if (!response.ok) {
-                      throw new Error('Failed to submit data.');
-                  }
-                  return response.json(); 
-              })
-              .then(result => {
-                  console.log('Data submitted successfully:', result);
-                  // display a success message
-              })
-              .catch(error => {
-                  console.error('Error submitting data:', error);
-                  // display an error message to the user
-              });
+              .then(res => res.json())
+              .then(data => console.log(data))
+              .catch(error => console.log(error));
           });
   </script>
 
