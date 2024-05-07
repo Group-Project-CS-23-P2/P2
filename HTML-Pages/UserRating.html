@@ -63,36 +63,35 @@
 <body>
   <div class="container">
     <h1>Activity rating</h1>
-    <form action="#" method="post">
+    <form id="ratingForm" action="http://www.cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/submitrating/" method="POST">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required><br><br>
     
         <label for="activity">Choose an activity:</label>
         <select id="activity" name="activity" required>
-          <option value="">Select an activity</option>
-          <option value="Football">Football</option>
-          <option value="Cheramic">Cheramic</option>
-          <option value="Padletennis">Padletennis</option>
-          <option value="Running">Running</option>
-          <option value="Walking">Walking</option>
-          <option value="Bowling">Bowling</option>
-          <option value="Cooking class">Cooking class</option>
-          <option value="Crossfit">Crossfit</option>
-          <option value="Yoga">Yoga</option>
-          <option value="Wellness">Wellness</option>
-          <option value="Swim">Swim</option>
-          <option value="Museum">Museum</option>
-          <option value="Board game">Board game</option>
-          <option value="Read a book">Read a book</option>
-          <option value="Listen to music">Listen to music</option>
-          <option value="Go to a concert">Go to a concert</option>
-          <option value="Make a song">Make a song</option>
-          <option value="Beachvolley">Beachvolley</option>
-          <option value="Paint">Paint</option>
-          <option value="Play computer">Play computer</option>
+          <option value="1">Football</option>
+          <option value="2">Cheramic</option>
+          <option value="3">Padletennis</option>
+          <option value="4">Running</option>
+          <option value="5">Walking</option>
+          <option value="6">Bowling</option>
+          <option value="7">Cooking class</option>
+          <option value="8">Crossfit</option>
+          <option value="9">Yoga</option>
+          <option value="10">Wellness</option>
+          <option value="11">Swim</option>
+          <option value="12">Museum</option>
+          <option value="13">Board game</option>
+          <option value="14">Book club</option>
+          <option value="15">Listen music</option>
+          <option value="16">Concert</option>
+          <option value="17">Create song</option>
+          <option value="18">Beachvolley</option>
+          <option value="19">Paint</option>
+          <option value="20">Gaming</option>
         </select><br><br>
     
-        <label for="rating">Rate the activity (1-5):</label>
+        <label for="rate">Rate the activity (1-5):</label>
         <select id="rate" name="rate">
             <option value="1">1 (low)</option>
             <option value="2">2</option>
@@ -103,6 +102,31 @@
     
         <input type="submit" value="Submit">
       </form>
+    </div>
+    <script>
+      const formEl = document.querySelector('#ratingForm');
+
+          formEl.addEventListener('submit', event => {
+              event.preventDefault();
+
+              const formData = new FormData(formEl);
+              const data = Object.fromEntries(formData);
+              console.log(data)
+
+            
+              fetch('http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/submitrating/', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'text/html'
+                  },
+                  body : JSON.stringify(data)
+              })
+              .then(res => res.json())
+              .then(data => console.log(data))
+              .catch(error => console.log(error));
+          });
+  </script>
+
       </div>
     </body>
     </html>
