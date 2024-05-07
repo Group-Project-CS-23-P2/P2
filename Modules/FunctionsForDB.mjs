@@ -99,7 +99,7 @@ class User {
  */
 export async function userInfo(username){
   return new Promise((resolve, reject) =>{
-    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+    const query = 'SELECT * FROM new_User_table WHERE Username = ? LIMIT 1';
     DBConnection.query(query, [username], (err, results) => {
       if (err) {
         console.error('Error fetching user from new_User_table', err);
@@ -118,14 +118,11 @@ export async function userInfo(username){
           userRow.Competative,
           userRow.Pricepoint
         ];
-    
+
         const user = new User(userRow.Username, userRow.User_id, listofFeatures);
         resolve(user);
-      }
-  
-  })
-  })};
-
+      }})})
+};
 
 export async function activityInfo(Activity_name) {
   return new Promise((resolve, reject) => {
