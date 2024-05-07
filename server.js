@@ -111,10 +111,13 @@ server.on("request", async (request, response) => {
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
         console.log("SubmitRating received as:");
-        console.log(request.body);
-        //requestinfo = JSON.parse(request.body);
-        //try {AddRating(requestinfo)}
-        //catch (e) {}
+        request.setEncoding("utf8");
+        let body = "";
+        for await (let chunk of request) {
+            body += chunk;
+        }
+
+        console.log(body);
 
         response.writeHead(200, {
             "Content-Type": "text/html"
@@ -127,9 +130,15 @@ server.on("request", async (request, response) => {
         //requestinfo = JSON.parse(request.body);
         //let returnList;
         console.log("GroupRequest received as:");
-        console.log(request.body);
+        request.setEncoding("utf8");
+        let body = "";
+        for await (let chunk of request) {
+            body += chunk;
+        }
 
-        let listOfUsers = JSON.parse(request.body);
+        console.log(body);
+
+        let listOfUsers = JSON.parse(body);
         for (let i = 0; i < listOfUsers.length; i++)
         {
             if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
