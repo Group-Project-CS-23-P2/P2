@@ -11,34 +11,11 @@ DBConnection.connect((err) =>{
     console.log('MySql connected');
 });
 
-const userInfotest1 = {
-    Username: "amve",
-    Password: "tintinitibet123",
-    Age: 21,
-    Physical: 5,
-    Creative: 4,
-    Brainy: 4,
-    Social: 3,
-    Competative: 5,
-    Pricepoint: 300
-}
-
-const userInfotest7 = {
-  Username: "finaltest",
-  Password: "test",
-  Age: 26,
-  Physical: 3,
-  Creative: 4,
-  Brainy: 1,
-  Social: 5,
-  Competative: 5,
-  Pricepoint: 150
-}
 
 
-function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking) {
-  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`,`Walking`) VALUES (?, ?, ?, ?, ?, ?)';
-  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking], (err, results) => {
+function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming) {
+  const query = 'INSERT INTO `ratedActivitiestTable` (`User_id`, `Football`, `Cheramic`, `Padeltennis`,`Running`, `Walking`, `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  DBConnection.query(query, [User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming], (err, results) => {
     if (err) {
       console.error('Error inserting data into table', err);
       return;
@@ -47,7 +24,7 @@ function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walk
   });
 }
 
-export function CreateUser(userInfo)
+export function createUser(userInfo)
 {
     const query = `
     INSERT INTO new_User_table
@@ -77,7 +54,7 @@ export function CreateUser(userInfo)
       return;
     }
     console.log('New user created successfully:', results);
-    insertIntoTable(results.insertId, -1, -1, -1, -1, -1);
+    insertIntoTable(results.insertId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
   });
 
  
@@ -113,19 +90,25 @@ class User {
     }
 }
 
-function userInfo(username){
-    const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
-
+/**
+ *
+ *
+ * @export
+ * @param {string} username
+ * @returns {User} User object from database
+ */
+export async function userInfo(username){
+  return new Promise((resolve, reject) =>{
+    const query = 'SELECT * FROM new_User_table WHERE Username = ? LIMIT 1';
     DBConnection.query(query, [username], (err, results) => {
-        if (err) {
-          console.error('Error fetching user from new_User_table', err);
-          return null; 
-        }
-        if (results.length === 0) {
-          console.log('User not found');
-          return null; 
-        }
-    
+      if (err) {
+        console.error('Error fetching user from new_User_table', err);
+        reject(err);
+      }
+      else if (results.length === 0) {
+        console.log('User not found');
+        reject(new Error('User not found'));
+      }else{
         const userRow = results[0];
         const listofFeatures = [
           userRow.Physical,
@@ -135,15 +118,13 @@ function userInfo(username){
           userRow.Competative,
           userRow.Pricepoint
         ];
-    
-        const user = new User(userRow.Username, userRow.User_id, listofFeatures);
-    
-        console.log(user);
-        return user;
-      });
-}
 
-function activityInfo(Activity_name) {
+        const user = new User(userRow.Username, userRow.User_id, listofFeatures);
+        resolve(user);
+      }})})
+};
+
+export async function activityInfo(Activity_name) {
   return new Promise((resolve, reject) => {
       const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
       DBConnection.query(query, [Activity_name], (err, results) => {
@@ -171,12 +152,18 @@ function activityInfo(Activity_name) {
 }
 
 
-//activityInfo("Football");
 
-//userInfo("amve");
+export async function GetAllActivities(){
+  let activitives = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`];
+  let i = 0; 
+  let activityclasses = [];
+  for (i; i < activitives.length-1; i++){
+    activityclasses.push(await activityInfo(activitives[i]));
+  }
+  return activityclasses;
+}
 
-
-async function getRatedActivities(Username) {
+export async function getRatedActivities(Username) {
   try {
       const userResults = await new Promise((resolve, reject) => {
           const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
@@ -199,7 +186,7 @@ async function getRatedActivities(Username) {
       });
 
       let listOfRatedActivities = [];
-      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking'];  
+      const activities = ['Football', 'Cheramic', 'Padeltennis', 'Running', 'Walking', `Bowling`, `Cooking_class`, `Crossfit`, `Yoga`, `Wellness`, `Swim`, `Museum`, `Board_game`, `Book_club`, `Listen_music`, `Concert`, `Create_song`, `Beachvolley`, `Paint`, `Gaming`];  
       for (let activity of activities) {
           if (ratingsResults[0][activity] > 0) {
               let activityDetails = await activityInfo(activity);
@@ -216,7 +203,7 @@ async function getRatedActivities(Username) {
   }
 }
 
-
+/*
 getRatedActivities("mebj").then(activities => {
   console.log(activities); 
 }).catch(error => {
@@ -228,7 +215,7 @@ getRatedActivities("finaltest").then(activities => {
 }).catch(error => {
   console.error("Error fetching activities:", error);
 });
-
+*/
 
 class RatedActivity {
     constructor(name, id, listofFeatures, rating)

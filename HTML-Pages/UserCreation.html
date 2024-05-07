@@ -16,7 +16,7 @@
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #c6e7fd;
+            background-color: #68fb74;
             border-radius: 5px;
             box-shadow: 0 0 10px rgb(14, 33, 11);
         }
@@ -41,6 +41,10 @@
             padding: 10px 20px;
             border-radius: 3px;
             cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: darkgreen;
+            color: white;
         }
     </style>
     </head>
@@ -145,7 +149,7 @@
                         'Content-Type': 'text/html'
                     },
                     body : JSON.stringify(data)
-                }).then(res => res.json())
+                }).then(res => console.log(res))
                   .then(data => console.log(data))
                   .catch(error => console.log(error))
             });
