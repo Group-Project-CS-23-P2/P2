@@ -28,7 +28,7 @@ def costFunction(userfeatures):
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
 
-result = minimize(costFunction, quiznparray, bounds= ((0,5),(0,5),(0,5),(0,5),(0,5)));
+result = minimize(costFunction, [2.5,2.5,2.5,2.5,2.5], bounds= ((0,5),(0,5),(0,5),(0,5),(0,5)));
 returnobject = list(result.x);
 
 print(json.dumps(returnobject))
