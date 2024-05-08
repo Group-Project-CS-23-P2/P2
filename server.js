@@ -112,7 +112,7 @@ server.on("request", async (request, response) => {
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
-        console.log("SubmitRating received as:");4
+        console.log("SubmitRating received as:");
 
         request.setEncoding("utf8");
         let body = "";
@@ -121,6 +121,9 @@ server.on("request", async (request, response) => {
         }
 
         console.log(body);
+
+
+
 
         response.writeHead(200, {
             "Content-Type": "text/html"
@@ -177,7 +180,6 @@ async function GroupQuery(requestinfo)
     {
         let currentUser = await userInfo(requestinfo[i]);
         let currentActivities = await getRatedActivities(currentUser.name);
-        console.log(currentActivities);
         let currentArgs = [currentUser.name];
 
         //Add the currentUser features to arguments.
@@ -191,13 +193,9 @@ async function GroupQuery(requestinfo)
         {
             currentArgs.push(JSON.stringify(currentActivities[j]));
         }
-        console.log(currentArgs);
         let currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
         listOfUserFeatures.push(currentUserFeatures);
     }
-
-    console.log("Exited first for loop successfully");
-    console.log(listOfUserFeatures);
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
@@ -205,23 +203,16 @@ async function GroupQuery(requestinfo)
     {
         for (let j = 0; j < 5; j++)
         {
-            console.log(listOfUserFeatures[i][j]);
             finalGroupVector[j] += listOfUserFeatures[i][j];
         }
     }
 
-    console.log("Exited double for loop");
-
-    console.log(finalGroupVector.length);
     for(let i = 0; i < finalGroupVector.length; i++)
     {
         finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
     }
 
-    console.log("Exited division for loop");
-
     let listOfAllActivities = await GetAllActivities();
-    console.log("Got all activities");
     
     let currentArgs = [];
     for(let i = 0; i < 5; i++)
@@ -234,13 +225,7 @@ async function GroupQuery(requestinfo)
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
-    console.log("Exited two argument for loops");
-    //Send group vector to python to calculate group similarity
-
-    console.log(currentArgs);
     let recommendedActivities = await PythonCosineComparer(currentArgs);
-    console.log(recommendedActivities);
-    console.log(typeof(recommendedActivities));
     
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
