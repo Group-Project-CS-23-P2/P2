@@ -166,11 +166,6 @@ server.on("request", async (request, response) => {
 
 console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
 
-function AddRating()
-{
-    //Sanitize Relevant JSON variables
-}
-
 async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
@@ -288,6 +283,43 @@ class RatedActivity {
 async function RunAllTests()
 {
     let listOfGroupInputs = [];
+
+
+    ////////////////////////////////////////////
+    //Extremity cases
+    ////////////////////////////////////////////
+
+    listOfGroupInputs.push(["X","X","X","X","W","W"]);
+    listOfGroupInputs.push(["W","W","W","W","X","X"]);
+
+    listOfGroupInputs.push(["Y","Y","Y","Y","V","V"]);
+    listOfGroupInputs.push(["V","V","V","V","Y","Y"]);
+
+    listOfGroupInputs.push(["Z","Z","Z","Z","Y","Y"]);
+    listOfGroupInputs.push(["Y","Y","Y","Y","Z","Z"]);
+
+    ////////////////////////////////////////////
+    //Realistic cases
+    ////////////////////////////////////////////
+
+
+    //Homogenous groups can be tested via one singular member, as the average will be the same
+
+    listOfGroupInputs.push(["X"]);
+    listOfGroupInputs.push(["Y"]);
+    listOfGroupInputs.push(["Z"]);
+    listOfGroupInputs.push(["V"]);
+    listOfGroupInputs.push(["W"]);
+
+    listOfGroupInputs.push(["X","Y","Z","V","W"]);
+    listOfGroupInputs.push(["","","","","",""]);
+
+    //Our own personal group
+    listOfGroupInputs.push(["","","","","",""]);
+    listOfGroupInputs.push(["","","","","",""]);
+
+
+
 
 
 
