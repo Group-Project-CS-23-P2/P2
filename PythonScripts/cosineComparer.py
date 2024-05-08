@@ -31,7 +31,7 @@ for i in range(len(listOfActivityObject)):
 calculatedActivityList.sort(key = lambda x: x[1]);
 
 ReturnObject = {"ListOfObjectIDs": calculatedActivityList}
-listOfIds = [(calculatedActivityList[i])[0] for i in range(4)];
+listOfIds = [(calculatedActivityList[i])[0] for i in range(5)];
 ReturnObject["ListOfObjectIDs"] = listOfIds;
 
 
