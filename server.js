@@ -150,7 +150,9 @@ server.on("request", async (request, response) => {
 
         let requestInfo = JSON.parse(body);
 
-        await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);
+        console.log(requestInfo.username, requestInfo.activity, requestInfo.rate)
+
+        //await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);
 
 
 
