@@ -260,10 +260,8 @@ async function GroupQuery(requestinfo)
     {
         for(let j = 0; j < recommendedActivities.ListOfObjectIDs.length; j++)
         {
-            console.log(listOfAllActivities[i].id, recommendedActivities.ListOfObjectIDs[j])
             if(listOfAllActivities[i].id === recommendedActivities.ListOfObjectIDs[j])
             {
-                console.log("Added", listOfAllActivities[i]);
                 returnActivities.push(listOfAllActivities[i]);
             }
             
