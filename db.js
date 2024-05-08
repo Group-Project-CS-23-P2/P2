@@ -338,7 +338,7 @@ async function userInfo(username){
 async function AddRating(username, activityID, rating) {
 
   try {
-      let userID = (await userInfo(username).id);
+      let userID = ((await userInfo(username)).id);
 
       const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
       const results = await new Promise((resolve, reject) => {
