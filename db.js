@@ -303,7 +303,7 @@ async function AddRating(userID, activityID, rating){
     const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
 
     try{
-      const result = await new Promise((resolve, reject) =>{
+      const results = await new Promise((resolve, reject) =>{
         DBConnection.query(query, [activityID], (err, results) =>{
 
   
