@@ -300,8 +300,9 @@ const userInfotest10 = {
 //add rating
 
 function AddRating(userID, activityID, rating){
-    console.log("Entered function with the following:", userID, activityID, rating);
-    const query = `SELCT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+
+    const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+  
     DBConnection.query(query, [activityID], (err, results) =>{
       if(err){
         console.error('Error fetching activity form new_Activity_table',err);
