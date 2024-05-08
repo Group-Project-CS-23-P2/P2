@@ -295,3 +295,33 @@ const userInfotest10 = {
     });
   });
 });
+
+
+//add rating
+
+function AddRating(userID, activityID, rating){
+
+    const query = `SELCT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+    DBConnection.query(query, [activityID], (err, results) =>{
+      if(err){
+        console.error('Error fetching activity form new_Activity_table',err);
+      }else if(results.length === 0){
+        console.log('Activity not found');
+      }else{
+        let activityName = results[0].Activity_name;
+        const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
+
+        DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
+          if(err){
+            console.error('error updating rating', err);
+            return;
+          }else{
+            console.log(`rating for ${activityName} updated to ${rating}`);
+          }
+        })
+      }
+    })
+}
+
+
+AddRating(21, 4, 3);
