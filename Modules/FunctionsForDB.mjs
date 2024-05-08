@@ -203,7 +203,11 @@ export async function getRatedActivities(Username) {
   }
 }
 
-export async function AddRating(userID, activityID, rating) {
+export async function AddRating(username, activityID, rating) {
+
+  let userID = (await userInfo(username).id);
+
+
   const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
   try {
       const results = await new Promise((resolve, reject) => {
