@@ -335,4 +335,3 @@ async function AddRating(userID, activityID, rating) {
   }
 }
 
-AddRating(21, 2, 4);

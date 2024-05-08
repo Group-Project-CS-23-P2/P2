@@ -203,6 +203,42 @@ export async function getRatedActivities(Username) {
   }
 }
 
+export async function AddRating(userID, activityID, rating) {
+  const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+  try {
+      const results = await new Promise((resolve, reject) => {
+          DBConnection.query(query, [activityID], (err, results) => {
+              if (err) {
+                  return reject('Error fetching activity from new_Activity_table: ' + err);
+              }
+              resolve(results);
+          });
+      });
+
+      if (results.length === 0) {
+          console.log("Activity not found");
+          return;
+      }
+
+      let activityName = results[0].Activity_name;
+      const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
+
+      await new Promise((resolve, reject) => {
+          DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
+              if (err) {
+                  return reject('Error updating rating: ' + err);
+              }
+              resolve(result);
+          });
+      });
+
+      console.log(`Rating for ${activityName} updated to ${rating}`);
+  } catch (error) {
+      console.error(error);
+  }
+}
+
+
 /*
 getRatedActivities("mebj").then(activities => {
   console.log(activities); 
