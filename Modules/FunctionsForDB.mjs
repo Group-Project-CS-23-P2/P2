@@ -112,6 +112,7 @@ export async function userInfo(username){
       }})})
 };
 
+
 export async function activityInfo(Activity_name) {
   return new Promise((resolve, reject) => {
       const query = `SELECT * FROM new_Activity_table WHERE Activity_name = ? LIMIT 1`;
