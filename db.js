@@ -299,6 +299,7 @@ const userInfotest10 = {
 
 //add rating
 
+
 async function AddRating(userID, activityID, rating) {
   const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
   try {
