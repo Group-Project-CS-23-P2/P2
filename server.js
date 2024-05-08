@@ -253,6 +253,7 @@ async function GroupQuery(requestinfo)
     }
 
     let recommendedActivities = await PythonCosineComparer(currentArgs);
+    console.log(recommendedActivities);
     
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
