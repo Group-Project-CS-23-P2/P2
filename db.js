@@ -299,50 +299,40 @@ const userInfotest10 = {
 
 //add rating
 
-async function AddRating(userID, activityID, rating){
-    const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
 
-    try{
-      const results = await new Promise((resolve, reject) =>{
-        DBConnection.query(query, [activityID], (err, results) =>{
-
-  
-    DBConnection.query(query, [activityID], (err, results) =>{
-      if(err){
-        console.error('Error fetching activity form new_Activity_table',err);
-      }else if(results.length === 0){
-        console.log('Activity not found');
-      }else{
-        let activityName = results[0].Activity_name;
-        const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
-
-        DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
-
-          if(err){
-            return reject('Error fetching activity form new_Activity_table'+ err);
-      }
-          resolve(results);
+async function AddRating(userID, activityID, rating) {
+  const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+  try {
+      const results = await new Promise((resolve, reject) => {
+          DBConnection.query(query, [activityID], (err, results) => {
+              if (err) {
+                  return reject('Error fetching activity from new_Activity_table: ' + err);
+              }
+              resolve(results);
+          });
       });
-    });
-    if(results.length === 0){
-      console.log("activity not found");
-      return;
-    }
-    let activityName = results[0].Activity_name;
-    const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
 
-    await new Promise((resolve, reject) =>{
-      DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
-        if(err){
-          return reject('Error updating rating: ' + err);
-        }
-        resolve(result);
-    });
-  });
-  console.log(`rating for ${activityName} updated to ${rating}`);
-}catch (error){
-  console.error(error);
-}
+      if (results.length === 0) {
+          console.log("Activity not found");
+          return;
+      }
+
+      let activityName = results[0].Activity_name;
+      const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
+
+      await new Promise((resolve, reject) => {
+          DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
+              if (err) {
+                  return reject('Error updating rating: ' + err);
+              }
+              resolve(result);
+          });
+      });
+
+      console.log(`Rating for ${activityName} updated to ${rating}`);
+  } catch (error) {
+      console.error(error);
+  }
 }
 
 AddRating(21, 2, 4);
