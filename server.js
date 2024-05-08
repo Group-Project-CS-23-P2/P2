@@ -265,7 +265,6 @@ async function GroupQuery(requestinfo)
             {
                 console.log("Added", listOfAllActivities[i]);
                 returnActivities.push(listOfAllActivities[i]);
-                recommendedActivities.ListOfObjectIDs.splice(j,j);
             }
             
         }
