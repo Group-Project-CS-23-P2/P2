@@ -357,7 +357,7 @@ async function AddRating(username, activityID, rating) {
       }
 
       let activityName = results[0].Activity_name;
-      const updateQuery = `UPDATE ratedActivitiestTable SET ? = ? WHERE User_id = ?`;
+      const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
 
       await new Promise((resolve, reject) => {
           DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
@@ -377,4 +377,4 @@ async function AddRating(username, activityID, rating) {
 
 
 
-AddRating('Anton', 4, 4);
+AddRating('Peter', 4, 4);
