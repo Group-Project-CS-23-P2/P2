@@ -357,6 +357,7 @@ async function AddRating(username, activityID, rating) {
               }
               resolve(result);
           });
+          console.log(`Rating for ${activityName} updated to ${rating}`);
       });
 
       console.log(`Rating for ${activityName} updated to ${rating}`);
@@ -366,4 +367,4 @@ async function AddRating(username, activityID, rating) {
 }
 
 
-AddRating('Anton', 3, 4);
+AddRating('Anton', 4, 4);
