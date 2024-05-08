@@ -335,6 +335,7 @@ async function AddRating(userID, activityID, rating) {
               }
               resolve(result);
           });
+          console.log(`Rating for ${activityName} updated to ${rating}`);
       });
 
       console.log(`Rating for ${activityName} updated to ${rating}`);
