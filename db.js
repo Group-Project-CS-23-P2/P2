@@ -1,5 +1,13 @@
 import mysql from 'mysql';
 
+class User {
+  constructor(name, id, listofFeatures)
+  {
+      this.name = name;
+      this.id= id;
+      this.listofFeatures = listofFeatures;
+  }
+}
 
 const DBConnection = mysql.createConnection({
   host: 'localhost',
