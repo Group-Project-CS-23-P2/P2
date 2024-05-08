@@ -11,7 +11,33 @@ import {userInfo} from './Modules/FunctionsForDB.mjs';
 import { error } from 'console';
 import { AddRating } from './Modules/FunctionsForDB.mjs';
 
+class Activity {
+    constructor(name, id, listofFeatures)
+    {
+        this.name = name;
+        this.id = id;
+        this.listofFeatures = listofFeatures;
+    }
+}
 
+class User {
+    constructor(name, id, listofFeatures)
+    {
+        this.name = name;
+        this.id= id;
+        this.listofFeatures = listofFeatures;
+    }
+}
+
+class RatedActivity {
+    constructor(name, id, listofFeatures, rating)
+    {
+        this.name = name;
+        this.id = id;
+        this.listofFeatures = listofFeatures;
+        this.rating = rating;
+    }
+  }
 
 
 const frontpageHTML = fs.readFileSync("/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/HTML-Pages/frontpage.html");
@@ -121,6 +147,10 @@ server.on("request", async (request, response) => {
         }
 
         console.log(body);
+
+        let requestInfo = JSON.parse(body);
+
+        await AddRating(requestInfo.username, requestInfo.id, requestInfo.rating, );
 
 
 
@@ -251,34 +281,6 @@ function sanitize(str){
   return str.trim();
   }
 
-
-class Activity {
-    constructor(name, id, listofFeatures)
-    {
-        this.name = name;
-        this.id = id;
-        this.listofFeatures = listofFeatures;
-    }
-}
-
-class User {
-    constructor(name, id, listofFeatures)
-    {
-        this.name = name;
-        this.id= id;
-        this.listofFeatures = listofFeatures;
-    }
-}
-
-class RatedActivity {
-    constructor(name, id, listofFeatures, rating)
-    {
-        this.name = name;
-        this.id = id;
-        this.listofFeatures = listofFeatures;
-        this.rating = rating;
-    }
-  }
 
 async function RunAllTests()
 {
