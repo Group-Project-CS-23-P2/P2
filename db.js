@@ -374,7 +374,3 @@ async function AddRating(username, activityID, rating) {
       console.error(error);
   }
 }
-
-
-
-AddRating('Peter', 4, 4);
