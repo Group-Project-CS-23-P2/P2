@@ -110,7 +110,7 @@ server.on("request", async (request, response) => {
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
-        console.log("SubmitRating received as:");4
+        console.log("SubmitRating received as:");
 
         request.setEncoding("utf8");
         let body = "";
@@ -119,6 +119,9 @@ server.on("request", async (request, response) => {
         }
 
         console.log(body);
+
+
+        
 
         response.writeHead(200, {
             "Content-Type": "text/html"

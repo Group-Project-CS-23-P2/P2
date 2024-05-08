@@ -301,9 +301,23 @@ const userInfotest10 = {
 
 async function AddRating(userID, activityID, rating){
     const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
+
     try{
       const result = await new Promise((resolve, reject) =>{
         DBConnection.query(query, [activityID], (err, results) =>{
+
+  
+    DBConnection.query(query, [activityID], (err, results) =>{
+      if(err){
+        console.error('Error fetching activity form new_Activity_table',err);
+      }else if(results.length === 0){
+        console.log('Activity not found');
+      }else{
+        let activityName = results[0].Activity_name;
+        const updateQuery = `UPDATE ratedActivitiestTable SET ?? = ? WHERE User_id = ?`;
+
+        DBConnection.query(updateQuery, [activityName, rating, userID], (err, result) => {
+
           if(err){
             return reject('Error fetching activity form new_Activity_table'+ err);
       }
