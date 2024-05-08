@@ -299,12 +299,28 @@ const userInfotest10 = {
 
 //add rating
 
+async function AddRating(username, activityID, rating) {
 
-async function AddRating(userID, activityID, rating) {
-  const query = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
   try {
+      const query = `SELECT * FROM new_User_table WHERE Username = ? LIMIT 1`;
+      const result = await new Promise((resolve, reject) => {
+        DBConnection.query(query, [username], (err, result) => {
+          if(err){
+            return reject('Error fetching user from new_User_table:' + err);
+          }
+          resolve(result);
+        });
+      });
+
+      if(result.length === 0){
+        console.log("user not found");
+        return;
+      }
+      let userID = result[0].User_id;
+
+      const query1 = `SELECT * FROM new_Activity_table WHERE Activity_id = ? LIMIT 1`;
       const results = await new Promise((resolve, reject) => {
-          DBConnection.query(query, [activityID], (err, results) => {
+          DBConnection.query(query1, [activityID], (err, results) => {
               if (err) {
                   return reject('Error fetching activity from new_Activity_table: ' + err);
               }
@@ -335,3 +351,5 @@ async function AddRating(userID, activityID, rating) {
   }
 }
 
+
+AddRating('Anton', 3, 4);
