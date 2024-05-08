@@ -367,4 +367,5 @@ async function AddRating(username, activityID, rating) {
 }
 
 
+
 AddRating('Anton', 4, 4);
