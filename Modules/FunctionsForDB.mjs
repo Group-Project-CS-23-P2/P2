@@ -60,18 +60,6 @@ export function createUser(userInfo)
  
 }
 
-//CreateUser(userInfotest8);
-
-function AddRating()
-{
-    //Sanitize Relevant JSON variables
-}
-
-function GroupQuery()
-{
-    //Sanitize Relevant JSON variables
-}
-
 class Activity {
     constructor(name, id, listofFeatures)
     {
