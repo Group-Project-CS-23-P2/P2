@@ -21,7 +21,7 @@ def costFunction(userfeatures):
     ratingsum = 0;
 
     for i in range(len(activities)):
-        ratingsum += np.power((userfeatures.dot(np.array(json.loads(activities[i])["listofFeatures"], dtype=np.int32))) - json.loads(activities[i])["rating"] * 25 ,2);
+        ratingsum += np.power((userfeatures.dot(np.array(json.loads(activities[i])["listofFeatures"][0:5], dtype=np.int32))) - json.loads(activities[i])["rating"] * 25 ,2);
     
     quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
 
