@@ -9,6 +9,8 @@ import {getRatedActivities} from './Modules/FunctionsForDB.mjs';
 import {GetAllActivities} from './Modules/FunctionsForDB.mjs';
 import {userInfo} from './Modules/FunctionsForDB.mjs';
 import { error } from 'console';
+import { AddRating } from './Modules/FunctionsForDB.mjs';
+
 
 
 
