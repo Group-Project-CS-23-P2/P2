@@ -84,14 +84,14 @@ server.on("request", async (request, response) => {
 
 
         let requestInfo = JSON.parse(body);
-        /*if (requestInfo.Username.length != sanitize(requestInfo.Username)) {
+        if (requestInfo.Username.length != sanitize(requestInfo.Username).length) {
             response.writeHead(400, 
                 {
                     "Content-Type": "text/html"
                 }).end("The given username was not valid, it cannot contain special characters.");
                 response.end();
                 return;
-        }*/
+        }
         
 
         try {createUser(requestInfo)} catch (error) {            
@@ -110,7 +110,8 @@ server.on("request", async (request, response) => {
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
-        console.log("SubmitRating received as:");
+        console.log("SubmitRating received as:");4
+
         request.setEncoding("utf8");
         let body = "";
         for await (let chunk of request) {
@@ -127,9 +128,8 @@ server.on("request", async (request, response) => {
 
     //Group Query GET
     else if (pathname === "/grouprequest/" && request.method === 'GET') {
-        //requestinfo = JSON.parse(request.body);
-        //let returnList;
         console.log("GroupRequest received as:");
+
         request.setEncoding("utf8");
         let body = "";
         for await (let chunk of request) {
@@ -156,8 +156,6 @@ server.on("request", async (request, response) => {
         }).end();
         response.end();
         }
-    
-        
     }
 )
 
@@ -299,3 +297,21 @@ class RatedActivity {
         this.rating = rating;
     }
   }
+
+async function RunAllTests()
+{
+    let listOfGroupInputs = [];
+
+
+
+
+    console.log("///////////////////////////////////////");
+
+    for(let i = 0; i < listOfGroupInputs.length; i++)
+    {
+        console.log(listOfGroupInputs[i]);
+        console.log("");
+        console.log(await GroupQuery(listOfGroupInputs[i]));
+        console.log("///////////////////////////////////////");
+    }
+}
