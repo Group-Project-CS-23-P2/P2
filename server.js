@@ -254,14 +254,16 @@ async function GroupQuery(requestinfo)
 
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     console.log(recommendedActivities);
-    
+
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
     {
         for(let j = 0; j < recommendedActivities.ListOfObjectIDs.length; j++)
         {
+            console.log(listOfAllActivities[i].id, recommendedActivities.ListOfObjectIDs[j])
             if(listOfAllActivities[i].id == recommendedActivities.ListOfObjectIDs[j])
             {
+                console.log("Added", listOfAllActivities[i]);
                 returnActivities.push(listOfAllActivities[i]);
                 recommendedActivities.ListOfObjectIDs.splice(j,j);
             }
