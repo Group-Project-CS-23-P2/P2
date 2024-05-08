@@ -112,7 +112,7 @@ server.on("request", async (request, response) => {
 
     //Rating POST
     else if (pathname === "/submitrating/" && request.method === 'POST') {
-        console.log("SubmitRating received as:");4
+        console.log("SubmitRating received as:");
 
         request.setEncoding("utf8");
         let body = "";
@@ -121,6 +121,9 @@ server.on("request", async (request, response) => {
         }
 
         console.log(body);
+
+
+
 
         response.writeHead(200, {
             "Content-Type": "text/html"
@@ -163,11 +166,6 @@ server.on("request", async (request, response) => {
 
 console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
 
-function AddRating()
-{
-    //Sanitize Relevant JSON variables
-}
-
 async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
@@ -177,7 +175,6 @@ async function GroupQuery(requestinfo)
     {
         let currentUser = await userInfo(requestinfo[i]);
         let currentActivities = await getRatedActivities(currentUser.name);
-        console.log(currentActivities);
         let currentArgs = [currentUser.name];
 
         //Add the currentUser features to arguments.
@@ -191,13 +188,9 @@ async function GroupQuery(requestinfo)
         {
             currentArgs.push(JSON.stringify(currentActivities[j]));
         }
-        console.log(currentArgs);
         let currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
         listOfUserFeatures.push(currentUserFeatures);
     }
-
-    console.log("Exited first for loop successfully");
-    console.log(listOfUserFeatures);
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
@@ -205,23 +198,16 @@ async function GroupQuery(requestinfo)
     {
         for (let j = 0; j < 5; j++)
         {
-            console.log(listOfUserFeatures[i][j]);
             finalGroupVector[j] += listOfUserFeatures[i][j];
         }
     }
 
-    console.log("Exited double for loop");
-
-    console.log(finalGroupVector.length);
     for(let i = 0; i < finalGroupVector.length; i++)
     {
         finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
     }
 
-    console.log("Exited division for loop");
-
     let listOfAllActivities = await GetAllActivities();
-    console.log("Got all activities");
     
     let currentArgs = [];
     for(let i = 0; i < 5; i++)
@@ -234,13 +220,7 @@ async function GroupQuery(requestinfo)
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
-    console.log("Exited two argument for loops");
-    //Send group vector to python to calculate group similarity
-
-    console.log(currentArgs);
     let recommendedActivities = await PythonCosineComparer(currentArgs);
-    console.log(recommendedActivities);
-    console.log(typeof(recommendedActivities));
     
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
@@ -303,6 +283,43 @@ class RatedActivity {
 async function RunAllTests()
 {
     let listOfGroupInputs = [];
+
+
+    ////////////////////////////////////////////
+    //Extremity cases
+    ////////////////////////////////////////////
+
+    listOfGroupInputs.push(["X","X","X","X","W","W"]);
+    listOfGroupInputs.push(["W","W","W","W","X","X"]);
+
+    listOfGroupInputs.push(["Y","Y","Y","Y","V","V"]);
+    listOfGroupInputs.push(["V","V","V","V","Y","Y"]);
+
+    listOfGroupInputs.push(["Z","Z","Z","Z","Y","Y"]);
+    listOfGroupInputs.push(["Y","Y","Y","Y","Z","Z"]);
+
+    ////////////////////////////////////////////
+    //Realistic cases
+    ////////////////////////////////////////////
+
+
+    //Homogenous groups can be tested via one singular member, as the average will be the same
+
+    listOfGroupInputs.push(["X"]);
+    listOfGroupInputs.push(["Y"]);
+    listOfGroupInputs.push(["Z"]);
+    listOfGroupInputs.push(["V"]);
+    listOfGroupInputs.push(["W"]);
+
+    listOfGroupInputs.push(["X","Y","Z","V","W"]);
+    listOfGroupInputs.push(["","","","","",""]);
+
+    //Our own personal group
+    listOfGroupInputs.push(["","","","","",""]);
+    listOfGroupInputs.push(["","","","","",""]);
+
+
+
 
 
 
