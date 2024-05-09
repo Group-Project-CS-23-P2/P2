@@ -37,7 +37,7 @@ export async function PythonFeatureCalculation(args) {
 
   //If not, throw an error
   if(exitcode) {
-    throw new Error( `subprocess error exit ${exitCode}, ${error}`);
+    throw new Error( `subprocess error exit ${exitCode}`);
   }
 
   return data;
