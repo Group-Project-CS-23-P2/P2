@@ -316,8 +316,8 @@ async function RunAllTests()
     listOfGroupInputs.push(["X","Y","Z","V","W"]);
 
     //Our own personal group
-    listOfGroupInputs.push(["","","","","",""]);
-    listOfGroupInputs.push(["","","","","",""]);
+    //listOfGroupInputs.push(["","","","","",""]);
+    //listOfGroupInputs.push(["","","","","",""]);
 
 
 
