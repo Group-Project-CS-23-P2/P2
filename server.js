@@ -196,8 +196,6 @@ server.on("request", async (request, response) => {
     }
 )
 
-console.log(await GroupQuery(["Peter","Anton","Mikkel"]));
-
 async function GroupQuery(requestinfo)
 {
     //Sanitize Relevant JSON variables
@@ -316,7 +314,6 @@ async function RunAllTests()
     listOfGroupInputs.push(["W"]);
 
     listOfGroupInputs.push(["X","Y","Z","V","W"]);
-    listOfGroupInputs.push(["","","","","",""]);
 
     //Our own personal group
     listOfGroupInputs.push(["","","","","",""]);
@@ -338,3 +335,5 @@ async function RunAllTests()
         console.log("///////////////////////////////////////");
     }
 }
+
+await RunAllTests();
