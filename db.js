@@ -208,7 +208,7 @@ function deleteSinglePerson(user_id){
 }
 
 
-
+deleteSinglePerson(25);
 
 
 function insertIntoTable(User_id, Football, Cheramic, Padeltennis, Running, Walking, Bowling, Cooking_class, Crossfit, Yoga, Wellness, Swim, Museum, Board_game, Book_club, Listen_music, Concert, Create_song, Beachvolley, Paint, Gaming) {
