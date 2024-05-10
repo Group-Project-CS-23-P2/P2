@@ -336,4 +336,4 @@ async function RunAllTests()
     }
 }
 
-//await RunAllTests();
+await RunAllTests();
