@@ -10,6 +10,7 @@ import {GetAllActivities} from './Modules/FunctionsForDB.mjs';
 import {userInfo} from './Modules/FunctionsForDB.mjs';
 import { error } from 'console';
 import { AddRating } from './Modules/FunctionsForDB.mjs';
+import { PythonDotProductComparer } from './Modules/algorithm.mjs';
 
 class Activity {
     constructor(name, id, listofFeatures)
@@ -152,14 +153,18 @@ server.on("request", async (request, response) => {
 
         console.log(requestInfo.username, requestInfo.activity, requestInfo.rate)
 
-        //await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);
 
-
-
+        try {await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);} catch (error) {            
+            response.writeHead(400, {
+                "Content-Type": "text/html"
+            }).end("An error occured while adding the user's rating to the database");
+            response.end();
+            return;
+        }
 
         response.writeHead(200, {
             "Content-Type": "text/html"
-        }).end();
+        }).end("Post received and added succcesfully");
         response.end();
     }
 
@@ -250,7 +255,8 @@ async function GroupQuery(requestinfo)
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
-    let recommendedActivities = await PythonCosineComparer(currentArgs);
+    //let recommendedActivities = await PythonCosineComparer(currentArgs);
+    let recommendedActivities = await PythonDotProductComparer(currentArgs);
     console.log(recommendedActivities);
 
     let returnActivities = [];

@@ -76,6 +76,41 @@ export async function PythonCosineComparer(args)
   return JSON.parse(data);
 }
 
+
+//Returns an object, where the subvariable .ListOfObjectIDs contains a list of the top 5 activities, when using cosine similarity
+export async function PythonDotProductComparer(args)
+{
+  const pythonDotProductPath = '/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/PythonScripts/dotProductComparer.py';
+  //const pythonCosinePath = '/Users/peter/Documents/GitHub/P2/P2/cosineComparer.py';
+  const pythonProcess = spawn('/srv/www/cs-24-sw-2-13.p2datsw.cs.aau.dk/data/psnode/GitRepo/venv/bin/python3', [pythonDotProductPath, ...args]);
+
+  //read data from stdout
+  let data = "";
+  for await (const chunk of pythonProcess.stdout)
+  {
+    data += chunk;
+  }
+
+  // Listen for errors from the Python script
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  //Resolve promise if exit code is close
+  const exitcode = await new Promise((resolve, reject) => {
+    pythonProcess.on('close', resolve);
+  })
+
+  //If not, throw an error
+  if(exitcode) {
+    throw new Error( `subprocess error exit ${exitCode}, ${error}`);
+  }
+
+  return JSON.parse(data);
+}
+
+
+
 //let testingVars = [3,3,3,3,3, JSON.stringify(new RatedActivity('Soccer', 51, [5,5,5,5,5], 5)), JSON.stringify(new RatedActivity('Basket', 51, [5,5,5,5,5], 5)),JSON.stringify(new RatedActivity('Basket', 51, [5,5,5,5,5], 5)), JSON.stringify(new RatedActivity('Basket', 51, [5,5,5,5,5], 5)), JSON.stringify(new RatedActivity('Basket', 51, [5,5,5,5,5], 5))];
 //let finalResult = await PythonCosineComparer(testingVars);
 //console.log(finalResult);
