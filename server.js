@@ -255,8 +255,8 @@ async function GroupQuery(requestinfo)
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
-    //let recommendedActivities = await PythonCosineComparer(currentArgs);
-    let recommendedActivities = await PythonDotProductComparer(currentArgs);
+    let recommendedActivities = await PythonCosineComparer(currentArgs);
+    //let recommendedActivities = await PythonDotProductComparer(currentArgs);
     console.log(recommendedActivities);
 
     let returnActivities = [];
