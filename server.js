@@ -112,7 +112,21 @@ server.on("request", async (request, response) => {
         console.log(body);
 
 
-        let requestInfo = JSON.parse(body);
+        let requestInfo = {};
+
+        try{requestInfo = JSON.parse(body);}
+        catch(e){
+            console.log("Couldn't parse JSON", e);
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("Couldn't parse incoming JSON");
+                response.end();
+                return;
+        }
+        
+        
+        JSON.parse(body);
         if (requestInfo.Username.length != sanitize(requestInfo.Username).length) {
             response.writeHead(400, 
                 {
