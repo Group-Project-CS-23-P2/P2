@@ -126,7 +126,6 @@ server.on("request", async (request, response) => {
         }
         
         
-        JSON.parse(body);
         if (requestInfo.Username.length != sanitize(requestInfo.Username).length) {
             response.writeHead(400, 
                 {
@@ -163,7 +162,18 @@ server.on("request", async (request, response) => {
 
         console.log(body);
 
-        let requestInfo = JSON.parse(body);
+        let requestInfo = {};
+
+        try{requestInfo = JSON.parse(body);}
+        catch(e){
+            console.log("Couldn't parse JSON", e);
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("Couldn't parse incoming JSON");
+                response.end();
+                return;
+        }
 
         console.log(requestInfo.username, requestInfo.activity, requestInfo.rate)
 
@@ -194,7 +204,18 @@ server.on("request", async (request, response) => {
 
         console.log(body);
 
-        let listOfUsers = JSON.parse(body);
+        let listOfUsers = {};
+
+        try{listOfUsers = JSON.parse(body);}
+        catch(e){
+            console.log("Couldn't parse JSON", e);
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("Couldn't parse incoming JSON");
+                response.end();
+                return;
+        }
         for (let i = 0; i < listOfUsers.length; i++)
         {
             if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
