@@ -134,6 +134,15 @@ server.on("request", async (request, response) => {
                 response.end();
                 return;
         }
+
+        if (requestInfo.Password.length != sanitize(requestInfo.Password).length) {
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("The given password was not valid, it cannot contain special characters.");
+                response.end();
+                return;
+        }
         
 
         try {createUser(requestInfo)} catch (error) {            
@@ -187,6 +196,15 @@ server.on("request", async (request, response) => {
             return;
         }
 
+        if (requestInfo.username.length != sanitize(requestInfo.username).length) {
+            response.writeHead(400, 
+                {
+                    "Content-Type": "text/html"
+                }).end("The given username was not valid, it cannot contain special characters.");
+                response.end();
+                return;
+        }
+
 
         try {await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);} catch (error) {            
             response.writeHead(400, {
@@ -226,6 +244,7 @@ server.on("request", async (request, response) => {
                 response.end();
                 return;
         }
+
         for (let i = 0; i < listOfUsers.length; i++)
         {
             if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
@@ -236,6 +255,16 @@ server.on("request", async (request, response) => {
                 response.end();
                 return
             }
+        }
+        try {
+            GroupQuery(listOfUsers);
+        } catch (error) {
+            console.log("Something failed during Group Query calculation", error);
+            response.writeHead(400, {
+                "Content-Type": "text/html"
+            }).end("Something failed during recommendation, contact Administrator");
+            response.end();
+            return
         }
         //If function succeeds
         response.writeHead(200, {
