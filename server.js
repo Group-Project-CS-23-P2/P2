@@ -313,14 +313,21 @@ async function GroupQuery(requestinfo)
 function sanitize(str){
     str=str
   .replace(/&/g, "")
+  .replace(/{/g, "")
+  .replace(/}/g, "")
+  .replace(/\(/g, "")
+  .replace(/\)/g, "")
+  .replace(/\[/g, "")
+  .replace(/\]/g, "")
+  .replace(/\;/g, "")
   .replace(/</g, "")
   .replace(/>/g, "")
   .replace(/"/g, "")
-  .replace(/\s/g, "")
   .replace(/\*/g, "")
   .replace(/'/g, "")
   .replace(/`/g, "")
-  .replace(/\//g, "");
+  .replace(/\//g, "")
+  .replace(/\s/g, "");
   return str.trim();
   }
 
