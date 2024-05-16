@@ -177,6 +177,16 @@ server.on("request", async (request, response) => {
 
         console.log(requestInfo.username, requestInfo.activity, requestInfo.rate)
 
+        try{Number.parseInt(requestInfo.rate); Number.parseInt(requestInfo.activity); }catch(error)
+        {
+            console.log("Could not parse variables as expected types", error);
+            response.writeHead(400, {
+                "Content-Type": "text/html"
+            }).end("Inputted variables are of the wrong datatype");
+            response.end();
+            return;
+        }
+
 
         try {await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);} catch (error) {            
             response.writeHead(400, {
