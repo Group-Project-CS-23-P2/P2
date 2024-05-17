@@ -256,8 +256,11 @@ server.on("request", async (request, response) => {
                 return
             }
         }
+
+        let returnedActivities = [];
+
         try {
-            GroupQuery(listOfUsers);
+            returnedActivities = GroupQuery(listOfUsers);
         } catch (error) {
             console.log("Something failed during Group Query calculation", error);
             response.writeHead(400, {
@@ -270,7 +273,7 @@ server.on("request", async (request, response) => {
         response.writeHead(200, {
         "Content-Type": "application/json"
         }).end();
-        response.end();
+        response.end(returnedUsers);
         }
     }
 )
