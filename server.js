@@ -273,14 +273,13 @@ server.on("request", async (request, response) => {
         response.writeHead(200, {
         "Content-Type": "application/json"
         }).end();
-        response.end(returnedUsers);
+        response.end(returnedActivities);
         }
     }
 )
 
 async function GroupQuery(requestinfo)
 {
-    //Sanitize Relevant JSON variables
     let listOfUserFeatures = [];
 
     for(let i = 0; i < requestinfo.length; i++)
@@ -373,7 +372,6 @@ function sanitize(str){
   return str.trim();
   }
 
-
 async function RunAllTests()
 {
     let listOfGroupInputs = [];
@@ -427,5 +425,3 @@ async function RunAllTests()
         console.log("///////////////////////////////////////");
     }
 }
-
-//await RunAllTests();
