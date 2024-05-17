@@ -280,6 +280,8 @@ server.on("request", async (request, response) => {
 
 async function GroupQuery(requestinfo)
 {
+
+    //Getting each individuals calculated feature vectors
     let listOfUserFeatures = [];
 
     for(let i = 0; i < requestinfo.length; i++)
@@ -294,7 +296,7 @@ async function GroupQuery(requestinfo)
             currentArgs.push(currentUser.listofFeatures[j]);
         }
 
-        //Add the current 
+        //Add the current rated activities for the user.
         for(let j = 0; j < currentActivities.length; j++)
         {
             currentArgs.push(JSON.stringify(currentActivities[j]));
@@ -303,7 +305,7 @@ async function GroupQuery(requestinfo)
         listOfUserFeatures.push(currentUserFeatures);
     }
 
-    //Calculate the group vector
+    //Calculate the group vector by averaging out vectors
     let finalGroupVector = [0,0,0,0,0];
     for(let i = 0; i < listOfUserFeatures.length; i++)
     {
@@ -313,28 +315,35 @@ async function GroupQuery(requestinfo)
         }
     }
 
+
     for(let i = 0; i < finalGroupVector.length; i++)
     {
         finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
     }
 
+
     let listOfAllActivities = await GetAllActivities();
     
     let currentArgs = [];
+
+    //Add group vector to args
     for(let i = 0; i < 5; i++)
     {
         currentArgs.push(finalGroupVector[i]);
     }
 
+    //Add all activities to args for recommendation
     for (let i = 0; i < listOfAllActivities.length; i++)
     {
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
+    //Use cosine comparison and save returned Activity ID's
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     //let recommendedActivities = await PythonDotProductComparer(currentArgs);
     console.log(recommendedActivities);
 
+    //Find full activity objects via returned ID's
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
     {
@@ -394,7 +403,6 @@ async function RunAllTests()
     //Realistic cases
     ////////////////////////////////////////////
 
-
     //Homogenous groups can be tested via one singular member, as the average will be the same
 
     listOfGroupInputs.push(["X"]);
@@ -408,12 +416,6 @@ async function RunAllTests()
     //Our own personal group
     //listOfGroupInputs.push(["","","","","",""]);
     //listOfGroupInputs.push(["","","","","",""]);
-
-
-
-
-
-
 
     console.log("///////////////////////////////////////");
 
