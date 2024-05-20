@@ -381,6 +381,9 @@ function sanitize(str){
   return str.trim();
   }
 
+
+  console.log(await GroupQuery(['Slessing','antonmv','NeliCh','Mikkelburmolle','Houkjaer','mathias','Petra']));
+
 async function RunAllTests()
 {
     let listOfGroupInputs = [];
