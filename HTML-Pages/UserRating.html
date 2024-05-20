@@ -124,6 +124,11 @@
               .then(res => res.json())
               .then(data => console.log(data))
               .catch(error => console.log(error));
+
+              document.getElementById("username").value = "";
+              document.getElementById("activity").value = 1;
+              document.getElementById("rate").value = 1;
+
           });
   </script>
 
