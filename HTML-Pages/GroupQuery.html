@@ -108,3 +108,32 @@ function generateResultPage(result) {
     document.body.appendChild(resultContainer);
 }
     </script>
+
+
+<script>
+  const selectedUsers = []; // an array for users
+  
+  function addUser() {
+      const usernameInput = document.getElementById('username');
+      const username = usernameInput.value.trim();
+      if (username) {
+          selectedUsers.push(username); // adding username to an array
+          document.getElementById('addedUsersList').innerHTML += <li>${username}</li>; // list update on the user interface
+          usernameInput.value = ''; // clear input field
+      } else {
+          alert('Please enter a username.');
+      }
+  }
+  
+  function showResult() {
+      try {
+          validateInput({selectedUsers: selectedUsers});
+          makePostRequest('YOUR_ENDPOINT_URL', {selectedUsers: selectedUsers})
+              .then(response => response.json())
+              .then(result => generateResultPage(result))
+              .catch(error => displayError(error));
+      } catch (error) {
+          displayError(error);
+      }
+  }
+  </script>
