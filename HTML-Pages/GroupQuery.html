@@ -40,10 +40,11 @@
       }
     </style>
   </head>
+
   <body>
     <div class="container" id="initialDiv">
       <h1>Add User to Group</h1>
-      <form id="addUserForm">
+      <form id="addUserForm" onsubmit="event.preventDefault(); addUser();">
         <label for="username">Enter Username:</label>
         <input type="text" id="username" name="username" required />
         <button type="button" onclick="addUser()">Add</button>
