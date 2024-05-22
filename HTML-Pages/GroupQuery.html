@@ -80,9 +80,10 @@ GROUP QUEORY
             console.log(selectedUsers);
             //validateInput(selectedUsers);
             makePostRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
-              .then((response) => response.json())
-              .then((result) => generateResultPage(result))
-              .catch((error) => console.log(error));
+                  .then(res => console.log(res))
+                  .then(data => console.log(data))
+                  .catch(error => console.log(error))
+
           } catch (error) {
               console.log(error);
           }
