@@ -78,8 +78,8 @@ GROUP QUEORY
         function showResult() {
           try {
             console.log(selectedUsers);
-            validateInput(selectedUsers);
-            makeGetRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
+            //validateInput(selectedUsers);
+            makePostRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
               .then((response) => response.json())
               .then((result) => generateResultPage(result))
               .catch((error) => console.log(error));
@@ -96,10 +96,10 @@ GROUP QUEORY
             }
         }
 
-        // a POST request
-        function makeGetRequest(url, data) {
+        // a POST requestS
+        function makePostRequest(url, data) {
             fetch(url, {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
