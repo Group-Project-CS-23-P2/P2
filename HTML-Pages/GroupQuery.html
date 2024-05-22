@@ -97,7 +97,7 @@ GROUP QUEORY
             }
         }
 
-        // a POST requestS
+        // a POST request
         function makePostRequest(url, data) {
             fetch(url, {
                 method: 'POST',
@@ -110,7 +110,6 @@ GROUP QUEORY
                 if (!response.ok) {
                     throw new Error('Failed to submit data.');
                 }
-                generateResultPage(result);
             });
         }
 
