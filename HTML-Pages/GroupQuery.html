@@ -96,7 +96,14 @@ GROUP QUEORY
           try {
             console.log(selectedUsers);
             
-            makePostRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
+
+            fetch("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(selectedUsers)
+            })
                   .then(res => console.log(res))
                   .then(data => console.log(data))
                   .catch(error => console.log(error))
