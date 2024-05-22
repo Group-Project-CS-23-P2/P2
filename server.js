@@ -186,25 +186,6 @@ server.on("request", async (request, response) => {
 
         console.log(requestInfo.username, requestInfo.activity, requestInfo.rate)
 
-        try{Number.parseInt(requestInfo.rate); Number.parseInt(requestInfo.activity); }catch(error)
-        {
-            console.log("Could not parse variables as expected types", error);
-            response.writeHead(400, {
-                "Content-Type": "text/html"
-            }).end("Inputted variables are of the wrong datatype");
-            response.end();
-            return;
-        }
-
-        if (requestInfo.username.length != sanitize(requestInfo.username).length) {
-            response.writeHead(400, 
-                {
-                    "Content-Type": "text/html"
-                }).end("The given username was not valid, it cannot contain special characters.");
-                response.end();
-                return;
-        }
-
 
         try {await AddRating(requestInfo.username, requestInfo.activity, requestInfo.rate);} catch (error) {            
             response.writeHead(400, {
@@ -244,7 +225,6 @@ server.on("request", async (request, response) => {
                 response.end();
                 return;
         }
-
         for (let i = 0; i < listOfUsers.length; i++)
         {
             if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
@@ -256,32 +236,18 @@ server.on("request", async (request, response) => {
                 return
             }
         }
-
-        let returnedActivities = [];
-
-        try {
-            returnedActivities = GroupQuery(listOfUsers);
-        } catch (error) {
-            console.log("Something failed during Group Query calculation", error);
-            response.writeHead(400, {
-                "Content-Type": "text/html"
-            }).end("Something failed during recommendation, contact Administrator");
-            response.end();
-            return
-        }
         //If function succeeds
         response.writeHead(200, {
         "Content-Type": "application/json"
         }).end();
-        response.end(returnedActivities);
+        response.end();
         }
     }
 )
 
 async function GroupQuery(requestinfo)
 {
-
-    //Getting each individuals calculated feature vectors
+    //Sanitize Relevant JSON variables
     let listOfUserFeatures = [];
 
     for(let i = 0; i < requestinfo.length; i++)
@@ -296,7 +262,7 @@ async function GroupQuery(requestinfo)
             currentArgs.push(currentUser.listofFeatures[j]);
         }
 
-        //Add the current rated activities for the user.
+        //Add the current 
         for(let j = 0; j < currentActivities.length; j++)
         {
             currentArgs.push(JSON.stringify(currentActivities[j]));
@@ -305,7 +271,7 @@ async function GroupQuery(requestinfo)
         listOfUserFeatures.push(currentUserFeatures);
     }
 
-    //Calculate the group vector by averaging out vectors
+    //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
     for(let i = 0; i < listOfUserFeatures.length; i++)
     {
@@ -315,35 +281,28 @@ async function GroupQuery(requestinfo)
         }
     }
 
-
     for(let i = 0; i < finalGroupVector.length; i++)
     {
         finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
     }
 
-
     let listOfAllActivities = await GetAllActivities();
     
     let currentArgs = [];
-
-    //Add group vector to args
     for(let i = 0; i < 5; i++)
     {
         currentArgs.push(finalGroupVector[i]);
     }
 
-    //Add all activities to args for recommendation
     for (let i = 0; i < listOfAllActivities.length; i++)
     {
         currentArgs.push(JSON.stringify(listOfAllActivities[i]));
     }
 
-    //Use cosine comparison and save returned Activity ID's
     let recommendedActivities = await PythonCosineComparer(currentArgs);
     //let recommendedActivities = await PythonDotProductComparer(currentArgs);
     console.log(recommendedActivities);
 
-    //Find full activity objects via returned ID's
     let returnActivities = [];
     for(let i = 0; i < listOfAllActivities.length; i++)
     {
@@ -363,26 +322,17 @@ async function GroupQuery(requestinfo)
 function sanitize(str){
     str=str
   .replace(/&/g, "")
-  .replace(/{/g, "")
-  .replace(/}/g, "")
-  .replace(/\(/g, "")
-  .replace(/\)/g, "")
-  .replace(/\[/g, "")
-  .replace(/\]/g, "")
-  .replace(/\;/g, "")
   .replace(/</g, "")
   .replace(/>/g, "")
   .replace(/"/g, "")
+  .replace(/\s/g, "")
   .replace(/\*/g, "")
   .replace(/'/g, "")
   .replace(/`/g, "")
-  .replace(/\//g, "")
-  .replace(/\s/g, "");
+  .replace(/\//g, "");
   return str.trim();
   }
 
-
-  console.log(await GroupQuery(['Slessing','antonmv','NeliCh','Mikkelburmolle','Houkjaer','mathias','Petra']));
 
 async function RunAllTests()
 {
@@ -406,6 +356,7 @@ async function RunAllTests()
     //Realistic cases
     ////////////////////////////////////////////
 
+
     //Homogenous groups can be tested via one singular member, as the average will be the same
 
     listOfGroupInputs.push(["X"]);
@@ -420,6 +371,12 @@ async function RunAllTests()
     //listOfGroupInputs.push(["","","","","",""]);
     //listOfGroupInputs.push(["","","","","",""]);
 
+
+
+
+
+
+
     console.log("///////////////////////////////////////");
 
     for(let i = 0; i < listOfGroupInputs.length; i++)
@@ -430,3 +387,5 @@ async function RunAllTests()
         console.log("///////////////////////////////////////");
     }
 }
+
+//await RunAllTests();

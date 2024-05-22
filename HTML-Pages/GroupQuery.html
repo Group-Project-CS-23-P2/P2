@@ -2,138 +2,136 @@ GROUP QUEORY
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Add User to Group</title>
-      <style>
-        body {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-          margin: 0;
-          background-color: #f0f8ea; /* Light green background */
-        }
-        
-        .container {
-          max-width: 400px; /* widt for the container */
-          padding: 20px;
-          background-color: #dff0d8; /* Light green background for the boxes */
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-        }
-    
-        h1, h2 {
-          text-align: center;
-        }
-    
-        form {
-          margin-bottom: 20px;
-        }
-    
-        label, input, button {
-          display: block;
-          margin-bottom: 10px;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Add User to Group</h1>
-        <form id="addUserForm">
-          <label for="username">Enter Username:</label>
-          <input type="text" id="username" name="username" required>
-          <button type="button" onclick="addUser()">Add</button>
-        </form>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add User to Group</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f8ea; /* Light green background */
+      }
 
-  
-    <div class="user-box">
-      <h2>Added Users</h2>
-      <ul id="addedUsersList" class="user-list"></ul>
+      .container {
+        max-width: 400px; /* widt for the container */
+        padding: 20px;
+        background-color: #dff0d8; /* Light green background for the boxes */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      label,
+      input,
+      button {
+        display: block;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add User to Group</h1>
+      <form id="addUserForm">
+        <label for="username">Enter Username:</label>
+        <input type="text" id="username" name="username" required />
+        <button type="button" onclick="addUser()">Add</button>
+      </form>
+
+      <div class="user-box">
+        <h2>Added Users</h2>
+        <ul id="addedUsersList" class="user-list"></ul>
+      </div>
+
+      <button type="button" onclick="showResult()">Show Result</button>
+
+      <script>
+        let selectedUsers = []; // an array for users
+        const usernameInput = document.getElementById("username");
+        const listOfUsers = document.getElementById("addedUsersList");
+        function addUser() {
+          const username = usernameInput.value.trim();
+          if (username) {
+            selectedUsers.push(username); // adding username to an array
+            listOfUsers.innerHTML += (
+              "<li>" + username + "</li>"
+            ); // list update on the user interface
+            usernameInput.value = ""; // clear input field
+          } else {
+            alert("Please enter a username.");
+          }
+        }
+
+        function showResult() {
+          try {
+            validateInput(selectedUsers);
+            makePostRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
+              .then((response) => response.json())
+              .then((result) => generateResultPage(result))
+              .catch((error) => console.log(error));
+          } catch (error) {
+              console.log(error);
+          }
+        }
+
+
+        // input validation
+        function validateInput(data) {
+            if (data.selectedUsers.length === 0) {
+                throw new Error('Please fill in all fields and select at least one user.');
+            }
+        }
+
+        // a POST request
+        function makePostRequest(url, data) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to submit data.');
+                }
+                generateResultPage(result);
+            });
+        }
+
+        // function to generate the result page
+        function generateResultPage(result) {
+          console.log(result);
+
+          const resultContainer = document.createElement('div');
+          resultContainer.innerHTML +=
+              `
+              <h2>Group Creation Result</h2>
+              <p>Recommended Activities:</p>
+              <ul>
+              `;
+
+                
+
+              resultContainer +=
+              `
+              </ul>
+              `;
+            document.body.appendChild(resultContainer);
+        }
+      </script>
     </div>
-  
-    <button type="button" onclick="showResult()">Show Result</button>
-
-    <script>
-
-      // input validation
-function validateInput(data) {
-    // two required inputs: the group name and at least one user
-    // if either the group name is missing or no user is added, an error is thrown
-    if (!data.groupName || data.selectedUsers.length === 0) {
-        throw new Error('Please fill in all fields and select at least one user.');
-    }
-}
-
-// display a success message
-function displaySuccess(message) {
-    console.log('Group creation successful!', message);
-}
-
-// display an error message
-function displayError(error) {
-    console.error('Something went wrong!', error.message);
-}
-
-// a POST request
-function makePostRequest(url, data) {
-    return fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to submit data.');
-        }
-        generateResultPage(result);
-    });
-}
-
-// function to generate the result page
-function generateResultPage(result) {
-    const resultContainer = document.createElement('div');
-    resultContainer.innerHTML = 
-       `
-       <h2>Group Creation Result</h2>
-        <p>Group Name: ${result.groupName}</p>
-        <p>Selected Users:</p>
-        <ul>
-            ${result.selectedUsers.map(user => <li>${user}</li>).join('')}
-        </ul>
-    `;
-    document.body.appendChild(resultContainer);
-}
-    </script>
-
-
-<script>
-  const selectedUsers = []; // an array for users
-  
-  function addUser() {
-      const usernameInput = document.getElementById('username');
-      const username = usernameInput.value.trim();
-      if (username) {
-          selectedUsers.push(username); // adding username to an array
-          document.getElementById('addedUsersList').innerHTML += <li>${username}</li>; // list update on the user interface
-          usernameInput.value = ''; // clear input field
-      } else {
-          alert('Please enter a username.');
-      }
-  }
-  
-  function showResult() {
-      try {
-          validateInput({selectedUsers: selectedUsers});
-          makePostRequest('YOUR_ENDPOINT_URL', {selectedUsers: selectedUsers})
-              .then(response => response.json())
-              .then(result => generateResultPage(result))
-              .catch(error => displayError(error));
-      } catch (error) {
-          displayError(error);
-      }
-  }
-  </script>
+  </body>
+</html>
