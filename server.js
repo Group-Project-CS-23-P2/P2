@@ -227,7 +227,7 @@ server.on("request", async (request, response) => {
         }
         for (let i = 0; i < listOfUsers.length; i++)
         {
-            if(listOfUsers[i].length != sanitize(listOfUsers[i].length))
+            if(listOfUsers[i].length != sanitize(listOfUsers[i]).length)
             {
                 response.writeHead(400, {
                     "Content-Type": "text/html"
@@ -321,7 +321,7 @@ async function GroupQuery(requestinfo)
 }
 
 function sanitize(str){
-    str=str
+    str = str
   .replace(/&/g, "")
   .replace(/</g, "")
   .replace(/>/g, "")
