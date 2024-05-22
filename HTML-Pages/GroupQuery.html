@@ -107,9 +107,9 @@
           console.log(result);
 
           //Remove current page
-          document.getElementById("initialDiv").innerHTML = "";
+          document.getElementById("initialDiv").remove();
 
-          let resultContainer = document.createElement('div');
+          let resultContainer = document.createElement('div class="container"');
           resultContainer.innerHTML +=
               `
               <h2>Group Creation Result</h2>
