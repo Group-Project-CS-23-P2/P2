@@ -61,6 +61,7 @@ GROUP QUEORY
         let selectedUsers = []; // an array for users
         const usernameInput = document.getElementById("username");
         const listOfUsers = document.getElementById("addedUsersList");
+
         function addUser() {
           const username = usernameInput.value.trim();
           if (username) {
@@ -76,6 +77,7 @@ GROUP QUEORY
 
         function showResult() {
           try {
+            console.log(selectedUsers);
             validateInput(selectedUsers);
             makeGetRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
               .then((response) => response.json())
