@@ -1,4 +1,3 @@
-GROUP QUEORY
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +41,7 @@ GROUP QUEORY
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="initialDiv">
       <h1>Add User to Group</h1>
       <form id="addUserForm">
         <label for="username">Enter Username:</label>
@@ -87,7 +86,7 @@ GROUP QUEORY
                 body: JSON.stringify(selectedUsers)
             })
                   .then(res => res.json())
-                  .then(data => console.log(data))
+                  .then(data => generateResultPage(data))
                   .catch(error => console.log(error))
 
           } catch (error) {
@@ -107,6 +106,9 @@ GROUP QUEORY
         function generateResultPage(result) {
           console.log(result);
 
+          //Remove current page
+          document.getElementById("initialDiv").innerHTML = "";
+
           const resultContainer = document.createElement('div');
           resultContainer.innerHTML +=
               `
@@ -115,7 +117,11 @@ GROUP QUEORY
               <ul>
               `;
 
-
+              for (let index = 0; index < result.length; index++) {
+                const element = result[index];
+                resultContainer += `<li> ${element.name} </li>`
+                
+              }
 
               resultContainer +=
               `
