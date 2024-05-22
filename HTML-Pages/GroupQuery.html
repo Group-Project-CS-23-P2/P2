@@ -75,10 +75,27 @@ GROUP QUEORY
           }
         }
 
+        // a POST request
+        function makePostRequest(url, data) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to submit data.');
+                }
+            });
+        }
+
+
         function showResult() {
           try {
             console.log(selectedUsers);
-            //validateInput(selectedUsers);
+            
             makePostRequest("http://cs-24-sw-2-13.p2datsw.cs.aau.dk/node0/grouprequest/", selectedUsers)
                   .then(res => console.log(res))
                   .then(data => console.log(data))
@@ -95,22 +112,6 @@ GROUP QUEORY
             if (selectedUsers.length === 0) {
                 throw new Error('Please fill in all fields and select at least one user.');
             }
-        }
-
-        // a POST request
-        function makePostRequest(url, data) {
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to submit data.');
-                }
-            });
         }
 
         // function to generate the result page
