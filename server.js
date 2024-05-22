@@ -237,11 +237,14 @@ server.on("request", async (request, response) => {
             }
 
         }
+        
+        resultingList = await GroupQuery(listOfUsers);
+
         //If function succeeds
         response.writeHead(200, {
         "Content-Type": "application/json"
         }).end();
-        response.end();
+        response.end(JSON.stringify(resultingList));
         }
     }
 )
