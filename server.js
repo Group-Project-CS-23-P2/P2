@@ -201,8 +201,8 @@ server.on("request", async (request, response) => {
         response.end();
     }
 
-    //Group Query GET
-    else if (pathname === "/grouprequest/" && request.method === 'GET') {
+    //Group Query POST
+    else if (pathname === "/grouprequest/" && request.method === 'POST') {
         console.log("GroupRequest received as:");
 
         request.setEncoding("utf8");
@@ -235,6 +235,7 @@ server.on("request", async (request, response) => {
                 response.end();
                 return
             }
+
         }
         //If function succeeds
         response.writeHead(200, {
