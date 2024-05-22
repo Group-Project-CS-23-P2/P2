@@ -243,8 +243,8 @@ server.on("request", async (request, response) => {
         //If function succeeds
         response.writeHead(200, {
         "Content-Type": "application/json"
-        }).end();
-        response.end(JSON.stringify(resultingList));
+        }).end(JSON.stringify(resultingList));
+        response.end();
         }
     }
 )
