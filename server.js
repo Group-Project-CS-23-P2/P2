@@ -238,7 +238,7 @@ server.on("request", async (request, response) => {
 
         }
         
-        resultingList = await GroupQuery(listOfUsers);
+        let resultingList = await GroupQuery(listOfUsers);
 
         //If function succeeds
         response.writeHead(200, {
