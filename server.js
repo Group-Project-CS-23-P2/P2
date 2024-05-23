@@ -238,7 +238,16 @@ server.on("request", async (request, response) => {
 
         }
         
-        let resultingList = await GroupQuery(listOfUsers);
+        let resultingList = []
+         try{resultingList = await GroupQuery(listOfUsers);}
+         catch(e){
+            console.log("", e);
+            response.writeHead(400, {
+                "Content-Type": "text/html"
+            }).end("Something went wrong on the server side. Are you sure you have the right usernames?");
+            response.end();
+            return
+         }
 
         //If function succeeds
         response.writeHead(200, {
