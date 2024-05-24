@@ -9,11 +9,11 @@ from scipy.optimize import minimize, LinearConstraint
 args_from_nodejs = sys.argv[1:]
 
 username = args_from_nodejs[0];
-userphysical = int(args_from_nodejs[1]);
-usercreative = int(args_from_nodejs[2]);
-userbrainy = int(args_from_nodejs[3]);
-usersocial = int(args_from_nodejs[4]);
-usercompetitive = int(args_from_nodejs[5]);
+userphysical = int(args_from_nodejs[1]) / 5;
+usercreative = int(args_from_nodejs[2]) / 5;
+userbrainy = int(args_from_nodejs[3]) / 5;
+usersocial = int(args_from_nodejs[4]) / 5;
+usercompetitive = int(args_from_nodejs[5]) / 5;
 activities = args_from_nodejs[6:];
 quiznparray = np.array([userphysical, usercreative, userbrainy, usersocial, usercompetitive], dtype=np.int32);
 
@@ -22,14 +22,21 @@ def costFunction(userfeatures):
 
     for i in range(len(activities)):
         currentActivity = json.loads(activities[i])
-        ratingsum += np.power((userfeatures.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32))) - (currentActivity["rating"] * 5) ,2);
+        for j in range(5):
+            currentActivity["listofFeatures"][j] /= 5;
+        ratingsum += np.power((userfeatures.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32))) - (currentActivity["rating"]) ,2);
     
     quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
 
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
 
-result = minimize(costFunction, quiznparray, bounds= ((1,5),(1,5),(1,5),(1,5),(1,5)));
+result = minimize(costFunction, quiznparray, bounds= ((0,1),(0,1),(0,1),(0,1),(0,1)));
 returnobject = list(result.x);
+
+#Nulitply fratures by 5
+for i in range(5):
+    returnobject[i] *= 5;
+
 
 print(json.dumps(returnobject))
