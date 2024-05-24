@@ -22,14 +22,14 @@ def costFunction(userfeatures):
 
     for i in range(len(activities)):
         currentActivity = json.loads(activities[i])
-        ratingsum += np.power((userfeatures.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32))) - currentActivity["rating"] * 25 ,2);
+        ratingsum += np.power((userfeatures.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32))) - ((currentActivity["rating"] / 5) * np.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32),np.array(currentActivity["listofFeatures"][0:5], dtype=np.int32))),2);
     
     quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
 
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
 
-result = minimize(costFunction, quiznparray, bounds= ((0,5),(0,5),(0,5),(0,5),(0,5)));
+result = minimize(costFunction, quiznparray, bounds= ((1,5),(1,5),(1,5),(1,5),(1,5)));
 returnobject = list(result.x);
 
 print(json.dumps(returnobject))
