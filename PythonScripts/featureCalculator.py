@@ -37,7 +37,7 @@ def cost_function(user_features):
     regularization_term = np.sum(np.square(user_features))
 
     # Combine all terms in the cost function
-    return rating_sum + quiz_diff + 0.2 * regularization_term
+    return rating_sum + quiz_diff + 1 * regularization_term
 
 # Optimization with bounds
 bounds = [(0, 1) for _ in range(5)]
