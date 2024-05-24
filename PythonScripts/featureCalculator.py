@@ -28,7 +28,7 @@ def costFunction(userfeatures):
         
         ratingsum += np.power((userfeatures.dot(currentActivityFeatures)) - (int(currentActivity["rating"])) , 2);
     
-    quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
+    quizdiff = np.power(userfeatures.dot(quiznparray) - 5,2);
 
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
