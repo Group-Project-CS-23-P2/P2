@@ -37,12 +37,17 @@ def cost_function(user_features):
     regularization_term = np.sum(np.square(user_features))
 
     # Combine all terms in the cost function
-    return rating_sum + quiz_diff + 1 * regularization_term
+    return rating_sum + quiz_diff + 0.1 * regularization_term
 
-# Optimization with bounds
+# Define the normalization constraint (sum of user features should be <= 1)
+def normalization_constraint(user_features):
+    return 1.0 - np.sum(user_features)
+
+# Optimization with bounds and constraints
 bounds = [(0, 1) for _ in range(5)]
+constraints = {'type': 'ineq', 'fun': normalization_constraint}
 
-result = minimize(cost_function, quiznparray, bounds=bounds, method='SLSQP')
+result = minimize(cost_function, quiznparray, bounds=bounds, constraints=constraints, method='SLSQP')
 return_object = list(result.x)
 
 # Multiply features by 5 to scale back to original range
