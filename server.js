@@ -352,10 +352,8 @@ function sanitize(str){
   }
 
 
-  console.log(await GroupQuery(["bruger1"]));
-  console.log(await GroupQuery(["bruger1", "bruger2", "bruger3"]));
-  console.log(await GroupQuery(["creative1", "creative2", "creative3"]));
-  console.log(await GroupQuery(["creative4"]));
+
+  await RunAllTests();
 
 async function RunAllTests()
 {
