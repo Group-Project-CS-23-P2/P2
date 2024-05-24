@@ -9,11 +9,11 @@ from scipy.optimize import minimize, LinearConstraint
 args_from_nodejs = sys.argv[1:]
 
 username = args_from_nodejs[0];
-userphysical = (args_from_nodejs[1]) / 5;
-usercreative = (args_from_nodejs[2]) / 5;
-userbrainy = (args_from_nodejs[3]) / 5;
-usersocial = (args_from_nodejs[4]) / 5;
-usercompetitive = (args_from_nodejs[5]) / 5;
+userphysical = float(args_from_nodejs[1]) / 5;
+usercreative = float(args_from_nodejs[2]) / 5;
+userbrainy = float(args_from_nodejs[3]) / 5;
+usersocial = float(args_from_nodejs[4]) / 5;
+usercompetitive = float(args_from_nodejs[5]) / 5;
 activities = args_from_nodejs[6:];
 quiznparray = np.array([userphysical, usercreative, userbrainy, usersocial, usercompetitive], dtype=np.int32);
 
