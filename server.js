@@ -283,6 +283,8 @@ async function GroupQuery(requestinfo)
         let currentUserFeatures = JSON.parse(await PythonFeatureCalculation(currentArgs));
         listOfUserFeatures.push(currentUserFeatures);
     }
+    
+    console.log(listOfUserFeatures);
 
     //Calculate the group vector
     let finalGroupVector = [0,0,0,0,0];
@@ -298,6 +300,8 @@ async function GroupQuery(requestinfo)
     {
         finalGroupVector[i] = finalGroupVector[i] / listOfUserFeatures.length;
     }
+
+    console.log(finalGroupVector);
 
     let listOfAllActivities = await GetAllActivities();
     
