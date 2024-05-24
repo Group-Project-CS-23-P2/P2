@@ -272,6 +272,7 @@ async function GroupQuery(requestinfo)
         //Add the currentUser features to arguments.
         for(let j = 0; j < 5; j++)
         {
+            console.log(currentUser.listofFeatures[j]);
             currentArgs.push(currentUser.listofFeatures[j]);
         }
 
