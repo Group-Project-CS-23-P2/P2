@@ -33,7 +33,7 @@ def costFunction(userfeatures):
     return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
 
 
-result = minimize(costFunction, quiznparray, bounds= ((0,1),(0,1),(0,1),(0,1),(0,1)));
+result = minimize(costFunction, quiznparray, bounds= ((0,1),(0,1),(0,1),(0,1),(0,1)), method='SLSQP');
 returnobject = list(result.x);
 
 #Nulitply fratures by 5
