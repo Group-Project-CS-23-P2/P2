@@ -29,7 +29,7 @@ def costFunction(userfeatures):
     
     quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
 
-    return (1/((len(activities)+1)*2))*(ratingsum + quizdiff) + 0.5 * np.square(np.sum(userfeatures));
+    return (1/((len(activities)+1)*2))*(ratingsum + quizdiff) + 0.5 * np.sum(np.square(userfeatures));
 
 result = minimize(costFunction, quiznparray, bounds= ((0,1),(0,1),(0,1),(0,1),(0,1)), method='SLSQP');
 returnobject = list(result.x);
