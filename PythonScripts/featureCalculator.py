@@ -25,11 +25,11 @@ def costFunction(userfeatures):
         for j in range(5):
             currentActivityFeatures[j] *= 0.2;
         
-        ratingsum += np.power(((userfeatures.dot(currentActivityFeatures)) - (currentActivityFeatures.dot(currentActivityFeatures)) * (float(currentActivity["rating"]) / 5)) , 2);
+        ratingsum += np.power(((userfeatures.dot(currentActivityFeatures)) - (float(currentActivity["rating"]))) , 2);
     
     quizdiff = np.power(userfeatures.dot(quiznparray) - quiznparray.dot(quiznparray),2);
 
-    return (1/((len(activities)+1)*2))*(ratingsum + quizdiff);
+    return (ratingsum + quizdiff);
 
 
 result = minimize(costFunction, quiznparray, bounds= ((0,1),(0,1),(0,1),(0,1),(0,1)), method='SLSQP');
