@@ -15,13 +15,14 @@ userbrainy = float(args_from_nodejs[3]) / 5;
 usersocial = float(args_from_nodejs[4]) / 5;
 usercompetitive = float(args_from_nodejs[5]) / 5;
 activities = args_from_nodejs[6:];
-quiznparray = np.array([userphysical, usercreative, userbrainy, usersocial, usercompetitive], dtype=np.int32);
+quiznparray = np.array([userphysical, usercreative, userbrainy, usersocial, usercompetitive], dtype=np.float64);
 
 def costFunction(userfeatures):
     ratingsum = 0;
 
     for i in range(len(activities)):
         currentActivity = json.loads(activities[i])
+
         for j in range(5):
             currentActivity["listofFeatures"][j] /= 5;
         ratingsum += np.power((userfeatures.dot(np.array(currentActivity["listofFeatures"][0:5], dtype=np.float64))) - (currentActivity["rating"]) ,2);
