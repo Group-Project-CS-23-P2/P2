@@ -1,8 +1,7 @@
 import sys
 import numpy as np
-import scipy as sp
 import json
-from scipy.optimize import minimize, LinearConstraint
+from scipy.optimize import minimize
 
 # Get the arguments passed from Node.js
 args_from_nodejs = sys.argv[1:]
@@ -18,7 +17,7 @@ quiznparray = np.array([userphysical, usercreative, userbrainy, usersocial, user
 
 def cost_function(user_features):
     """
-    Cost function to minimize the difference between predicted and actual ratings
+    Cost function to minimize the difference between predicted and actual ratings,
     and to ensure the user features are close to the initial quiz answers.
     """
     rating_sum = 0
@@ -34,10 +33,21 @@ def cost_function(user_features):
     # Calculate the difference from the quiz answers
     quiz_diff = np.power(user_features.dot(quiznparray) - quiznparray.dot(quiznparray), 2)
 
-    return rating_sum + quiz_diff
+    # Regularization term to penalize large feature values (L2 regularization)
+    regularization_term = np.sum(np.square(user_features))
 
-# Optimize the user features
-result = minimize(cost_function, quiznparray, bounds=((0, 1), (0, 1), (0, 1), (0, 1), (0, 1)), method='SLSQP')
+    # Combine all terms in the cost function
+    return rating_sum + quiz_diff + 0.1 * regularization_term
+
+# Define the normalization constraint (sum of user features should be <= 1)
+def normalization_constraint(user_features):
+    return 1.0 - np.sum(user_features)
+
+# Optimization with bounds and constraints
+bounds = [(0, 1) for _ in range(5)]
+constraints = {'type': 'ineq', 'fun': normalization_constraint}
+
+result = minimize(cost_function, quiznparray, bounds=bounds, constraints=constraints, method='SLSQP')
 return_object = list(result.x)
 
 # Multiply features by 5 to scale back to original range
