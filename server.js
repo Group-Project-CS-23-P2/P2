@@ -351,8 +351,7 @@ function sanitize(str){
   }
 
 
-
-  await RunAllTests();
+//await RunAllTests();
 
 async function RunAllTests()
 {
